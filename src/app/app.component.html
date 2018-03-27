@@ -1,12 +1,26 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
+  <h1>Welcome to {{ title }}!</h1>  
+  
+    <!-- material design playing with -->
+    
+  <h1 class="mat-display-2">Jackdaws love my big sphinx of quartz.</h1>
+  <h2 class="mat-h2">The quick brown fox jumps over the lazy dog.</h2>
+
 </div>
+<mat-checkbox class="mat-checkbox">Check it!</mat-checkbox>
+<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+  <div class="container">
+      <a class="navbar-brand">Angular Router</a>
+      <ul class="nav navbar-nav" routerLinkActive="active">
+          <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="about">About</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="courses">Courses</a></li>
+      </ul>
+  </div>
+</nav>
 <nav>
-  <a routerLink="/Category" routerLinkActive="active">Category</a>
-  <a routerLink="/MoneyEntry" routerLinkActive="active">MoneyEntry</a>
+  <i class="material-icons">label</i><a routerLink="Category" routerLinkActive="active">Category</a>
+  <a routerLink="MoneyEntry" routerLinkActive="active">MoneyEntry</a>
 </nav>
 <router-outlet></router-outlet>
-    <router-outlet name="popup"></router-outlet>

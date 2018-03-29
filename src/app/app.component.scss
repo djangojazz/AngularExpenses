@@ -1,0 +1,28 @@
+@import '../styles.scss';
+
+.example-container {
+  width: 99%;
+  height: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
+}
+
+.tgl {
+  padding: 5px 0 0;
+  text-align:center;
+  background-color: $secondary;
+}
+
+.tgl > span{
+  color: white;
+}

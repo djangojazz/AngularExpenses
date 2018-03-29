@@ -1,5 +1,3 @@
-<!--The content below is only a placeholder and can be replaced.-->
- 
 <!-- <mat-form-field>
     <input matInput [matDatepicker]="myDatepicker" placeholder="Choose a date">
     <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
@@ -13,7 +11,7 @@
 </nav>
 <router-outlet></router-outlet> -->
 
-<mat-sidenav-container class="example-container">
+<!-- <mat-sidenav-container class="example-container">
     <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
                  (closed)="events.push('close!')">
       Sidenav content
@@ -26,4 +24,24 @@
         <div *ngFor="let e of events">{{e}}</div>
       </div>
     </mat-sidenav-content>
-  </mat-sidenav-container>
+  </mat-sidenav-container> -->
+  <mat-drawer-container class="example-container" autosize>
+      <mat-drawer #drawer class="example-sidenav" mode="side">
+        <nav>
+          <i class="material-icons">create</i><a routerLink="Category" routerLinkActive="active">Category</a>
+          <br/>
+          <i class="material-icons">assessment</i><a routerLink="MoneyEntry" routerLinkActive="active">MoneyEntry</a>
+        </nav>
+      </mat-drawer>
+    
+      <button class="tgl" type="button" mat-button (click)="drawer.toggle()">
+          <i class="material-icons">menu</i><a routerLink="Category" routerLinkActive="active"></a>
+        Toggle Navigation
+      </button>
+      <div class="sidenav-content">
+        
+        <br/>
+        <router-outlet></router-outlet>
+      </div>
+    
+    </mat-drawer-container>

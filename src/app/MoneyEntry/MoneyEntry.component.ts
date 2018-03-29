@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./MoneyEntry.component.css']
 })
 export class MoneyEntryComponent implements OnInit {
+  public selectedType = 'Debit';
 
   constructor() { }
 

@@ -42,6 +42,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   exports: [
@@ -88,12 +89,13 @@ export class MaterialModule {}
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     CategoryModule,
     MoneyEntryModule,
     AppRoutingModule,
     MaterialModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

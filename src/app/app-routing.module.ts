@@ -2,6 +2,7 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoryComponent }    from './Category/Category.component';
 import { MoneyEntryComponent }  from './MoneyEntry/MoneyEntry.component';
+import { FormControl }          from '@angular/forms';
 
 const appRoutes: Routes = [
 
@@ -27,4 +28,7 @@ const appRoutes: Routes = [
   ],
   providers: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+  mode = new FormControl('over');
+  events = [];
+}

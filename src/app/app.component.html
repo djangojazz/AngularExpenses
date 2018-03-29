@@ -1,26 +1,29 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>Welcome to {{ title }}!</h1>  
+ 
+<!-- <mat-form-field>
+    <input matInput [matDatepicker]="myDatepicker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+    <mat-datepicker #myDatepicker></mat-datepicker>
+  </mat-form-field>
   
-    <!-- material design playing with -->
-    
-  <h1 class="mat-display-2">Jackdaws love my big sphinx of quartz.</h1>
-  <h2 class="mat-h2">The quick brown fox jumps over the lazy dog.</h2>
-
-</div>
-<mat-checkbox class="mat-checkbox">Check it!</mat-checkbox>
-<nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-  <div class="container">
-      <a class="navbar-brand">Angular Router</a>
-      <ul class="nav navbar-nav" routerLinkActive="active">
-          <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="about">About</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="courses">Courses</a></li>
-      </ul>
-  </div>
-</nav>
+  <mat-checkbox class="mat-checkbox">Check it!</mat-checkbox>
 <nav>
   <i class="material-icons">label</i><a routerLink="Category" routerLinkActive="active">Category</a>
   <a routerLink="MoneyEntry" routerLinkActive="active">MoneyEntry</a>
 </nav>
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> -->
+
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
+                 (closed)="events.push('close!')">
+      Sidenav content
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <p><mat-checkbox [(ngModel)]="opened">Open/Close</mat-checkbox></p>
+      <p>Events:</p>
+      <div class="example-events">
+        <div *ngFor="let e of events">{{e}}</div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

@@ -1,0 +1,16 @@
+import { Http, Response, Headers } from "@angular/http";
+import { Injectable } from '@angular/core';
+import { Observable } from "rxjs"
+import 'rxjs/add/operator/map';
+import { Category } from "../Models/Category";
+
+@Injectable()
+export class CategoriesService {
+    constructor(private http: Http) { }
+    public Categories: Category[] = [];
+
+    public loadCategories(): Observable<Category[]> {
+        return this.http.get("http://localhost:61352/api/categories")
+            .map((result: Response) => this.Categories = result.json());
+    }
+}

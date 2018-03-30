@@ -5,8 +5,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule  } from "./app-routing.module";
 
-import { CategoryModule  } from "./Category/Category.module";
-import { MoneyEntryModule } from "./MoneyEntry/MoneyEntry.module"
+import { CategoryModule  } from "./Modules/Category/Category.module";
+import { MoneyEntryModule } from "./Modules/MoneyEntry/MoneyEntry.module"
+import { ReconciliationModule  } from "./Modules/Reconciliation/Reconciliation.module";
+import { QueryModule } from "./Modules/Query/Query.module";
+import { ChartingModule  } from "./Modules/Charting/Charting.module";
 
 import {
   MatAutocompleteModule,
@@ -92,6 +95,9 @@ export class MaterialModule {}
     FormsModule,
     CategoryModule,
     MoneyEntryModule,
+    ReconciliationModule,
+    QueryModule,
+    ChartingModule,
     AppRoutingModule,
     MaterialModule
   ],

@@ -17,13 +17,10 @@
   padding: 20px;
 }
 
-.tgl {
+.mat-button, mat-drawer > button {
   margin: 5px;
-  padding: 5px;
-  text-align:center;
+  width: 120px;
+  text-align:left;
   background-color: $secondary;
-}
-
-.mat-button-wrapper {
-  color: white;
+  color: $primary;
 }

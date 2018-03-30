@@ -1,47 +1,30 @@
-<!-- <mat-form-field>
-    <input matInput [matDatepicker]="myDatepicker" placeholder="Choose a date">
-    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-    <mat-datepicker #myDatepicker></mat-datepicker>
-  </mat-form-field>
-  
-  <mat-checkbox class="mat-checkbox">Check it!</mat-checkbox>
-<nav>
-  <i class="material-icons">label</i><a routerLink="Category" routerLinkActive="active">Category</a>
-  <a routerLink="MoneyEntry" routerLinkActive="active">MoneyEntry</a>
-</nav>
-<router-outlet></router-outlet> -->
-
-<!-- <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
-                 (closed)="events.push('close!')">
-      Sidenav content
-    </mat-sidenav>
-  
-    <mat-sidenav-content>
-      <p><mat-checkbox [(ngModel)]="opened">Open/Close</mat-checkbox></p>
-      <p>Events:</p>
-      <div class="example-events">
-        <div *ngFor="let e of events">{{e}}</div>
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container> -->
-  <mat-drawer-container class="example-container" autosize>
-      <mat-drawer #drawer class="example-sidenav" mode="side">
-        <nav>
-          <i class="material-icons">create</i><a routerLink="Category" routerLinkActive="active">Category</a>
-          <br/>
-          <i class="material-icons">assessment</i><a routerLink="MoneyEntry" routerLinkActive="active">MoneyEntry</a>
-        </nav>
-      </mat-drawer>
-    
-      <button class="tgl" type="button" mat-button (click)="drawer.toggle()">
-          <!-- <i class="material-icons">menu</i> -->
-          Toggle Navigation
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="over">
+      <button class="tgl" mat-button routerLink="Category" routerLinkActive="active">
+          <i class="material-icons">vpn_key</i><a > Category</a>
       </button>
-      <div class="sidenav-content">
-        
-        <br/>
-        <router-outlet></router-outlet>
-      </div>
-    
-    </mat-drawer-container>
+      <br />
+      <button mat-button routerLink="MoneyEntry" routerLinkActive="active">
+          <i class="material-icons">create</i><a > Entry</a>
+      </button>
+      <br />
+      <button mat-button routerLink="Reconciliation" routerLinkActive="active">
+          <i class="material-icons">compare_arrows</i><a > Reconcile</a>
+      </button>
+      <br />
+      <button mat-button routerLink="Query" routerLinkActive="active">
+          <i class="material-icons">search</i><a > Query</a>
+      </button>
+      <br />
+      <button mat-button routerLink="Charting" routerLinkActive="active">
+          <i class="material-icons">insert_chart</i><a > Charting</a>
+      </button>
+  </mat-drawer>
+
+  <button  mat-button (click)="drawer.toggle()">
+      <i class="material-icons">menu</i> Menu
+  </button>
+  <div class="sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

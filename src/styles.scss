@@ -52,38 +52,55 @@ $warn: #EF9A9A;
 .clr-sd { color: $sdark; }
 .clr-w { color: $warn; }
 
-
-.hdr {
-    padding: 20px 0 0 ;
-    text-align:center;
-    background-color: $sdark;
-    color: $slight;
-    height: 60px;
-}
-
-
-footer {
-    position: fixed;
-    height: 40px;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: $sdark;
-    color: $slight;
-    text-align: center;
-}
-
 body { 
     font-family: Roboto, Arial, sans-serif;
     margin: 0;
   }
   
-  .basic-container {
-    padding: 5px;
-  }
+.basic-container {
+  padding: 5px;
+}
+
+.version-info {
+  font-size: 8pt;
+  float: right;
+}
   
-  .version-info {
-    font-size: 8pt;
-    float: right;
-  }
-  
+html,body,#wrapper {
+  height:100%;
+  padding:0;
+  margin:0;
+}
+
+#wrapper {
+  position:relative;
+}
+
+#top, #middle, #bottom {
+  position:absolute;
+}
+
+#top {
+  padding: 10px 0 0;
+  height:80px;
+  width:100%;
+  text-align:center;
+  background-color: $sdark;
+  color: $slight;
+}
+#middle {
+  top:80px;
+  bottom:40px;
+  width:100%;
+  background:black;
+  color:white;
+}
+#bottom {
+  bottom:0;
+  height:40px;
+  width:100%;
+  position: fixed;
+  background-color: $sdark;
+  color: $slight;
+  text-align: center;
+}

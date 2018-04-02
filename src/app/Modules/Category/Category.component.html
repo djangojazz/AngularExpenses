@@ -4,3 +4,10 @@
 <div *ngFor="let cat of Categories">
   <div>{{cat.categoryId}} {{cat.description}}</div>
 </div>
+<mat-form-field class="example-full-width">
+  <textarea matInput placeholder="Enter a new Category" >
+  </textarea>
+</mat-form-field>
+<button type="button" (click)="writeIt()">
+  Submit
+</button>

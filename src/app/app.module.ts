@@ -46,7 +46,6 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   exports: [
@@ -94,7 +93,6 @@ export class MaterialModule {}
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    FormsModule,
     CategoryModule,
     MoneyEntryModule,
     ReconciliationModule,

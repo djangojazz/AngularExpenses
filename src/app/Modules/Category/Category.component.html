@@ -1,13 +1,15 @@
 <p>
   Category works!
 </p>
-<div *ngFor="let cat of Categories">
+<div *ngFor="let cat of categories">
   <div>{{cat.categoryId}} {{cat.description}}</div>
 </div>
-<mat-form-field class="example-full-width">
-  <textarea matInput placeholder="Enter a new Category" >
-  </textarea>
-</mat-form-field>
-<button type="button" (click)="writeIt()">
-  Submit
-</button>
+<form novalidate (ngSubmit)="save()">
+  <mat-form-field class="example-full-width">
+    <textarea [(ngModel)]="category.description" name="description" #description="ngModel" matInput placeholder="Enter a new Category" >
+    </textarea>
+  </mat-form-field>
+  <button type="submit">
+    Submit
+  </button>
+</form>

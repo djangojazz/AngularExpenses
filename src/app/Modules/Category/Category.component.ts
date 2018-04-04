@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { CategoriesService  } from "../../Services/Categories.service";
 import { Category  } from "../../Models/Category";
 import { DataSource} from '@angular/cdk/collections';
@@ -11,20 +12,24 @@ import { Observable} from 'rxjs/Observable';
   styleUrls: ['./Category.component.css']
 })
 export class CategoryComponent implements OnInit {
-  public Categories: Category[] = [];
-  public Text: String = "";
+  public categories: Category[] = [];
+  public category: Category = new Category();
 
   constructor(private service: CategoriesService)   { 
-    this.Categories = service.Categories;
+    this.categories = service.Categories;
   }
 
   ngOnInit() {
     this.service.loadCategories()
-      .subscribe(() => this.Categories = this.service.Categories);
+      .subscribe(() => this.categories = this.service.Categories);
   }
 
   writeIt() {
-    console.log(this.Text);
+    console.log(this.category.description);
+  }
+
+  save() {
+    console.log('category: ' + this.category.description);
   }
 }
 

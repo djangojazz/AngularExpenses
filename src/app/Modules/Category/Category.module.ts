@@ -3,17 +3,21 @@ import { FormsModule  } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import { CategoryComponent } from './Category.component';
 import { CategoriesService } from '../../Services/Categories.service'
-import { MatInputModule } from '@angular/material';
+import { MatInputModule, MatDialogModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
+import { NewcategorydialogComponent } from './newcategorydialog.component';
 
 @NgModule({
   imports: [
     CommonModule,
     BrowserModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule
   ],
-  declarations: [CategoryComponent],
+  declarations: [CategoryComponent,
+    NewcategorydialogComponent
+],
   providers: [CategoriesService]
 })
 export class CategoryModule { }

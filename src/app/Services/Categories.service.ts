@@ -12,7 +12,6 @@ export class CategoriesService {
     
     public loadCategories(): Observable<Category[]> {
         return this.http.get(`${environment.baseApi}/categories`)
-            //"http://localhost:61352/api/categories")
             .map((result: Response) => this.Categories = result.json());
     }
 }

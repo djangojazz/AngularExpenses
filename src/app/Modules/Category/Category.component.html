@@ -4,7 +4,8 @@
 <div *ngFor="let cat of categories">
   <div>{{cat.categoryId}} {{cat.description}}</div>
 </div>
-<form novalidate (ngSubmit)="save()">
+<button mat-button (click)="openDialog()">Open dialog</button>
+<!-- <form novalidate (ngSubmit)="save()">
   <mat-form-field class="example-full-width">
     <textarea [(ngModel)]="category.description" name="description" #description="ngModel" matInput placeholder="Enter a new Category" >
     </textarea>
@@ -12,4 +13,4 @@
   <button type="submit">
     Submit
   </button>
-</form>
+</form> -->

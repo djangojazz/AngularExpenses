@@ -15,9 +15,11 @@ import { NewcategorydialogComponent } from './newcategorydialog.component';
     MatInputModule,
     MatDialogModule
   ],
+  entryComponents: [NewcategorydialogComponent
+  ],
   declarations: [CategoryComponent,
     NewcategorydialogComponent
-],
+  ],
   providers: [CategoriesService]
 })
 export class CategoryModule { }

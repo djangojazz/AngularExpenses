@@ -13,7 +13,7 @@ import { QueryModule } from "./Modules/Query/Query.module";
 import { ChartingModule  } from "./Modules/Charting/Charting.module";
 
 // Material modules
-import { MatButtonModule, MatSidenavModule, } from '@angular/material';
+import { MatButtonModule, MatSidenavModule, MatDialogModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { MatButtonModule, MatSidenavModule, } from '@angular/material';
     AppRoutingModule,
     MatButtonModule,
     MatSidenavModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

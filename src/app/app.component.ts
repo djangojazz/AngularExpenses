@@ -10,4 +10,8 @@ export class AppComponent {
   events = [];
   title = 'MoneyEntry';
   showFiller = false;
+
+  public navChanged(nav: string) {
+    this.title = `MoneyEntry - ${nav}`;
+  }
 }

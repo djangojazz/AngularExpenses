@@ -1,29 +1,33 @@
 <mat-drawer-container class="content-container" autosize>
+        <mat-toolbar id="header">
+                <button mat-button (click)="drawer.toggle()">
+                        <i class="material-icons">menu</i> Menu
+                    </button>
+                  <h1 id="headerTitle">{{title}}</h1>
+              </mat-toolbar>
   <mat-drawer #drawer class="sidenav-drawer" mode="over">
-      <button class="tgl" mat-button routerLink="Category" routerLinkActive="active">
+      <button class="tgl" mat-button routerLink="Category" routerLinkActive="active" (click)="navChanged('Category')">
           <i class="material-icons">vpn_key</i><a > Category</a>
       </button>
       <br />
-      <button mat-button routerLink="MoneyEntry" routerLinkActive="active">
+      <button mat-button routerLink="MoneyEntry" routerLinkActive="active"  (click)="navChanged('Entry')">
           <i class="material-icons">create</i><a > Entry</a>
       </button>
       <br />
-      <button mat-button routerLink="Reconciliation" routerLinkActive="active">
+      <button mat-button routerLink="Reconciliation" routerLinkActive="active"  (click)="navChanged('Reconcile')">
           <i class="material-icons">compare_arrows</i><a > Reconcile</a>
       </button>
       <br />
-      <button mat-button routerLink="Query" routerLinkActive="active">
+      <button mat-button routerLink="Query" routerLinkActive="active"  (click)="navChanged('Query')">
           <i class="material-icons">search</i><a > Query</a>
       </button>
       <br />
-      <button mat-button routerLink="Charting" routerLinkActive="active">
+      <button mat-button routerLink="Charting" routerLinkActive="active"  (click)="navChanged('Charting')">
           <i class="material-icons">insert_chart</i><a > Charting</a>
       </button>
   </mat-drawer>
 
-  <button  mat-button (click)="drawer.toggle()">
-      <i class="material-icons">menu</i> Menu
-  </button>
+  
   <div class="sidenav-content">
     <router-outlet></router-outlet>
   </div>

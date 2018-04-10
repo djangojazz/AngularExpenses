@@ -7,12 +7,15 @@
 }
 
 .sidenav-content {
-  display: absolute;
+  display: flex;
+  width: 100%;
+  height: 90%;
   align-items: top;
   margin-left: 10%;
 }
 
 .sidenav-drawer {
+  width: 12%;
   padding: 1%;
 }
 

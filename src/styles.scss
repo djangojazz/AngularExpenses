@@ -76,18 +76,27 @@ html,body,#wrapper {
   position:relative;
 }
 
-#content, #footer {
+#header, #content, #footer {
   position:absolute;
 }
 
+#header {
+  height:80px;
+  width:100%;
+  text-align:center;
+  background-color: $sdark;
+  color: $slight;
+}
+
 #content {
-  top:0px;
+  top:80px;
   bottom:40px;
   width:100%;
   position: flex;
   background:black;
   color:white;
 }
+
 #footer {
   bottom:0;
   height:40px;
@@ -97,3 +106,4 @@ html,body,#wrapper {
   color: $slight;
   text-align: center;
 }
+

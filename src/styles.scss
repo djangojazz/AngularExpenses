@@ -76,26 +76,19 @@ html,body,#wrapper {
   position:relative;
 }
 
-#top, #middle, #bottom {
+#content, #footer {
   position:absolute;
 }
 
-#top {
-  padding: 10px 0 0;
-  height:80px;
-  width:100%;
-  text-align:center;
-  background-color: $sdark;
-  color: $slight;
-}
-#middle {
-  top:80px;
+#content {
+  top:0px;
   bottom:40px;
   width:100%;
+  position: flex;
   background:black;
   color:white;
 }
-#bottom {
+#footer {
   bottom:0;
   height:40px;
   width:100%;

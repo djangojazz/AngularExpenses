@@ -1,16 +1,13 @@
 <h2 mat-dialog-title>Add Category</h2>
 <mat-dialog-content>
-  <!-- <form novalidate (ngSubmit)="save()">
-  <mat-form-field class="example-full-width">
+  <form novalidate (ngSubmit)="save()">
+  <mat-form-field>
     <textarea [(ngModel)]="category.description" name="description" #description="ngModel" matInput placeholder="Enter a new Category" >
     </textarea>
   </mat-form-field>
-  <button type="submit">
-    Submit
-  </button> 
-</form>-->
+</form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
-</mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="category.description" cdkFocusInitial>Create</button>
+  </mat-dialog-actions>

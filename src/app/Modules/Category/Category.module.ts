@@ -3,7 +3,7 @@ import { FormsModule  } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import { CategoryComponent } from './Category.component';
 import { CategoriesService } from '../../Services/Categories.service'
-import { MatInputModule, MatDialogModule } from '@angular/material';
+import { MatButtonModule,  MatInputModule, MatDialogModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { NewcategorydialogComponent } from './newcategorydialog.component';
 
@@ -13,7 +13,8 @@ import { NewcategorydialogComponent } from './newcategorydialog.component';
     BrowserModule,
     FormsModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule
   ],
   entryComponents: [NewcategorydialogComponent
   ],

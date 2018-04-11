@@ -6,7 +6,8 @@
 }
 
 #headerTitle {
-  margin-left: 44px
+  margin-left: 44px;
+  font-size: 20pt;
 }
 
 .content-container {
@@ -27,16 +28,6 @@
 .sidenav-drawer {
   width: 180px;
   padding: 1%;
-}
-
-.mat-button, mat-drawer > button {
-  text-align:left;
-  background-color: $secondary;
-  color: $primary;
-}
-
-.mat-button {
-width: 120px;
 }
 
 mat-drawer > button {

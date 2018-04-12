@@ -12,8 +12,7 @@ import { ReconciliationModule  } from "./Modules/Reconciliation/Reconciliation.m
 import { QueryModule } from "./Modules/Query/Query.module";
 import { ChartingModule  } from "./Modules/Charting/Charting.module";
 
-// Material modules
-import { MatButtonModule, MatSidenavModule, MatDialogModule, MatToolbarModule } from '@angular/material';
+import { MaterialModule } from "./Modules/material.module"
 
 @NgModule({
   declarations: [
@@ -29,10 +28,7 @@ import { MatButtonModule, MatSidenavModule, MatDialogModule, MatToolbarModule } 
     QueryModule,
     ChartingModule,
     AppRoutingModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatDialogModule,
-    MatToolbarModule
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent],

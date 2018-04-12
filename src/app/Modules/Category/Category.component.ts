@@ -34,12 +34,32 @@ export class CategoryComponent implements OnInit {
       data: { title: "Add Category", description: "Please name category"}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.snackBar.open('Created Category:', result, 
-      { 
-        duration: 2000,
-        verticalPosition: 'top'
-      });
+    dialogRef.afterClosed().subscribe(result => { 
+      
+      if(result == undefined || result.toString().length == 0)
+      {
+        this.snackBar.open('Category is blank:', 'No category to create', { duration: 2000, verticalPosition: 'top' });
+      }
+      else
+      {
+        try
+        {
+          var serviceResult = this.service.addCategory(result)
+
+          if(serviceResult)
+          {
+            this.snackBar.open('Created Category:', result, { duration: 2000, verticalPosition: 'top' });
+          }
+          else
+          {
+            this.snackBar.open('Service failed to create new category', '', { duration: 2000, verticalPosition: 'top' });
+          }
+        }
+        catch
+        {
+          this.snackBar.open('Failed to create new category', '', { duration: 2000, verticalPosition: 'top' });
+        }
+      }
     });
   }
 }

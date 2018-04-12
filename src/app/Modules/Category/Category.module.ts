@@ -5,7 +5,7 @@ import { CategoryComponent } from './Category.component';
 import { CategoriesService } from '../../Services/Categories.service'
 import { MatButtonModule,  MatInputModule, MatDialogModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
-import { NewcategorydialogComponent } from './newcategorydialog.component';
+import { DialogComponent } from '../../Shared/dialog.component';
 
 @NgModule({
   imports: [
@@ -16,10 +16,10 @@ import { NewcategorydialogComponent } from './newcategorydialog.component';
     MatDialogModule,
     MatButtonModule
   ],
-  entryComponents: [NewcategorydialogComponent
+  entryComponents: [DialogComponent
   ],
   declarations: [CategoryComponent,
-    NewcategorydialogComponent
+    DialogComponent
   ],
   providers: [CategoriesService]
 })

@@ -6,7 +6,7 @@ import { Category  } from "../../Models/Category";
 import { DataSource} from '@angular/cdk/collections';
 import { BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { Observable} from 'rxjs/Observable';
-import { NewcategorydialogComponent } from './newcategorydialog.component';
+import { DialogComponent } from '../../Shared/dialog.component';
 
 @Component({
   selector: 'app-Category',
@@ -26,9 +26,10 @@ export class CategoryComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(NewcategorydialogComponent, {
+    const dialogRef = this.dialog.open(DialogComponent, {
       width: '300px',
-      height: '250px'
+      height: '250px',
+      data: { title: "Add Category", description: "Please name category"}
     });
 
     dialogRef.afterClosed().subscribe(result => {

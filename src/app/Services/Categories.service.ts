@@ -12,6 +12,8 @@ export class CategoriesService {
     
     public loadCategories(): Observable<Category[]> {
         return this.http.get(`${environment.baseApi}/categories`)
-            .map((result: Response) => this.Categories = result.json());
+            .map((result: Response) => this.Categories = result.json()
+                .sort((x,y) => x.description < y.description ? -1 : 1)
+            );
     }
 }

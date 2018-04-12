@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MatDialog  } from "@angular/material";
+import { MatDialog, MatSnackBar  } from "@angular/material";
 import { CategoriesService  } from "../../Services/Categories.service";
 import { Category  } from "../../Models/Category";
 import { DataSource} from '@angular/cdk/collections';
@@ -16,7 +16,9 @@ import { DialogComponent } from '../../Shared/dialog.component';
 export class CategoryComponent implements OnInit {
   public categories: Category[] = [];
   
-  constructor(private service: CategoriesService, private dialog: MatDialog)   { 
+  constructor(private service: CategoriesService, 
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar)   { 
     this.categories = service.Categories;
   }
 
@@ -33,7 +35,11 @@ export class CategoryComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.snackBar.open('Created Category:', result, 
+      { 
+        duration: 2000,
+        verticalPosition: 'top'
+      });
     });
   }
 }

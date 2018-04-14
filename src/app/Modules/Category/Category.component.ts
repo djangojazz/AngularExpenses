@@ -42,22 +42,15 @@ export class CategoryComponent implements OnInit {
       }
       else
       {
-        try
-        {
-          var serviceResult = this.service.addCategory(result)
+        var serviceResult = this.service.addCategory(result)
 
-          if(serviceResult)
-          {
-            this.snackBar.open('Created Category:', result, { duration: 2000, verticalPosition: 'top' });
-          }
-          else
-          {
-            this.snackBar.open('Service failed to create new category', '', { duration: 2000, verticalPosition: 'top' });
-          }
-        }
-        catch
+        if(serviceResult)
         {
-          this.snackBar.open('Failed to create new category', '', { duration: 2000, verticalPosition: 'top' });
+          this.snackBar.open('Created Category:', result, { duration: 2000, verticalPosition: 'top' });
+        }
+        else
+        {
+          this.snackBar.open('Service failed to create new category', '', { duration: 2000, verticalPosition: 'top' });
         }
       }
     });

@@ -2,7 +2,7 @@
   Category works!
 </p>
 <div *ngFor="let cat of categories">
-  <div>{{cat.categoryId}} {{cat.description}}</div>
+  {{cat.categoryId}} {{cat.description}}
 </div>
 <button mat-button (click)="openDialog()">
     <i class="material-icons">create_new_folder</i> Category

@@ -26,7 +26,7 @@ export class CategoriesService {
         this.http.post(this.endpoint, JSON.stringify(newCategory), { headers: this.headers})
             .subscribe(response => {
                 console.log(`created category ${newCategory}`)
-                this.loadCategories();
+                this.Categories.push(new Category(newCategory, 0));
                 return true;
             }, error => {
                 console.log(`${error}`)

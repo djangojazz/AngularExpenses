@@ -17,22 +17,14 @@ export class CategoriesService {
 
     public loadCategories(): Observable<Category[]> {
         return this.http.get(this.endpoint)
-            .map((result: Response) => this.Categories = result.json()
-                .sort((x,y) => x.description < y.description ? -1 : 1)
-            );
+            .map((result: Response) => this.alphabetize(result));
     }
 
-    public addCategory(newCategory: string): boolean {
-        this.http.post(this.endpoint, JSON.stringify(newCategory), { headers: this.headers})
-            .subscribe(response => {
-                console.log(`created category ${newCategory}`)
-                this.Categories.push(new Category(newCategory, 0));
-                return true;
-            }, error => {
-                console.log(`${error}`)
-                return false;
-            });
-
-        return true;
+    public addCategory(newCategory: string): Observable<Category[]> {
+        return this.http.post(this.endpoint, JSON.stringify(newCategory), { headers: this.headers})
+            .map((result: Response) => this.alphabetize(result));
     }
+
+    alphabetize = (result: Response) => this.Categories = result.json()
+    .sort((x,y) => x.description < y.description ? -1 : 1)
 }

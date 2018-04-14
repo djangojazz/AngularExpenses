@@ -6,7 +6,8 @@ import {
   MatSidenavModule, 
   MatDialogModule, 
   MatSnackBarModule,
-  MatToolbarModule } from '@angular/material';
+  MatToolbarModule,
+  MatTableModule } from '@angular/material';
 
 @NgModule({
   exports: [
@@ -14,7 +15,8 @@ import {
     MatSidenavModule, 
     MatDialogModule, 
     MatSnackBarModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTableModule
   ],
 })
 export class MaterialModule { }

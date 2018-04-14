@@ -99,10 +99,14 @@ html,body,#wrapper {
   text-align: center;
 }
 
-
 .mat-button {
 width: 120px;
 text-align:left;
   background-color: $secondary;
   color: $primary;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
 }

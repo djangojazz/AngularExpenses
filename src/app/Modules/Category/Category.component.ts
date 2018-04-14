@@ -1,6 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MatDialog, MatSnackBar  } from "@angular/material";
+import { MatDialog, MatSnackBar, MatTable, MatPaginator, MatTableDataSource  } from "@angular/material";
 import { CategoriesService  } from "../../Services/Categories.service";
 import { Category  } from "../../Models/Category";
 import { DataSource} from '@angular/cdk/collections';
@@ -14,8 +14,10 @@ import { DialogComponent } from '../../Shared/dialog.component';
   styleUrls: ['./Category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-  public categories: Category[] = [];
-  
+  public categories = new MatTableDataSource<Category>(this.categories)
+  displayedColumns = ['categoryId', 'description'];
+  //dataSource = new MatTableDataSource<Category>(this.categories);
+
   constructor(private service: CategoriesService, 
     private dialog: MatDialog,
     private snackBar: MatSnackBar)   { 
@@ -26,6 +28,8 @@ export class CategoryComponent implements OnInit {
     this.service.loadCategories()
       .subscribe(() => this.categories = this.service.Categories);
   }
+
+  
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -48,5 +52,11 @@ export class CategoryComponent implements OnInit {
         this.snackBar.open('Created Category:', result, { duration: 2000, verticalPosition: 'top' });
       }
     });
+  }
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  ngAfterViewInit() {
+    this.categories.paginator = this.paginator;
   }
 }

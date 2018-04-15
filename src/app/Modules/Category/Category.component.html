@@ -2,11 +2,11 @@
 <!-- <div *ngFor="let cat of categories">
   {{cat.categoryId}} {{cat.description}}
 </div> -->
-<div class="example-container mat-elevation-z8">
-  <div class="example-loading-shade"
+<div class="tab-container mat-elevation-z8">
+  <div class="loading-shade"
        *ngIf="isLoadingResults || isRateLimitReached">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-    <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+    <div class="problem" *ngIf="isErrorState">
       There was a problem
     </div>
   </div>

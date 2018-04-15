@@ -1,3 +1,6 @@
-<p>
-  Charting works!
-</p>
+<div *ngFor="let f of flights">
+    {{f.flightName}}
+    <div *ngFor="let fp of f.flightPlans">
+        &nbsp;&nbsp;{{fp.flightPlanName}}
+    </div>
+  </div>

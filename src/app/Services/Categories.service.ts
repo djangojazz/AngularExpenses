@@ -21,9 +21,8 @@ export class CategoriesService {
     }
 
     public loadSectionCategories(size: number, page: number): Observable<Category[]> {
-        var sz = (size == undefined || size == 0) ? 5 : size;
-        var pg = (page == undefined) ? 0 : page;
-        var start = (sz * (pg));
+        var sz = (size == undefined) ? 5 : size;
+        var start = (sz * (page));
         var end = start + sz;
 
         var listing = this.Categories.slice(start, end);

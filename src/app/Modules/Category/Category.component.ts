@@ -31,7 +31,7 @@ export class CategoryComponent implements OnInit {
 
   resultsLength = 0;
   isLoadingResults = true;
-  isRateLimitReached = false;
+  isErrorState = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -39,7 +39,6 @@ export class CategoryComponent implements OnInit {
   constructor(private service: CategoriesService, 
     private dialog: MatDialog,
     private snackBar: MatSnackBar)   { 
-    this.categories = service.Categories;
   }
 
   ngOnInit() {
@@ -60,7 +59,7 @@ export class CategoryComponent implements OnInit {
         map(data => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
-          this.isRateLimitReached = false;
+          this.isErrorState = false;
           this.resultsLength = this.categories.length;
 
           return data;
@@ -68,7 +67,7 @@ export class CategoryComponent implements OnInit {
         catchError(() => {
           this.isLoadingResults = false;
           // Catch if the GitHub API has reached its rate limit. Return empty data.
-          this.isRateLimitReached = true;
+          this.isErrorState = true;
           return observableOf([]);
         })
       ).subscribe(data => this.dataSource.data = data);

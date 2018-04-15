@@ -41,8 +41,6 @@ export class CategoryComponent implements OnInit {
     this.service.loadCategories()
       .subscribe(() => this.categories = this.service.Categories);
 
-    this.dataSource.data = this.categories;
-
       // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
@@ -51,13 +49,14 @@ export class CategoryComponent implements OnInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.service.loadCategories();
+          return this.service.loadSectionCategories(this.paginator.pageSize, this.paginator.pageIndex);
         }),
         map(data => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
-          this.resultsLength = data.length;
+          this.resultsLength = 5;
+          //data.length;
 
           return data;
         }),

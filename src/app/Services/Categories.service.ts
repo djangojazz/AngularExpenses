@@ -20,6 +20,14 @@ export class CategoriesService {
             .map((result: Response) => this.alphabetize(result));
     }
 
+    public loadSectionCategories(size: number, page: number): Observable<Category[]> {
+        var start = (size * (page + 1));
+        var end = start + size;
+
+        var listing = this.Categories.slice(size * page, (size * page) + size);
+        return Observable.of(listing);
+    }
+
     public loadCategoriesStatic(): Category[] {
         return [
             {categoryId: 1, description: 'Hydrogen'},

@@ -26,5 +26,5 @@ export class CategoriesService {
     }
 
     alphabetize = (result: Response) => this.Categories = result.json()
-    .sort((x,y) => x.description < y.description ? -1 : 1)
+    //.sort((x,y) => x.description < y.description ? -1 : 1)
 }

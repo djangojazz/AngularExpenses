@@ -3,29 +3,18 @@ import { FormsModule  } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import { ChartingComponent } from './Charting.component';
 import { ChartingService  } from "../../Services/charting.service";
-import { MatButtonModule,  
-  MatInputModule, 
-  MatDialogModule, 
-  MatTableModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSortModule,
-  } from '@angular/material';
+
 import { BrowserModule } from '@angular/platform-browser';
 //import { DialogComponent } from '../../Shared/dialog.component';
+
+import { MaterialModule } from "../material.module";
 
 @NgModule({
   imports: [
     CommonModule,
     BrowserModule,
     FormsModule,
-    MatInputModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatSortModule
+    MaterialModule
   ],
   //entryComponents: [DialogComponent],
   declarations: [ChartingComponent],

@@ -7,7 +7,9 @@ import { MatButtonModule,
   MatInputModule, 
   MatDialogModule, 
   MatTableModule,
-  MatPaginatorModule } from '@angular/material';
+  MatPaginatorModule,
+  MatSortModule,
+  } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { DialogComponent } from '../../Shared/dialog.component';
 
@@ -20,7 +22,8 @@ import { DialogComponent } from '../../Shared/dialog.component';
     MatDialogModule,
     MatButtonModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSortModule
   ],
   entryComponents: [DialogComponent
   ],

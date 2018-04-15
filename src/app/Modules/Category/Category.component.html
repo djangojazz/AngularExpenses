@@ -2,37 +2,16 @@
 <!-- <div *ngFor="let cat of categories">
   {{cat.categoryId}} {{cat.description}}
 </div> -->
-<div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource">
+<div class="example-table">
+  <mat-table #table [dataSource]="dataSource" 
+    matSort matSortActive="description" 
+    matSortDisableClear matSortDirection="asc">
 
-<!-- Position Column
-<ng-container matColumnDef="position">
-  <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-  <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-</ng-container>
-
-<ng-container matColumnDef="name">
-  <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-  <mat-cell *matCellDef="let element">{{element.name}} </mat-cell>
-</ng-container>
-
-<ng-container matColumnDef="weight">
-  <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-  <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
-</ng-container>
-
-<ng-container matColumnDef="symbol">
-  <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-  <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
-</ng-container> -->
-
-    categoryId Column
     <ng-container matColumnDef="categoryId">
       <mat-header-cell *matHeaderCellDef>Category Id</mat-header-cell>
       <mat-cell *matCellDef="let cat"> {{cat.categoryId}} </mat-cell>
     </ng-container>
 
-    
     <ng-container matColumnDef="description">
       <mat-header-cell *matHeaderCellDef>Description </mat-header-cell>
       <mat-cell *matCellDef="let cat"> {{cat.description}} </mat-cell>
@@ -43,11 +22,11 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     
   </mat-table>
-  <!-- <mat-paginator #paginator
-                 [pageSize]="10"
+  <mat-paginator [length]="resultsLength"
+                 [pageSize]="5"
                  [pageSizeOptions]="[5, 10, 20]"
                  [showFirstLastButtons]="true">
-  </mat-paginator> -->
+  </mat-paginator>
 </div>
 <button mat-button (click)="openDialog()">
     <i class="material-icons">create_new_folder</i> Category

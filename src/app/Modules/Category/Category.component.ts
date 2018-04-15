@@ -1,6 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MatDialog, MatSnackBar, MatTable, MatPaginator, MatSort, MatTableDataSource  } from "@angular/material";
+import { MatDialog, 
+  MatSnackBar, 
+  MatTable, 
+  MatPaginator, 
+  MatSort, 
+  MatSpinner,
+  MatTableDataSource  } from "@angular/material";
 import { CategoriesService  } from "../../Services/Categories.service";
 import { Category  } from "../../Models/Category";
 import { DialogComponent } from '../../Shared/dialog.component';
@@ -55,8 +61,7 @@ export class CategoryComponent implements OnInit {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
-          this.resultsLength = 5;
-          //data.length;
+          this.resultsLength = this.categories.length;
 
           return data;
         }),

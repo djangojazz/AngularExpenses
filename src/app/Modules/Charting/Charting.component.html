@@ -1,6 +1,18 @@
-<div *ngFor="let f of flights">
-    {{f.flightName}}
-    <div *ngFor="let fp of f.flightPlans">
-        &nbsp;&nbsp;{{fp.flightPlanName}}
-    </div>
-  </div>
+  <mat-accordion *ngFor="let f of flights">
+      <mat-expansion-panel >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              FlightId: {{f.flightId}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{f.flightName}}
+            </mat-panel-description>
+            <mat-panel-description>
+                <button mat-button (click)="openEditFlight(f)">Edit</button>
+              </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngFor="let fp of f.flightPlans">
+              {{fp.flightPlanName}}
+          </div>
+        </mat-expansion-panel>
+  </mat-accordion>

@@ -19,4 +19,7 @@ export class ChartingComponent implements OnInit {
       .subscribe(() => this.flights = this.service.flights);
   }
 
+  openEditFlight(flight: Flight) {
+    console.log(flight.flightName);
+  }
 }

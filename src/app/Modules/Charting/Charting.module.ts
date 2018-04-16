@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 //import { DialogComponent } from '../../Shared/dialog.component';
 
 import { MaterialModule } from "../material.module";
+import { FlighteditComponent } from './flightedit.component';
 
 @NgModule({
   imports: [
@@ -16,8 +17,9 @@ import { MaterialModule } from "../material.module";
     FormsModule,
     MaterialModule
   ],
-  //entryComponents: [DialogComponent],
-  declarations: [ChartingComponent],
+  declarations: [ChartingComponent,
+    FlighteditComponent
+],
   providers: [ChartingService]
 })
 export class ChartingModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartingService } from '../../Services/charting.service';
 import { Flight } from '../../Models/Flight';
+import { FlightPlan } from '../../Models/FlightPlan';
 
 @Component({
   selector: 'app-Charting',
@@ -21,5 +22,9 @@ export class ChartingComponent implements OnInit {
 
   openEditFlight(flight: Flight) {
     console.log(flight.flightName);
+  }
+
+  openEditFlightPlan(flightPlan: FlightPlan) {
+    console.log(`FlightId ${flightPlan.flightPlanId}`)
   }
 }

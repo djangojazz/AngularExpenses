@@ -20,12 +20,12 @@ export class CategoriesService {
             .map((result: Response) => this.alphabetize(result));
     }
 
-    public loadSectionCategories(cats: Category[], size: number, page: number): Observable<Category[]> {
+    public loadSectionCategories(size: number, page: number): Observable<Category[]> {
         var sz = (size == undefined) ? 5 : size;
         var start = (sz * (page));
         var end = start + sz;
 
-        var listing = cats.slice(start, end);
+        var listing = this.Categories.slice(start, end);
         return Observable.of(listing);
     }
 

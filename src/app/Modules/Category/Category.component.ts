@@ -45,34 +45,12 @@ export class CategoryComponent implements OnInit  {
 }
 
   ngOnInit() {
-    this.service.loadCategories();
-
-      // If the user changes the sort order, reset back to the first page.
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-
-    merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        startWith({}),
-        switchMap(() => {
-          this.isLoadingResults = true;
-          return this.service.loadCategories()
-          //return this.service.loadSectionCategories(this.categories, this.paginator.pageSize, this.paginator.pageIndex);
-        }),
-        map(data => {
-          // Flip flag to show that loading has finished.
-          this.isLoadingResults = false;
-          this.isErrorState = false;
-          this.resultsLength = this.service.Categories.length;
-
-          return data;
-        }),
-        catchError(() => {
-          this.isLoadingResults = false;
-          // Catch if the GitHub API has reached its rate limit. Return empty data.
-          this.isErrorState = true;
-          return observableOf([]);
-        })
-      ).subscribe(data => this.dataSource.data = data);
+    this.service.loadCategories()
+      .subscribe(data => {
+        this.isLoadingResults = true
+        this.dataSource.data = data
+        this.isLoadingResults = false
+      });
   }
 
   openDialog() {

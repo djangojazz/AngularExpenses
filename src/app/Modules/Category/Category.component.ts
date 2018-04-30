@@ -25,7 +25,6 @@ import {switchMap} from 'rxjs/operators/switchMap';
   styleUrls: ['./Category.component.scss']
 })
 export class CategoryComponent implements OnInit  {
-  public categories: Category[] = [];
   displayedColumns = ['categoryId', 'description'];
   dataSource: MatTableDataSource<Category> = new MatTableDataSource();
 
@@ -46,6 +45,8 @@ export class CategoryComponent implements OnInit  {
 }
 
   ngOnInit() {
+    this.service.loadCategories();
+
       // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
@@ -55,12 +56,13 @@ export class CategoryComponent implements OnInit  {
         switchMap(() => {
           this.isLoadingResults = true;
           return this.service.loadCategories()
+          //return this.service.loadSectionCategories(this.categories, this.paginator.pageSize, this.paginator.pageIndex);
         }),
         map(data => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.isErrorState = false;
-          this.resultsLength = this.categories.length;
+          this.resultsLength = this.service.Categories.length;
 
           return data;
         }),
@@ -88,8 +90,7 @@ export class CategoryComponent implements OnInit  {
       }
       else
       {
-        this.service.addCategory(result)
-          .subscribe(() => this.categories = this.service.Categories);
+        this.service.addCategory(result);
 
         this.snackBar.open('Created Category:', result, { duration: 2000, verticalPosition: 'top' });
       }

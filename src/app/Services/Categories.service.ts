@@ -20,14 +20,14 @@ export class CategoriesService {
             .map((result: Response) => this.alphabetize(result));
     }
 
-    // public loadSectionCategories(size: number, page: number): Observable<Category[]> {
-    //     var sz = (size == undefined) ? 5 : size;
-    //     var start = (sz * (page));
-    //     var end = start + sz;
+    public loadSectionCategories(cats: Category[], size: number, page: number): Observable<Category[]> {
+        var sz = (size == undefined) ? 5 : size;
+        var start = (sz * (page));
+        var end = start + sz;
 
-    //     var listing = this.Categories.slice(start, end);
-    //     return Observable.of(listing);
-    // }
+        var listing = cats.slice(start, end);
+        return Observable.of(listing);
+    }
 
     public loadCategoriesStatic(): Category[] {
         return [

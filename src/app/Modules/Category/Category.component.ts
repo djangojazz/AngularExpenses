@@ -24,14 +24,10 @@ import {switchMap} from 'rxjs/operators/switchMap';
   templateUrl: './Category.component.html',
   styleUrls: ['./Category.component.scss']
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit  {
   public categories: Category[] = [];
   displayedColumns = ['categoryId', 'description'];
-  dataSource = new MatTableDataSource();
-
-  resultsLength = 0;
-  isLoadingResults = true;
-  isErrorState = false;
+  dataSource: MatTableDataSource<Category>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -39,39 +35,53 @@ export class CategoryComponent implements OnInit {
   constructor(private service: CategoriesService, 
     private dialog: MatDialog,
     private snackBar: MatSnackBar)   { 
+        //load up the categories that gets the data
+        //this.dataSource = new MatTableDataSource(this.service.Categories);
   }
 
   ngOnInit() {
     //load up the categories that gets the data
+    //this.dataSource = new MatTableDataSource(this.service.loadCategoriesStatic());
+
     this.service.loadCategories()
       .subscribe(() => this.categories = this.service.Categories);
 
-      // If the user changes the sort order, reset back to the first page.
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-
-    merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        startWith({}),
-        switchMap(() => {
-          this.isLoadingResults = true;
-          return this.service.loadSectionCategories(this.paginator.pageSize, this.paginator.pageIndex);
-        }),
-        map(data => {
-          // Flip flag to show that loading has finished.
-          this.isLoadingResults = false;
-          this.isErrorState = false;
-          this.resultsLength = this.categories.length;
-
-          return data;
-        }),
-        catchError(() => {
-          this.isLoadingResults = false;
-          // Catch if the GitHub API has reached its rate limit. Return empty data.
-          this.isErrorState = true;
-          return observableOf([]);
-        })
-      ).subscribe(data => this.dataSource.data = data);
+    // this.dataSource = new MatTableDataSource(this.categories);
+    this.dataSource = new MatTableDataSource(this.categories);
   }
+  // ngAfterViewInit() {
+  //   this.dataSource.paginator = this.paginator;
+  // }
+
+  
+  //     // If the user changes the sort order, reset back to the first page.
+  //   this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+  //   this.service.loadSectionCategories(30, 1);
+
+  //   merge(this.sort.sortChange, this.paginator.page)
+  //     .pipe(
+  //       startWith({}),
+  //       switchMap(() => {
+  //         this.isLoadingResults = true;
+  //         return this.service.loadSectionCategories(this.paginator.pageSize, this.paginator.pageIndex);
+  //       }),
+  //       map(data => {
+  //         // Flip flag to show that loading has finished.
+  //         this.isLoadingResults = false;
+  //         this.isErrorState = false;
+  //         this.resultsLength = this.categories.length;
+
+  //         return data;
+  //       }),
+  //       catchError(() => {
+  //         this.isLoadingResults = false;
+  //         // Catch if the GitHub API has reached its rate limit. Return empty data.
+  //         this.isErrorState = true;
+  //         return observableOf([]);
+  //       })
+  //     ).subscribe(data => this.dataSource.data = data);
+  // }
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {

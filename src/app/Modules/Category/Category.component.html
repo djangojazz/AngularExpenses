@@ -1,15 +1,15 @@
 
-<!-- <div *ngFor="let cat of categories">
+<div *ngFor="let cat of categories">
   {{cat.categoryId}} {{cat.description}}
-</div> -->
+</div>
 <div class="tab-container mat-elevation-z8">
-  <div class="loading-shade"
+  <!-- <div class="loading-shade"
        *ngIf="isLoadingResults || isRateLimitReached">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     <div class="problem" *ngIf="isErrorState">
       There was a problem
     </div>
-  </div>
+  </div> -->
   <mat-table #table [dataSource]="dataSource" 
     matSort matSortActive="description" 
     matSortDisableClear matSortDirection="asc">
@@ -29,11 +29,11 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     
   </mat-table>
-  <mat-paginator [length]="resultsLength"
+  <!-- <mat-paginator [length]="resultsLength"
                  [pageSize]="5"
                  [pageSizeOptions]="[5, 10, 20]"
                  [showFirstLastButtons]="true">
-  </mat-paginator>
+  </mat-paginator> -->
 </div>
 <button mat-button (click)="openDialog()">
     <i class="material-icons">create_new_folder</i> Category

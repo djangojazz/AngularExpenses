@@ -1,6 +1,6 @@
 import { Http, Response, Headers } from "@angular/http";
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from "rxjs"
+import { Observable } from "rxjs"
 import 'rxjs/add/operator/map';
 import { Category } from "../Models/Category";
 import { environment  } from "../../environments/environment";
@@ -20,14 +20,14 @@ export class CategoriesService {
             .map((result: Response) => this.alphabetize(result));
     }
 
-    public loadSectionCategories(size: number, page: number): Observable<Category[]> {
-        var sz = (size == undefined) ? 5 : size;
-        var start = (sz * (page));
-        var end = start + sz;
+    // public loadSectionCategories(size: number, page: number): Observable<Category[]> {
+    //     var sz = (size == undefined) ? 5 : size;
+    //     var start = (sz * (page));
+    //     var end = start + sz;
 
-        var listing = this.Categories.slice(start, end);
-        return Observable.of(listing);
-    }
+    //     var listing = this.Categories.slice(start, end);
+    //     return Observable.of(listing);
+    // }
 
     public loadCategoriesStatic(): Category[] {
         return [

@@ -41,12 +41,13 @@ export class CategoryComponent implements OnInit  {
     private snackBar: MatSnackBar)   { 
  }
 
+ ngAfterViewInit() {
+  this.dataSource.paginator = this.paginator;
+}
+
   ngOnInit() {
-  
       // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-
-    //this.service.loadSectionCategories(30, 1);
 
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
@@ -54,7 +55,6 @@ export class CategoryComponent implements OnInit  {
         switchMap(() => {
           this.isLoadingResults = true;
           return this.service.loadCategories()
-          //loadSectionCategories(this.paginator.pageSize, this.paginator.pageIndex);
         }),
         map(data => {
           // Flip flag to show that loading has finished.

@@ -121,3 +121,26 @@ text-align:left;
 {
   color: whitesmoke;
 }
+
+.tableContainer {
+  background-color: $p-dark;
+  max-height: 1000px;
+}
+
+.mat-header-cell {
+  color: $p-dark;
+  font-size: x-large;
+}
+
+.mat-cell {
+  color: $primary;
+}
+
+.mat-table {
+  margin-top: 0px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  background-color: $slight;
+  max-height: 1000px;
+}

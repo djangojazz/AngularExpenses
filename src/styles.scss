@@ -134,13 +134,25 @@ text-align:left;
 
 .mat-cell {
   color: $primary;
+  width: 150px;
 }
 
 .mat-table {
-  margin-top: 0px;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
   background-color: $slight;
-  max-height: 1000px;
+  max-height: 940px;
+}
+
+.mat-paginator {
+  color: $slight;
+  background-color: $p-dark;
+}
+
+.mat-grid-list {
+  position: relative;
+  min-width:600px;
+  max-width:1000px;
+}
+
+.mat-grid-tile {
+  margin: 10px;
 }

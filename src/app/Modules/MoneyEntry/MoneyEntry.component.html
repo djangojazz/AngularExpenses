@@ -1,7 +1,36 @@
-<h3>Entry into system</h3>
-<mat-form-field>
-  <mat-select [(value)]="selectedType">
-    <mat-option value="Credit">Credit</mat-option>
-    <mat-option value="Debit">Debit</mat-option>
-  </mat-select>
-</mat-form-field>
+<mat-grid-list cols="3" rowHeight="200px">
+  <mat-grid-tile item-width="500">
+      <mat-card class="result">
+          <mat-card-content>
+              <mat-slide-toggle
+                  class="example-margin"
+                  [color]="color"
+                  [checked]="checked"
+                  [disabled]="disabled">
+                  <h2>Debit/Credit</h2>
+              </mat-slide-toggle>
+          </mat-card-content>
+        </mat-card>
+        
+    <!--<mat-form-field>
+      
+      <mat-select [(value)]="selectedType">
+        <mat-option value="Credit">Credit</mat-option>
+        <mat-option value="Debit">Debit</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+  </mat-grid-tile>
+  <mat-grid-tile>2</mat-grid-tile>
+  <mat-grid-tile>3</mat-grid-tile>
+  <mat-grid-tile>4</mat-grid-tile>
+  <mat-grid-tile>5</mat-grid-tile>
+  <mat-grid-tile>6</mat-grid-tile>
+</mat-grid-list>
+
+<!-- <mat-form-field>
+        <h3>Entry into system</h3>
+    <mat-select [(value)]="selectedType">
+      <mat-option value="Credit">Credit</mat-option>
+      <mat-option value="Debit">Debit</mat-option>
+    </mat-select>
+  </mat-form-field> -->

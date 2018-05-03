@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule  } from "@angular/forms";
 
 
 @Component({
@@ -6,15 +7,18 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './MoneyEntry.component.html',
   styleUrls: ['./MoneyEntry.component.scss']
 })
-export class MoneyEntryComponent implements OnInit {
+export class MoneyEntryComponent  {
   public selectedType = 'Debit';
-  color = 'accent';
   checked = false;
-  disabled = false;
 
   constructor() { }
 
   ngOnInit() {
   }
+
+  test() {
+    console.log(this.checked);
+  }
+
 
 }

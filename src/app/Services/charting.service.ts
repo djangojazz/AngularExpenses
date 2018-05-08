@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
-import { Observable } from "rxjs"
+
+import { Observable, of } from "rxjs"
 import { Flight  } from "../Models/Flight";
 import { FlightPlan  } from "../Models/FlightPlan";
 

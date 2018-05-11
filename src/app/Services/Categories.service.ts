@@ -56,7 +56,7 @@ export class CategoriesService {
     }
 
     public addCategory(newCategory: string): Observable<Category[]> {
-        let params = new HttpParams().set('param1', newCategory);
+        let params = new HttpParams().set('', newCategory);
 
         return this.http.post<Category[]>(this.endpoint, 
             { headers: this.headers, params: params});

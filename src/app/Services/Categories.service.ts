@@ -1,23 +1,24 @@
-import { Http, Response, Headers } from "@angular/http";
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Observable, of } from "rxjs"
 
+
 import { Category } from "../Models/Category";
 import { environment  } from "../../environments/environment";
+import { tap } from "rxjs/operators";
 
 @Injectable()
 export class CategoriesService {
     public Categories: Category[] = [];
     private endpoint = `${environment.baseApi}/categories`;
-    private headers: Headers = new Headers();
+    private headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
-    constructor(private http: Http) { 
-        this.headers.append('Content-Type', 'application/json');
+    constructor(private http: HttpClient) {
     }
 
     public loadCategories(): Observable<Category[]> {
-        return this.http.get(this.endpoint)
-            .map((result: Response) => this.alphabetize(result));
+        return this.http.get<Category[]>(this.endpoint)
+            .pipe(tap(results => this.alphabetize(results)))
     }
 
     public loadSectionCategories(size: number, page: number): Observable<Category[]> {
@@ -26,7 +27,7 @@ export class CategoriesService {
         var end = start + sz;
 
         var listing = this.Categories.slice(start, end);
-        return Observable.of(listing);
+        return of(listing);
     }
 
     public loadCategoriesStatic(): Category[] {
@@ -55,10 +56,13 @@ export class CategoriesService {
     }
 
     public addCategory(newCategory: string): Observable<Category[]> {
-        return this.http.post(this.endpoint, JSON.stringify(newCategory), { headers: this.headers})
-            .map((result: Response) => this.alphabetize(result));
+        let params = new HttpParams().set('param1', newCategory);
+
+        return this.http.post<Category[]>(this.endpoint, 
+            { headers: this.headers, params: params});
     }
 
-    alphabetize = (result: Response) => this.Categories = result.json()
-    .sort((x,y) => x.description < y.description ? -1 : 1)
+    private alphabetize(categories: Category[]) {
+        categories.sort((x,y) => x.description < y.description ? -1 : 1)
+    }
 }

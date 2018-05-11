@@ -30,7 +30,7 @@ constructor() { }
             ]}
         ];
 
-        return Observable.of(this.flights);
+        return of(this.flights);
     }
 
     public pushFlight(flight: Flight) {

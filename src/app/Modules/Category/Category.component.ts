@@ -22,6 +22,7 @@ import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 export class CategoryComponent implements OnInit  {
   displayedColumns = ['categoryId', 'description'];
   dataSource: MatTableDataSource<Category> = new MatTableDataSource();
+  newCategory: string;
 
   isLoadingResults = false;
   isErrorState = false;
@@ -63,7 +64,17 @@ export class CategoryComponent implements OnInit  {
       }
       else
       {
-        this.service.addCategory(result);
+        this.service.addCategory(result)
+            .subscribe(
+              cats => this.dataSource.data = cats,
+              error => console.log(error)
+            )
+
+      //   getProduct(id: number) {
+      //     this.productService.getProduct(id).subscribe(
+      //         product => this.product = product,
+      //         error => this.errorMessage = <any>error);
+      // }
 
         this.snackBar.open('Created Category:', result, { duration: 2000, verticalPosition: 'top' });
       }

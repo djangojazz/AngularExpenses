@@ -56,10 +56,11 @@ export class CategoriesService {
     }
 
     public addCategory(newCategory: string): Observable<Category[]> {
-        let params = new HttpParams().set('', newCategory);
-
-        return this.http.post<Category[]>(this.endpoint, 
-            { headers: this.headers, params: params});
+        return this.http.post<Category[]>(
+            this.endpoint, 
+            JSON.stringify(newCategory),
+            { headers: this.headers})
+        .pipe(tap(results => this.alphabetize(results)));
     }
 
     private alphabetize(categories: Category[]) {

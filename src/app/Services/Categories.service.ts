@@ -21,15 +21,6 @@ export class CategoriesService {
             .pipe(tap(results => this.alphabetize(results)))
     }
 
-    public loadSectionCategories(size: number, page: number): Observable<Category[]> {
-        var sz = (size == undefined) ? 5 : size;
-        var start = (sz * (page));
-        var end = start + sz;
-
-        var listing = this.Categories.slice(start, end);
-        return of(listing);
-    }
-
     public loadCategoriesStatic(): Category[] {
         return [
             {categoryId: 1, description: 'Hydrogen'},

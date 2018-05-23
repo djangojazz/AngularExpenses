@@ -7,7 +7,7 @@ import { MatDialog,
   MatSort, 
   MatSpinner,
   MatTableDataSource  } from "@angular/material";
-import { CategoriesService  } from "../../Services/Categories.service";
+import { CategoriesService  } from "../../Services/categories.service";
 import { Category  } from "../../Models/Category";
 import { DialogComponent } from '../../Shared/dialog.component';
 

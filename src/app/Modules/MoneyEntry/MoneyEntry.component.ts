@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-
+import { TransactionsService  } from "../../Services/transactions.service";
+import { Transaction } from '../../Models/Transaction';
 
 @Component({
   selector: 'app-MoneyEntry',
@@ -10,10 +10,13 @@ import { Component, OnInit } from '@angular/core';
 export class MoneyEntryComponent  {
   public selectedType = 'Debit';
   checked = false;
+  public trans: Transaction[];
 
-  constructor() { }
+  constructor(private service: TransactionsService) { }
 
   ngOnInit() {
+    this.service.loadTransactions()
+      .subscribe(data => this.trans = data);
   }
 
   test() {

@@ -11,6 +11,7 @@ import { MoneyEntryModule } from "./Modules/MoneyEntry/MoneyEntry.module"
 import { ReconciliationModule  } from "./Modules/Reconciliation/Reconciliation.module";
 import { QueryModule } from "./Modules/Query/Query.module";
 import { ChartingModule  } from "./Modules/Charting/Charting.module";
+import { ServicesModule } from "./Services/services.module";
 
 import { MaterialModule } from "./Modules/material.module"
 
@@ -28,7 +29,8 @@ import { MaterialModule } from "./Modules/material.module"
     QueryModule,
     ChartingModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ServicesModule
   ],
   providers: [],
   bootstrap: [AppComponent],

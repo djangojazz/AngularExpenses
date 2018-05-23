@@ -22,8 +22,13 @@
   <mat-grid-tile>
     <button mat-button (click)="test()">Submit</button>  
   </mat-grid-tile>
+    
+  <mat-grid-tile>
+    <div *ngFor="let tran of trans">
+      <div>ID: {{tran.transactionID}} Amount: {{tran.amount}} Desc:{{tran.transactionDesc}} Total:{{tran.runningTotal}}</div>
+    </div>
 
-  <mat-grid-tile>3</mat-grid-tile>
+  </mat-grid-tile>
   <mat-grid-tile>4</mat-grid-tile>
   <mat-grid-tile>5</mat-grid-tile>
   <mat-grid-tile>6</mat-grid-tile>

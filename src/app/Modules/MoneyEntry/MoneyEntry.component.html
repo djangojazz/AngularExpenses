@@ -1,3 +1,5 @@
+<form novalidate (ngsubmit)="submit()"
+ [formGroup]="moneyForm">
 <mat-grid-list cols="3" rowHeight="200px">
   <mat-grid-tile item-width="500">
       <mat-card class="result">
@@ -9,31 +11,32 @@
               </mat-slide-toggle>
           </mat-card-content>
         </mat-card>
-        
-    <!--<mat-form-field>
-      
-      <mat-select [(value)]="selectedType">
-        <mat-option value="Credit">Credit</mat-option>
-        <mat-option value="Debit">Debit</mat-option>
-      </mat-select>
-    </mat-form-field> -->
   </mat-grid-tile>
-
+  
   <mat-grid-tile>
-    <button mat-button (click)="test()">Submit</button>  
+    <mat-form-field>
+      <textarea name="amount" matInput 
+        placeholder="amount" 
+        placeholder="Amount required"
+        formControlName="amount"
+        >
+      </textarea>
+    </mat-form-field>
   </mat-grid-tile>
     
   <mat-grid-tile>
-    <div *ngFor="let tran of trans">
-      <div>ID: {{tran.transactionID}} Amount: {{tran.amount}} Desc:{{tran.transactionDesc}} Total:{{tran.runningTotal}}</div>
-    </div>
+    3
 
   </mat-grid-tile>
   <mat-grid-tile>4</mat-grid-tile>
   <mat-grid-tile>5</mat-grid-tile>
-  <mat-grid-tile>6</mat-grid-tile>
+  <mat-grid-tile><button mat-button (click)="test()">Submit</button>  </mat-grid-tile>
 </mat-grid-list>
+</form>
 
+<div *ngFor="let tran of trans">
+  <div>ID: {{tran.transactionID}} Amount: {{tran.amount}} Desc:{{tran.transactionDesc}} Total:{{tran.runningTotal}}</div>
+</div>
 <!-- <mat-form-field>
         <h3>Entry into system</h3>
     <mat-select [(value)]="selectedType">

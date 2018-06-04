@@ -15,12 +15,29 @@
   
   <mat-grid-tile>
     <mat-form-field>
-      <textarea name="amount" matInput 
+        <input matInput placeholder="amountFormControl" [formControl]="amount"
+        [errorStateMatcher]="matcher">
+ <mat-hint>Errors appear instantly!</mat-hint>
+ <mat-error *ngIf="!amountFormControl.hasError('required')">
+   Amount Required
+ </mat-error>
+ <mat-error *ngIf="amountFormControl.hasError('amount')">
+   Email is <strong>required</strong>
+ </mat-error>
+      <!-- <textarea name="amount" matInput 
         placeholder="amount" 
         placeholder="Amount required"
         formControlName="amount"
         >
-      </textarea>
+      </textarea> -->
+      <!-- <span class="help-block" *ngIf="(moneyForm.get('amount').touched || moneyForm.get('amount').dirty) && moneyForm.get('amount').errors">
+        <span *ngIf="moneyForm.get('amount').errors.required">
+            Please enter your first name.
+        </span>
+        <span *ngIf="moneyForm.get('amount').errors.minlength">
+            The first name must be longer than 3 characters.
+        </span>
+    </span>-->
     </mat-form-field>
   </mat-grid-tile>
     

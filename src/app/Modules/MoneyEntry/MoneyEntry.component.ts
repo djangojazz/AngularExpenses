@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { TransactionsService  } from "../../Services/transactions.service";
 import { Transaction } from '../../Models/Transaction';
 import { FormGroup, FormBuilder, Validators, } from "@angular/forms";
+import { ErrorStateMatcher } from '@angular/material';
+import { SharedErrorStateMatcher } from '../../Shared/sharedErrorStateMacher';
+import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
 
 @Component({
   selector: 'app-MoneyEntry',
@@ -14,14 +17,18 @@ export class MoneyEntryComponent  {
   public trans: Transaction[];
   moneyForm: FormGroup;
 
-  constructor(private service: TransactionsService, private fb: FormBuilder) { }
+  constructor(private service: TransactionsService, 
+    private sharedValidator: SharedValidatorFunctions,
+    private fb: FormBuilder) { 
+      this.sharedValidator = new SharedValidatorFunctions();
+    }
 
   ngOnInit() {
     this.service.loadTransactions()
       .subscribe(data => this.trans = data);
 
     this.moneyForm = this.fb.group({
-      amount: [0, [Validators.required, Validators.pattern("[0-9.]")]]
+      amountFormControl: [0, [Validators.required, this.sharedValidator.validateNumber]]
     })
   }
 
@@ -29,5 +36,5 @@ export class MoneyEntryComponent  {
     console.log(this.checked);
   }
 
-
+  matcher = new SharedErrorStateMatcher();
 }

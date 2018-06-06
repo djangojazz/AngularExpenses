@@ -37,6 +37,7 @@ export class MoneyEntryComponent  {
 
     this.moneyForm = this.fb.group({
       amountFormControl: [10, [Validators.required, isNumeric()]]
+        //this.sharedValidator.numberValidator]]
     })
   }
 

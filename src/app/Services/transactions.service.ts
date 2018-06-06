@@ -15,9 +15,7 @@ export class TransactionsService {
 constructor(private http: HttpClient) { 
 }
 
-public loadTransactions() {
-    //personId: number, start: DateTimeFormat, end: DateTimeFormat): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`${this.endpoint}`);
-    ///${personId}/${start}/${end}`);
+public loadTransactions(personId?: number, start?: DateTimeFormat, end?: DateTimeFormat): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.endpoint}/getTransactions/${personId}/${start}/${end}`);
     }
 }

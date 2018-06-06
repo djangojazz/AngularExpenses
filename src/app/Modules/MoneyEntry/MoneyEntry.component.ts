@@ -1,10 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionsService  } from "../../Services/transactions.service";
 import { Transaction } from '../../Models/Transaction';
-import { FormGroup, FormBuilder, Validators, } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, } from "@angular/forms";
 import { ErrorStateMatcher } from '@angular/material';
 import { SharedErrorStateMatcher } from '../../Shared/sharedErrorStateMacher';
-import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
+//import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
+
+function isNumeric(): ValidatorFn {
+  return  (c: AbstractControl): {[key: string]: boolean} | null => {
+      if (c.value !== undefined && (isNaN(c.value))) {
+          return { 'isNumeric': true };
+      };
+      return null;
+      };
+  }
 
 @Component({
   selector: 'app-MoneyEntry',
@@ -18,9 +27,8 @@ export class MoneyEntryComponent  {
   moneyForm: FormGroup;
 
   constructor(private service: TransactionsService, 
-    private sharedValidator: SharedValidatorFunctions,
+    //private sharedValidator: SharedValidatorFunctions,
     private fb: FormBuilder) { 
-      this.sharedValidator = new SharedValidatorFunctions();
     }
 
   ngOnInit() {
@@ -28,7 +36,7 @@ export class MoneyEntryComponent  {
       .subscribe(data => this.trans = data);
 
     this.moneyForm = this.fb.group({
-      amountFormControl: [0, [Validators.required, this.sharedValidator.validateNumber]]
+      amountFormControl: [10, [Validators.required, isNumeric()]]
     })
   }
 

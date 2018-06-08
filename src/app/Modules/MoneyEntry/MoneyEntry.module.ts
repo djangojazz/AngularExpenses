@@ -4,6 +4,7 @@ import { MoneyEntryComponent } from './MoneyEntry.component';
 import { FormsModule  } from "@angular/forms";
 import { MaterialModule } from '../material.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     ReactiveFormsModule
   ],
+  providers: [SharedValidatorFunctions],
   declarations: [MoneyEntryComponent]
 })
 export class MoneyEntryModule { }

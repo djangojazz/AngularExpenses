@@ -11,20 +11,10 @@ function isNumeric(): ValidatorFn {
     }
 
 @Directive({
-    providers: [
-        { provide: NG_VALIDATORS, useExisting: SharedValidatorFunctions, multi: true}
-    ]
+    selector: '[ngModel]'
 })
 
 export class SharedValidatorFunctions {
-    numberValidator: Function;
-
-    constructor() {
-        this.numberValidator = isNumeric();
-    };
-
-    validateNumber(c: FormControl) {
-        return this.numberValidator(c);
+    numberValidator: Function = isNumeric();
     }
-}
 

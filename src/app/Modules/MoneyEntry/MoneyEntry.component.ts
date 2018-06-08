@@ -4,7 +4,7 @@ import { Transaction } from '../../Models/Transaction';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, } from "@angular/forms";
 import { ErrorStateMatcher } from '@angular/material';
 import { SharedErrorStateMatcher } from '../../Shared/sharedErrorStateMacher';
-//import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
+import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
 
 function isNumeric(): ValidatorFn {
   return  (c: AbstractControl): {[key: string]: boolean} | null => {
@@ -27,7 +27,7 @@ export class MoneyEntryComponent  {
   moneyForm: FormGroup;
 
   constructor(private service: TransactionsService, 
-    //private sharedValidator: SharedValidatorFunctions,
+    private sharedValidator: SharedValidatorFunctions,
     private fb: FormBuilder) { 
     }
 
@@ -36,8 +36,9 @@ export class MoneyEntryComponent  {
       .subscribe(data => this.trans = data);
 
     this.moneyForm = this.fb.group({
-      amountFormControl: [10, [Validators.required, isNumeric()]]
-        //this.sharedValidator.numberValidator]]
+      amountFormControl: [10, [Validators.required, 
+        //isNumeric()]]
+        this.sharedValidator.numberValidator]]
     })
   }
 

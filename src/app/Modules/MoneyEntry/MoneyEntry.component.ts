@@ -6,15 +6,6 @@ import { ErrorStateMatcher } from '@angular/material';
 import { SharedErrorStateMatcher } from '../../Shared/sharedErrorStateMacher';
 import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
 
-function isNumeric(): ValidatorFn {
-  return  (c: AbstractControl): {[key: string]: boolean} | null => {
-      if (c.value !== undefined && (isNaN(c.value))) {
-          return { 'isNumeric': true };
-      };
-      return null;
-      };
-  }
-
 @Component({
   selector: 'app-MoneyEntry',
   templateUrl: './MoneyEntry.component.html',
@@ -36,9 +27,7 @@ export class MoneyEntryComponent  {
       .subscribe(data => this.trans = data);
 
     this.moneyForm = this.fb.group({
-      amountFormControl: [10, [Validators.required, 
-        //isNumeric()]]
-        this.sharedValidator.numberValidator]]
+      amountFormControl: [10, [Validators.required, this.sharedValidator.numberValidator]]
     })
   }
 

@@ -1,32 +1,37 @@
 <form novalidate (ngsubmit)="submit()"
  [formGroup]="moneyForm">
- <textarea name="amount" matInput 
-        placeholder="amount" 
-        placeholder="Amount required"
-        formControlName="amountFormControl"
-        >
-      </textarea>
-       <span class="help-block" *ngIf="(moneyForm.get('amountFormControl').touched || moneyForm.get('amountFormControl').dirty) && moneyForm.get('amountFormControl').errors">
-        <span *ngIf="moneyForm.get('amountFormControl').errors.required">
-            Please enter an amount.
-        </span>
-        <span *ngIf="moneyForm.get('amountFormControl').errors.isNumeric">
-            Must be numeric.
-        </span>
-    </span>
+
+ <div class="form-group">
+    <mat-form-field>
+        <input matInput placeholder="amount" 
+        [formControl]="moneyForm.get('amountFormControl')"
+        [errorStateMatcher]="matcher">
+    <mat-error *ngIf="moneyForm.get('amountFormControl').hasError('required')">
+    Amount Required
+    </mat-error>
+    <mat-error *ngIf="moneyForm.get('amountFormControl').hasError('isNumeric')">
+      Amount must be numeric
+    </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+<mat-form-field>
+        <h3>Entry into system</h3>
+    <mat-select [(value)]="selectedType">
+      <mat-option value="Credit">Credit</mat-option>
+      <mat-option value="Debit">Debit</mat-option>
+    </mat-select>
+  </mat-form-field>
+  </div>
+
+ <!--  -->
+
+
 </form>
 
-    <!-- <mat-form-field>
-        <input matInput placeholder="Amount" [formControl]="amount"
-        [errorStateMatcher]="matcher">
- <mat-hint>Errors appear instantly!</mat-hint> -->
- <!-- <mat-error *ngIf="!amountFormControl.hasError('required')">
-   Amount Required
- </mat-error> -->
- <!-- <mat-error *ngIf="amountFormControl.hasError('amount')">
-   Email is <strong>required</strong>
- </mat-error> 
--->
+
+
 
 <!-- <mat-grid-list cols="3" rowHeight="200px">
   <mat-grid-tile item-width="500">
@@ -50,10 +55,3 @@
 <div *ngFor="let tran of trans">
   <div>ID: {{tran.transactionID}} Amount: {{tran.amount}} Desc:{{tran.transactionDesc}} Running Total:{{tran.runningTotal}}</div>
 </div>
-<!-- <mat-form-field>
-        <h3>Entry into system</h3>
-    <mat-select [(value)]="selectedType">
-      <mat-option value="Credit">Credit</mat-option>
-      <mat-option value="Debit">Debit</mat-option>
-    </mat-select>
-  </mat-form-field> -->

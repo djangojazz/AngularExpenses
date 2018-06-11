@@ -5,6 +5,8 @@ import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, } fro
 import { ErrorStateMatcher } from '@angular/material';
 import { SharedErrorStateMatcher } from '../../Shared/sharedErrorStateMacher';
 import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
+import { CategoriesService } from '../../Services/categories.service';
+import { Category } from '../../Models/Category';
 
 @Component({
   selector: 'app-MoneyEntry',
@@ -12,27 +14,34 @@ import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions'
   styleUrls: ['./MoneyEntry.component.scss']
 })
 export class MoneyEntryComponent  {
-  public selectedType = 'Debit';
-  checked = false;
-  public trans: Transaction[];
+  debitCredit = false;
+  transactions: Transaction[];
+  categories: Category[];
+
+  public cat
   moneyForm: FormGroup;
 
-  constructor(private service: TransactionsService, 
-    private sharedValidator: SharedValidatorFunctions,
-    private fb: FormBuilder) { 
+  constructor(private transactionService: TransactionsService, 
+              private categoriesService: CategoriesService,
+              private sharedValidator: SharedValidatorFunctions,
+              private fb: FormBuilder) { 
     }
 
   ngOnInit() {
-    this.service.loadTransactions()
-      .subscribe(data => this.trans = data);
+    this.transactionService.loadTransactions()
+      .subscribe(x => this.transactions = x);
+
+    this.categoriesService.loadCategories()
+      .subscribe(x => this.categories = x);
 
     this.moneyForm = this.fb.group({
+      debitCreditFormControl: [false],
       amountFormControl: [10, [Validators.required, this.sharedValidator.numberValidator]]
     })
   }
 
   submit() {
-    console.log(this.checked);
+    console.log(this.debitCredit);
   }
 
   matcher = new SharedErrorStateMatcher();

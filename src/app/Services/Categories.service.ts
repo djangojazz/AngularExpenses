@@ -21,31 +21,6 @@ export class CategoriesService {
             .pipe(tap(results => this.alphabetize(results)))
     }
 
-    public loadCategoriesStatic(): Category[] {
-        return [
-            {categoryId: 1, description: 'Hydrogen'},
-            {categoryId: 2, description: 'Helium'},
-            {categoryId: 3, description: 'Lithium'},
-            {categoryId: 4, description: 'Beryllium'},
-            {categoryId: 5, description: 'Boron'},
-            {categoryId: 6, description: 'Carbon'},
-            {categoryId: 7, description: 'Nitrogen'},
-            {categoryId: 8, description: 'Oxygen'},
-            {categoryId: 9, description: 'Fluorine'},
-            {categoryId: 10, description: 'Neon'},
-            {categoryId: 11, description: 'Sodium'},
-            {categoryId: 12, description: 'Magnesium'},
-            {categoryId: 13, description: 'Aluminum'},
-            {categoryId: 14, description: 'Silicon'},
-            {categoryId: 15, description: 'Phosphorus'},
-            {categoryId: 16, description: 'Sulfur'},
-            {categoryId: 17, description: 'Chlorine'},
-            {categoryId: 18, description: 'Argon'},
-            {categoryId: 19, description: 'Potassium'},
-            {categoryId: 20, description: 'Calcium'},
-          ];
-    }
-
     public addCategory(newCategory: string): Observable<Category[]> {
         return this.http.post<Category[]>(
             this.endpoint, 

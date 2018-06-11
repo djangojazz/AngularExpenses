@@ -15,7 +15,15 @@
     </mat-grid-tile>
   
     <mat-grid-tile>  
-      2
+        <mat-form-field>
+            <input type="text" placeholder="categorySelect" aria-label="categorySelect" matInput 
+              [formControl]="moneyForm.get('categoryFormControl')" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let option of filteredCategories | async" [value]="option">
+                {{ option.name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
     </mat-grid-tile>
   
     <mat-grid-tile>

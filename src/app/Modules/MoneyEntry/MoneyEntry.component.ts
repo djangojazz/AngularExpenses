@@ -16,7 +16,6 @@ import { map, startWith} from 'rxjs/operators';
   styleUrls: ['./MoneyEntry.component.scss']
 })
 export class MoneyEntryComponent  {
-  debitCredit = false;
   transactions: Transaction[];
   categories: Category[] = [];
   
@@ -36,9 +35,11 @@ export class MoneyEntryComponent  {
     this.categoriesService.loadCategories()
       .subscribe(x => this.categories = x);
 
+    
+
     this.moneyForm = this.fb.group({
       debitCreditFormControl: [false],
-      categoryFormControl: [new Category('Miscellaneous', 13)],
+      categoryFormControl: [new Category('Food', 28)],
       amountFormControl: [10, [Validators.required, this.sharedValidator.numberValidator]]
     })
 
@@ -60,7 +61,7 @@ export class MoneyEntryComponent  {
   }
 
   submit() {
-    console.log(this.debitCredit);
+    console.log(this.moneyForm.getRawValue());
   }
 
   matcher = new SharedErrorStateMatcher();

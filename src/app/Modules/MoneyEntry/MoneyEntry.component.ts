@@ -18,7 +18,12 @@ import { map, startWith} from 'rxjs/operators';
 export class MoneyEntryComponent  {
   debitCredit = false;
   transactions: Transaction[];
-  categories: Category[];
+  categories = [
+    new Category('Test', 1),
+    new Category('Food', 2),
+    new Category('Kids', 3),
+  ]
+  //: Category[];
   filteredCategories: Observable<Category[]>;
   moneyForm: FormGroup;
 
@@ -32,8 +37,8 @@ export class MoneyEntryComponent  {
     this.transactionService.loadTransactions()
       .subscribe(x => this.transactions = x);
 
-    this.categoriesService.loadCategories()
-      .subscribe(x => this.categories = x);
+    // this.categoriesService.loadCategories()
+    //   .subscribe(x => this.categories = x);
 
     this.moneyForm = this.fb.group({
       debitCreditFormControl: [false],
@@ -45,13 +50,17 @@ export class MoneyEntryComponent  {
       .pipe(
         startWith<string | Category>(''),
         map(x => typeof x === 'string' ? x: x.description),
-        map(x => x ? this.filter(x) : this.categories.slice())
+        map(name => name ? this.filter(name) : this.categories.slice())
       );
   }
 
   filter(desc: string): Category[] {
-    return this.categories.filter(option =>
-      option.description.toLowerCase().indexOf(desc.toLowerCase()) === 0);
+    return this.categories.filter(x =>
+      x.description.toLowerCase().indexOf(desc.toLowerCase()) === 0);
+  }
+
+  displayFn(cat?: Category): string | undefined {
+    return cat ?  cat.description : undefined;
   }
 
   submit() {

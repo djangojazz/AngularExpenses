@@ -2,6 +2,7 @@
  [formGroup]="moneyForm">
 
  <mat-grid-list cols="3" rowHeight="200px">
+
     <mat-grid-tile item-width="500">
         <mat-card class="result">
             <mat-card-content>
@@ -20,7 +21,7 @@
               [formControl]="moneyForm.get('categoryFormControl')" [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
               <mat-option *ngFor="let option of filteredCategories | async" [value]="option">
-                {{ option.name }}
+                {{ option.description }}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -42,7 +43,11 @@
           </div>
     </mat-grid-tile>
   
-    <mat-grid-tile>4</mat-grid-tile>
+    <mat-grid-tile>
+      <div *ngFor="let i of categories">
+        {{i.description}}
+      </div>
+    </mat-grid-tile>
     <mat-grid-tile>5</mat-grid-tile>
     <mat-grid-tile><button mat-button (click)="test()">Submit</button>  </mat-grid-tile>
   </mat-grid-list>

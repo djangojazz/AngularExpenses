@@ -18,8 +18,8 @@ import { map, startWith} from 'rxjs/operators';
 export class MoneyEntryComponent  {
   transactions: Transaction[] = [];
   categories: Category[] = [];
-  date: Date = new Date;
-  dateString: string;
+  startDate: Date = new Date();
+  endDate: Date = new Date();
   
   filteredCategories: Observable<Category[]>;
   moneyForm: FormGroup;
@@ -34,19 +34,17 @@ export class MoneyEntryComponent  {
     this.categoriesService.loadCategories()
       .subscribe(x => this.categories = x);
 
+    this.transactionService.getLastDate(1)
+      .subscribe(x => this.startDate = x);
+
     this.transactionService.loadTransactions()
       .subscribe(x => this.transactions = x);
-
-    this.transactionService.getLastDate(1)
-      .subscribe(x => this.dateString = x.toLocaleDateString());
-
-    console.log(this.date);
 
     this.moneyForm = this.fb.group({
       debitCreditFormControl: [false],
       categoryFormControl: [new Category('Food', 28)],
       amountFormControl: [10, [Validators.required, this.sharedValidator.numberValidator]],
-      dateFormControl: [this.date]
+      dateFormControl: [this.startDate]
     })
 
     this.filteredCategories = this.moneyForm.get('categoryFormControl').valueChanges

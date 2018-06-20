@@ -1,4 +1,4 @@
-<form novalidate (ngsubmit)="submit()"
+<form novalidate (ngsubmit)="submit"
  [formGroup]="moneyForm">
 
  <mat-grid-list cols="3" rowHeight="200px">
@@ -48,7 +48,9 @@
             </mat-form-field>
           </div>
     </mat-grid-tile>
-    <mat-grid-tile>5</mat-grid-tile>
+    <mat-grid-tile>
+      {{startDate}} - {{endDate}}
+    </mat-grid-tile>
     <mat-grid-tile>
       <button mat-button type="submit" 
       [disabled]="!moneyForm.valid">
@@ -56,8 +58,6 @@
       </button>  
     </mat-grid-tile>
   </mat-grid-list>
-
-
 </form>
 
 <div *ngFor="let tran of transactions">

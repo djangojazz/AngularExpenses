@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from "@angular/common/http";
-import { Observable, of, observable } from "rxjs"
+import { Observable, of, observable } from 'rxjs';
 
 import { Transaction } from "../Models/Transaction";
 import { environment  } from "../../environments/environment";
-import { tap } from "rxjs/operators";
-import { MatDateFormats } from '@angular/material';
 
 @Injectable()
 export class TransactionsService {
@@ -18,6 +16,14 @@ constructor(private http: HttpClient) {
 
 public getLastDate(personId: number): Observable<Date> {
     return this.http.get<Date>(`${this.endpoint}/getLastDate/${personId}`)
+}
+
+public getLastTest(): Date {
+    return new Date(2018, 4, 2);
+}
+
+public getLastTest2(): Observable<Date> {
+    return of(new Date(2018, 4, 20));
 }
 
 public loadTransactions(personId?: number, start?: Date, end?: Date): Observable<Transaction[]> {

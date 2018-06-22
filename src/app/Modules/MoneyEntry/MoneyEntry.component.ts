@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TransactionsService  } from "../../Services/transactions.service";
 import { Transaction } from '../../Models/Transaction';
 import { FormControl, FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, } from "@angular/forms";
-import { ErrorStateMatcher } from '@angular/material';
+//import { ErrorStateMatcher } from '@angular/material';
 import { SharedErrorStateMatcher } from '../../Shared/sharedErrorStateMacher';
 import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
 import { CategoriesService } from '../../Services/categories.service';
@@ -31,21 +31,29 @@ export class MoneyEntryComponent  {
     }
 
   ngOnInit() {
-    this.categoriesService.loadCategories()
-      .subscribe(x => this.categories = x);
-
-    this.transactionService.getLastDate(1)
-      .subscribe(x => this.startDate = x);
-
-    this.transactionService.loadTransactions()
-      .subscribe(x => this.transactions = x);
-
     this.moneyForm = this.fb.group({
       debitCreditFormControl: [false],
       categoryFormControl: [new Category('Food', 28)],
       amountFormControl: [10, [Validators.required, this.sharedValidator.numberValidator]],
-      dateFormControl: [this.startDate]
+      dateFormControl: []
     })
+
+    this.categoriesService.loadCategories()
+      .subscribe(x => this.categories = x);
+
+    this.transactionService.getLastDate(1)
+      .subscribe(x => {
+        this.startDate = x
+        this.moneyForm.setValue({ 
+          debitCreditFormControl: this.moneyForm.get('debitCreditFormControl').value,
+          categoryFormControl: this.moneyForm.get('categoryFormControl').value,
+          amountFormControl: this.moneyForm.get('amountFormControl').value,
+          dateFormControl: x
+        })
+      });
+
+    this.transactionService.loadTransactions()
+      .subscribe(x => this.transactions = x);
 
     this.filteredCategories = this.moneyForm.get('categoryFormControl').valueChanges
       .pipe(
@@ -53,7 +61,12 @@ export class MoneyEntryComponent  {
         map(x => typeof x === 'string' ? x: x.description),
         map(name => name ? this.filter(name) : this.categories.slice())
       );
+
+    this.moneyForm.get('dateFormControl').valueChanges.pipe(
+      map(x => x = this.startDate)
+    )
   }
+
 
   filter(desc: string): Category[] {
     return this.categories.filter(x =>
@@ -66,11 +79,11 @@ export class MoneyEntryComponent  {
 
   submit() {
     console.log(this.moneyForm.getRawValue());
-    console.log(this.moneyForm.get('debitCreditFormControl').value);
-    console.log(this.moneyForm.get('categoryFormControl').value);
-    console.log(this.moneyForm.get('amountFormControl').value);
-    console.log(this.moneyForm.get('dateFormControl').value);
+     console.log(this.moneyForm.get('debitCreditFormControl').value);
+    // console.log(this.moneyForm.get('categoryFormControl').value);
+    // console.log(this.moneyForm.get('amountFormControl').value);
+    // console.log(this.moneyForm.get('dateFormControl').value);
   }
 
-  matcher = new SharedErrorStateMatcher();
+  //matcher = new SharedErrorStateMatcher();
 }

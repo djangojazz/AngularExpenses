@@ -25,6 +25,9 @@
                 {{option.description}}
               </mat-option>
             </mat-autocomplete>
+            <mat-error *ngIf="moneyForm.get('categoryFormControl').hasError('required')">
+              Category Required
+            </mat-error>
           </mat-form-field>
     </mat-grid-tile>
   
@@ -35,6 +38,9 @@
         [formControl]="moneyForm.get('dateFormControl')">
         <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
         <mat-datepicker #datePicker></mat-datepicker>
+        <mat-error *ngIf="moneyForm.get('dateFormControl').hasError('required')">
+          Date Required
+        </mat-error>
       </mat-form-field>
     </mat-grid-tile>
   

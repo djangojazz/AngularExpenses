@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TransactionsService  } from "../../Services/transactions.service";
 import { Transaction } from '../../Models/Transaction';
 import { FormControl, FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, } from "@angular/forms";
-//import { ErrorStateMatcher } from '@angular/material';
 import { SharedErrorStateMatcher } from '../../Shared/sharedErrorStateMacher';
 import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
 import { CategoriesService } from '../../Services/categories.service';
@@ -33,9 +32,9 @@ export class MoneyEntryComponent  {
   ngOnInit() {
     this.moneyForm = this.fb.group({
       debitCreditFormControl: [false],
-      categoryFormControl: [new Category('Food', 28)],
+      categoryFormControl: [new Category('Food', 28), [Validators.required]],
       amountFormControl: [10, [Validators.required, this.sharedValidator.numberValidator]],
-      dateFormControl: []
+      dateFormControl: [this.startDate, [Validators.required]]
     })
 
     this.categoriesService.loadCategories()
@@ -79,12 +78,11 @@ export class MoneyEntryComponent  {
   }
 
   submit() {
-    //console.log(this.moneyForm);
-     console.log(this.moneyForm.get('debitCreditFormControl').value);
+    console.log(this.moneyForm.get('debitCreditFormControl').value);
     console.log(this.moneyForm.get('categoryFormControl').value);
     console.log(this.moneyForm.get('amountFormControl').value);
     console.log(this.moneyForm.get('dateFormControl').value);
   }
 
-  //matcher = new SharedErrorStateMatcher();
+  matcher = new SharedErrorStateMatcher();
 }

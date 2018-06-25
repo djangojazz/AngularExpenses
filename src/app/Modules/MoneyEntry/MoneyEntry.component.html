@@ -60,7 +60,11 @@
       </div>
     </mat-grid-tile>
     <mat-grid-tile>5</mat-grid-tile>
-    <mat-grid-tile><button mat-button (click)="submit()">Submit</button>  </mat-grid-tile>
+    <mat-grid-tile>
+      <button mat-button (click)="submit()" [disabled]="!moneyForm.valid">
+        Submit
+      </button> 
+    </mat-grid-tile>
   </mat-grid-list>
 </form>
 <div *ngFor="let tran of transactions">

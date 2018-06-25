@@ -79,11 +79,11 @@ export class MoneyEntryComponent  {
   }
 
   submit() {
-    console.log(this.moneyForm.getRawValue());
+    //console.log(this.moneyForm);
      console.log(this.moneyForm.get('debitCreditFormControl').value);
-    // console.log(this.moneyForm.get('categoryFormControl').value);
-    // console.log(this.moneyForm.get('amountFormControl').value);
-    // console.log(this.moneyForm.get('dateFormControl').value);
+    console.log(this.moneyForm.get('categoryFormControl').value);
+    console.log(this.moneyForm.get('amountFormControl').value);
+    console.log(this.moneyForm.get('dateFormControl').value);
   }
 
   //matcher = new SharedErrorStateMatcher();

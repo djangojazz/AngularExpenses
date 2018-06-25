@@ -1,14 +1,19 @@
-<form novalidate (ngsubmit)="submit"
+<form novalidate (ngsubmit)="submit()"
  [formGroup]="moneyForm">
 
  <mat-grid-list cols="3" rowHeight="200px">
 
     <mat-grid-tile item-width="500">
+        <mat-card class="result">
+            <mat-card-content>
                 <mat-slide-toggle
                     class="example-margin"
-                    [formControl]="moneyForm.get('debitCreditFormControl')">
+                    [formControl]="moneyForm.get('debitCreditFormControl')"
+                    >
                     <h2>Debit/Credit</h2>
                 </mat-slide-toggle>
+            </mat-card-content>
+          </mat-card>
     </mat-grid-tile>
   
     <mat-grid-tile>  
@@ -24,42 +29,34 @@
     </mat-grid-tile>
   
     <mat-grid-tile>
-        <mat-form-field>
-            <input matInput [matDatepicker]="datePicker" 
-            placeholder="Entry Date" 
-            [formControl]="moneyForm.get('dateFormControl')">
-            <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
-            <mat-datepicker #datePicker></mat-datepicker>
-          </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="datePicker" 
+        placeholder="Entry Date" 
+        [formControl]="moneyForm.get('dateFormControl')">
+        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+      </mat-form-field>
     </mat-grid-tile>
   
     <mat-grid-tile>
-        <div class="form-group">
-            <mat-form-field>
-                <input matInput placeholder="amount" 
-                [formControl]="moneyForm.get('amountFormControl')"
-                [errorStateMatcher]="matcher">
-            <mat-error *ngIf="moneyForm.get('amountFormControl').hasError('required')">
-            Amount Required
-            </mat-error>
-            <mat-error *ngIf="moneyForm.get('amountFormControl').hasError('isNumeric')">
-              Amount must be numeric
-            </mat-error>
-            </mat-form-field>
-          </div>
+      <div class="form-group">
+        <mat-form-field>
+            <input matInput placeholder="amount" 
+            [formControl]="moneyForm.get('amountFormControl')"
+            [errorStateMatcher]="matcher">
+        <mat-error *ngIf="moneyForm.get('amountFormControl').hasError('required')">
+        Amount Required
+        </mat-error>
+        <mat-error *ngIf="moneyForm.get('amountFormControl').hasError('isNumeric')">
+          Amount must be numeric
+        </mat-error>
+        </mat-form-field>
+      </div>
     </mat-grid-tile>
-    <mat-grid-tile>
-      5
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <button mat-button type="submit" 
-      [disabled]="!moneyForm.valid">
-        submit
-      </button>  
-    </mat-grid-tile>
+    <mat-grid-tile>5</mat-grid-tile>
+    <mat-grid-tile><button mat-button (click)="submit()">Submit</button>  </mat-grid-tile>
   </mat-grid-list>
 </form>
 <div *ngFor="let tran of transactions">
   <div>ID: {{tran.transactionID}} Amount: {{tran.amount}} Desc:{{tran.transactionDesc}} Running Total:{{tran.runningTotal}}</div>
-  <div>{{tran}}</div>
 </div>

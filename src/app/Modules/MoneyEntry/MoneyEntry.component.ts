@@ -50,10 +50,11 @@ export class MoneyEntryComponent  {
           amountFormControl: this.moneyForm.get('amountFormControl').value,
           dateFormControl: x
         })
+        
+      this.transactionService.loadTransactions(1, this.startDate, this.endDate)
+        .subscribe(x => this.transactions = x);
       });
 
-    this.transactionService.loadTransactions()
-      .subscribe(x => this.transactions = x);
 
     this.filteredCategories = this.moneyForm.get('categoryFormControl').valueChanges
       .pipe(

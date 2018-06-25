@@ -18,14 +18,6 @@ public getLastDate(personId: number): Observable<Date> {
     return this.http.get<Date>(`${this.endpoint}/getLastDate/${personId}`)
 }
 
-public getLastTest(): Date {
-    return new Date(2018, 4, 2);
-}
-
-public getLastTest2(): Observable<Date> {
-    return of(new Date(2018, 4, 20));
-}
-
 public loadTransactions(personId?: number, start?: Date, end?: Date): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(`${this.endpoint}/getTransactions/${personId}/${start}/${end}`);
     }

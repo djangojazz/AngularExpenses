@@ -59,7 +59,18 @@
         </mat-form-field>
       </div>
     </mat-grid-tile>
-    <mat-grid-tile>5</mat-grid-tile>
+    <mat-grid-tile>
+        <div class="form-group">
+            <mat-form-field>
+                <input matInput placeholder="description" 
+                [formControl]="moneyForm.get('descFormControl')"
+                [errorStateMatcher]="matcher">
+            <mat-error *ngIf="moneyForm.get('descFormControl').hasError('required')">
+            Description Required
+            </mat-error>
+            </mat-form-field>
+          </div>
+    </mat-grid-tile>
     <mat-grid-tile>
       <button mat-button (click)="submit()" [disabled]="!moneyForm.valid">
         Submit

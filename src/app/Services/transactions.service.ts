@@ -21,4 +21,8 @@ public getLastDate(personId: number): Observable<Date> {
 public loadTransactions(personId?: number, start?: Date, end?: Date): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(`${this.endpoint}/getTransactions/${personId}/${start}/${end}`);
     }
+
+public createANewTransaction(transaction: Transaction): Observable<Transaction> {
+    return this.http.post<Transaction>(`${this.endpoint}`, transaction, { headers: this.headers});
+    }
 }

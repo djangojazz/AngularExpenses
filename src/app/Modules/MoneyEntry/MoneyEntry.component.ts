@@ -8,6 +8,7 @@ import { CategoriesService } from '../../Services/categories.service';
 import { Category } from '../../Models/Category';
 import { Observable } from 'rxjs';
 import { map, startWith} from 'rxjs/operators';
+import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group';
 
 @Component({
   selector: 'app-MoneyEntry',
@@ -34,6 +35,7 @@ export class MoneyEntryComponent  {
       debitCreditFormControl: [false],
       categoryFormControl: [new Category('Food', 28), [Validators.required]],
       amountFormControl: [10, [Validators.required, this.sharedValidator.numberValidator]],
+      descFormControl: ['groceries', [Validators.required]],
       dateFormControl: [this.startDate, [Validators.required]]
     })
 
@@ -47,6 +49,7 @@ export class MoneyEntryComponent  {
           debitCreditFormControl: this.moneyForm.get('debitCreditFormControl').value,
           categoryFormControl: this.moneyForm.get('categoryFormControl').value,
           amountFormControl: this.moneyForm.get('amountFormControl').value,
+          descFormControl: this.moneyForm.get('descFormControl').value,
           dateFormControl: x
         })
         
@@ -78,9 +81,22 @@ export class MoneyEntryComponent  {
   }
 
   submit() {
+    var newTransaction: Transaction = <Transaction>{
+      transactionID: 0,
+      personID: 1,
+    };
+    
+
+    //   this.moneyForm;
+
+    // this.transactionService.createANewTransaction(new Transaction{
+
+    // });
+
     console.log(this.moneyForm.get('debitCreditFormControl').value);
     console.log(this.moneyForm.get('categoryFormControl').value);
     console.log(this.moneyForm.get('amountFormControl').value);
+    console.log(this.moneyForm.get('descFormControl').value);
     console.log(this.moneyForm.get('dateFormControl').value);
   }
 

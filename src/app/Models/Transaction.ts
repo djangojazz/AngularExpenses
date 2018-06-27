@@ -1,4 +1,4 @@
-export interface Transaction {
+export class Transaction {
     personID: number;
     name: string;
     amount: number;

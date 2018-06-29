@@ -11,8 +11,7 @@ export class TransactionsService {
     private endpoint = `${environment.baseApi}/transactions`;
     private headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
-constructor(private http: HttpClient) { 
-}
+constructor(private http: HttpClient) { }
 
 public getLastDate(personId: number): Observable<Date> {
     return this.http.get<Date>(`${this.endpoint}/getLastDate/${personId}`)
@@ -23,6 +22,6 @@ public loadTransactions(personId?: number, start?: Date, end?: Date): Observable
     }
 
 public createANewTransaction(transaction: Transaction): Observable<Transaction> {
-    return this.http.post<Transaction>(`${this.endpoint}`, transaction, { headers: this.headers});
+    return this.http.post<Transaction>(`${this.endpoint}/postTransaction`, transaction, { headers: this.headers});
     }
 }

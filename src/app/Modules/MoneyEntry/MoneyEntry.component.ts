@@ -81,23 +81,14 @@ export class MoneyEntryComponent  {
   }
 
   submit() {
-    var newTransaction: Transaction = <Transaction>{
-      transactionID: 0,
-      personID: 1,
-    };
-    
-
-    //   this.moneyForm;
-
-    // this.transactionService.createANewTransaction(new Transaction{
-
-    // });
-
-    console.log(this.moneyForm.get('debitCreditFormControl').value);
-    console.log(this.moneyForm.get('categoryFormControl').value);
-    console.log(this.moneyForm.get('amountFormControl').value);
-    console.log(this.moneyForm.get('descFormControl').value);
-    console.log(this.moneyForm.get('dateFormControl').value);
+     this.transactionService.createANewTransaction( 
+      new Transaction(0, 1, <number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
+          <number>(<Category>(this.moneyForm.get('categoryFormControl').value)).categoryId, <Date>this.moneyForm.get('dateFormControl').value,
+          this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value)
+        ).subscribe(
+          (result: Transaction) => console.log(`saved entry to database ${result}`),
+          (err: any) => console.log(err)
+        );
   }
 
   matcher = new SharedErrorStateMatcher();

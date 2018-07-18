@@ -36,7 +36,8 @@ export class MoneyEntryComponent  {
       categoryFormControl: [new Category('Food', 28), [Validators.required]],
       amountFormControl: [10, [Validators.required, this.sharedValidator.numberValidator]],
       descFormControl: ['groceries', [Validators.required]],
-      dateFormControl: [this.startDate, [Validators.required]]
+      startDateFormControl: [this.startDate, [Validators.required]],
+      endDateFormControl: [this.endDate, [Validators.required]],
     })
 
     this.categoriesService.loadCategories()
@@ -50,7 +51,8 @@ export class MoneyEntryComponent  {
           categoryFormControl: this.moneyForm.get('categoryFormControl').value,
           amountFormControl: this.moneyForm.get('amountFormControl').value,
           descFormControl: this.moneyForm.get('descFormControl').value,
-          dateFormControl: x
+          startDateFormControl: x,
+          endDateFormControl: this.moneyForm.get('endDateFormControl').value,
         })
         
       this.transactionService.loadTransactions(1, this.startDate, this.endDate)
@@ -65,8 +67,12 @@ export class MoneyEntryComponent  {
         map(name => name ? this.filter(name) : this.categories.slice())
       );
 
-    this.moneyForm.get('dateFormControl').valueChanges.pipe(
+    this.moneyForm.get('startDateFormControl').valueChanges.pipe(
       map(x => x = this.startDate)
+    )
+    
+    this.moneyForm.get('endDateFormControl').valueChanges.pipe(
+      map(x => x = this.endDate)
     )
   }
 
@@ -81,9 +87,10 @@ export class MoneyEntryComponent  {
   }
 
   submit() {
+    //console.log(`${<Date>this.moneyForm.get('startDateFormControl').value}-${<Date>this.moneyForm.get('endDateFormControl').value}`)
      this.transactionService.createANewTransaction( 
       new Transaction(0, 1, <number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
-          <number>(<Category>(this.moneyForm.get('categoryFormControl').value)).categoryId, <Date>this.moneyForm.get('dateFormControl').value,
+          <number>(<Category>(this.moneyForm.get('categoryFormControl').value)).categoryId, <Date>this.moneyForm.get('startDateFormControl').value,
           this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value)
         ).subscribe(
           (result: Transaction) => console.log(`saved entry to database ${result}`),

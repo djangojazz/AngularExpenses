@@ -3,6 +3,38 @@
 
  <mat-grid-list cols="3" rowHeight="200px">
 
+    <mat-grid-tile>
+        <mat-form-field>
+          <input matInput [matDatepicker]="start" 
+          placeholder="Start Date" 
+          [formControl]="moneyForm.get('startDateFormControl')">
+          <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+          <mat-datepicker #start></mat-datepicker>
+          <mat-error *ngIf="moneyForm.get('startDateFormControl').hasError('required')">
+            Date Required
+          </mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+          <mat-form-field>
+            <input matInput [matDatepicker]="end" 
+            placeholder="End Date" 
+            [formControl]="moneyForm.get('endDateFormControl')">
+            <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+            <mat-datepicker #end></mat-datepicker>
+            <mat-error *ngIf="moneyForm.get('endDateFormControl').hasError('required')">
+              Date Required
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <button mat-button (click)="submit()" [disabled]="!moneyForm.valid">
+              Submit
+            </button> 
+          </mat-grid-tile>
+
     <mat-grid-tile item-width="500">
         <mat-card class="result">
             <mat-card-content>
@@ -32,7 +64,8 @@
     </mat-grid-tile>
   
     <mat-grid-tile>
-      <mat-form-field>
+      3
+      <!-- <mat-form-field>
         <input matInput [matDatepicker]="datePicker" 
         placeholder="Entry Date" 
         [formControl]="moneyForm.get('dateFormControl')">
@@ -41,7 +74,7 @@
         <mat-error *ngIf="moneyForm.get('dateFormControl').hasError('required')">
           Date Required
         </mat-error>
-      </mat-form-field>
+      </mat-form-field> -->
     </mat-grid-tile>
   
     <mat-grid-tile>
@@ -72,9 +105,10 @@
           </div>
     </mat-grid-tile>
     <mat-grid-tile>
-      <button mat-button (click)="submit()" [disabled]="!moneyForm.valid">
+      6
+      <!-- <button mat-button (click)="submit()" [disabled]="!moneyForm.valid">
         Submit
-      </button> 
+      </button>  -->
     </mat-grid-tile>
   </mat-grid-list>
 </form>

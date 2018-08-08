@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MoneyEntryComponent } from './moneyEntry2.component';
+import { MoneyEntryComponent } from './moneyEntry.component';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';

@@ -1,43 +1,43 @@
 import { Injectable } from '@angular/core';
 
 import { Observable, of } from "rxjs"
-import { Flight  } from "../Models/flight";
-import { FlightPlan  } from "../Models/flightPlan";
+import { Chart  } from "../Models/chart";
+import { ChartPlan  } from "../Models/chartPlan";
 
 @Injectable()
 export class ChartingService {
-    public flights: Flight[] = [];
+    public charts: Chart[] = [];
 
 constructor() { }
-    public loadFlights(): Observable<Flight[]> {
-        this.flights = [
+    public loadCharts(): Observable<Chart[]> {
+        this.charts = [
             {
-                flightId: 1, flightName: "Flight One", flightPlans: [
-                {flightPlanId: 1, flightPlanName: "FlightPlan One"},
-                {flightPlanId: 2, flightPlanName: "FlightPlan Two"}
+                chartId: 1, chartName: "Chart One", chartPlans: [
+                {chartPlanId: 1, chartPlanName: "ChartPlan One"},
+                {chartPlanId: 2, chartPlanName: "ChartPlan Two"}
             ]},
             {
-                flightId: 2, flightName: "Flight Two", flightPlans: [
-                {flightPlanId: 3, flightPlanName: "FlightPlan Three"},
-                {flightPlanId: 4, flightPlanName: "FlightPlan Four"},
-                {flightPlanId: 5, flightPlanName: "FlightPlan Five"}
+                chartId: 2, chartName: "Chart Two", chartPlans: [
+                {chartPlanId: 3, chartPlanName: "ChartPlan Three"},
+                {chartPlanId: 4, chartPlanName: "ChartPlan Four"},
+                {chartPlanId: 5, chartPlanName: "ChartPlan Five"}
             ]},
             {
-                flightId: 3, flightName: "Flight Three", flightPlans: [
-                {flightPlanId: 6, flightPlanName: "FlightPlan Six"},
-                {flightPlanId: 7, flightPlanName: "FlightPlan Seven"},
-                {flightPlanId: 8, flightPlanName: "FlightPlan Eight"}
+                chartId: 3, chartName: "Chart Three", chartPlans: [
+                {chartPlanId: 6, chartPlanName: "ChartPlan Six"},
+                {chartPlanId: 7, chartPlanName: "ChartPlan Seven"},
+                {chartPlanId: 8, chartPlanName: "ChartPlan Eight"}
             ]}
         ];
 
-        return of(this.flights);
+        return of(this.charts);
     }
 
-    public pushFlight(flight: Flight) {
-        this.flights.push(flight);
+    public pushChart(chart: Chart) {
+        this.charts.push(chart);
     }
 
-    public popFlight(flightId: number) {
-        delete this.flights[flightId];
+    public popChart(chartId: number) {
+        delete this.charts[chartId];
     }
 }

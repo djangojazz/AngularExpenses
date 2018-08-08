@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartingService } from '../../Services/charting.service';
-import { Flight } from '../../Models/Flight';
-import { FlightPlan } from '../../Models/FlightPlan';
+import { Chart } from '../../Models/chart';
+import { ChartPlan } from '../../Models/chartPlan';
 
 @Component({
   selector: 'app-Charting',
@@ -9,22 +9,22 @@ import { FlightPlan } from '../../Models/FlightPlan';
   styleUrls: ['./charting.component.scss']
 })
 export class ChartingComponent implements OnInit {
-  public flights: Flight[] = [];
+  public charts: Chart[] = [];
 
   constructor(private service: ChartingService) { 
-    this.flights = this.service.flights;
+    this.charts = this.service.charts;
   }
 
   ngOnInit() {
-    this.service.loadFlights()
-      .subscribe(() => this.flights = this.service.flights);
+    this.service.loadCharts()
+      .subscribe(() => this.charts = this.service.charts);
   }
 
-  openEditFlight(flight: Flight) {
-    console.log(flight.flightName);
+  openEditFlight(chart: Chart) {
+    console.log(chart.chartName);
   }
 
-  openEditFlightPlan(flightPlan: FlightPlan) {
-    console.log(`FlightId ${flightPlan.flightPlanId}`)
+  openEditFlightPlan(chartPlan: ChartPlan) {
+    console.log(`ChartId ${chartPlan.chartPlanId}`)
   }
 }

@@ -1,20 +1,20 @@
-<h1>Current Flights</h1>
-  <mat-accordion *ngFor="let f of flights">
+<h1>Current Charts</h1>
+  <mat-accordion *ngFor="let c of charts">
     
       <mat-expansion-panel class="expander">
           <mat-expansion-panel-header>
             <mat-panel-title class="expander-top">
-              FlightId: {{f.flightId}}
+              ChartId: {{c.chartId}}
             </mat-panel-title>
             <mat-panel-description  class="expander-top">
-              {{f.flightName}}
+              {{c.chartName}}
             </mat-panel-description>
             <mat-panel-description>
-                <button mat-button (click)="openEditFlight(f)">Edit</button>
+                <button mat-button (click)="openEditFlight(c)">Edit</button>
               </mat-panel-description>
           </mat-expansion-panel-header>
-          <div *ngFor="let fp of f.flightPlans">
-              <div>{{fp.flightPlanName}} <button mat-button (click)="openEditFlightPlan(fp)">Edit</button>
+          <div *ngFor="let cp of c.chartPlans">
+              <div>{{cp.chartPlanName}} <button mat-button (click)="openEditFlightPlan(cp)">Edit</button>
               </div>
           </div>
 

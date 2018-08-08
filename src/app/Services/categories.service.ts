@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from "rxjs"
 
 
-import { Category } from "../Models/Category";
+import { Category } from "../Models/category";
 import { environment  } from "../../environments/environment";
 import { tap } from "rxjs/operators";
 

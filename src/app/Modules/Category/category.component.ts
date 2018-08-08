@@ -8,7 +8,7 @@ import { MatDialog,
   MatSpinner,
   MatTableDataSource  } from "@angular/material";
 import { CategoriesService  } from "../../Services/categories.service";
-import { Category  } from "../../Models/Category";
+import { Category  } from "../../Models/category";
 import { DialogComponent } from '../../Shared/dialog.component';
 
 import {Observable, merge, of as observableOf} from 'rxjs';

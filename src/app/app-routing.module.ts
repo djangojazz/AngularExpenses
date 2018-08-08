@@ -2,7 +2,7 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CategoryComponent }    from './Modules/Category/category.component';
 import { MoneyEntryComponent }  from './Modules/MoneyEntry/moneyEntry.component';
-import { ReconciliationComponent }  from './Modules/Reconciliation/reconciliation2.component';
+import { ReconciliationComponent }  from './Modules/Reconciliation/reconciliation.component';
 import { QueryComponent } from "./Modules/Query/query.component"
 import { ChartingComponent  } from "./Modules/Charting/charting.component";
 import { FormControl }          from '@angular/forms';

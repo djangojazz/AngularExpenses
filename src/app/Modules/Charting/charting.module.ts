@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule  } from "@angular/forms";
 import { CommonModule } from '@angular/common';
-import { ChartingComponent } from './charting2.component';
+import { ChartingComponent } from './charting.component';
 import { ChartingService  } from "../../Services/charting.service";
 
 import { BrowserModule } from '@angular/platform-browser';

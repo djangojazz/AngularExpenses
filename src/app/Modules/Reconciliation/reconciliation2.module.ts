@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReconciliationComponent } from './Reconciliation.component';
+import { ReconciliationComponent } from './reconciliation2.component';
 
 @NgModule({
   imports: [

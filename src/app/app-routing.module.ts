@@ -1,10 +1,10 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoryComponent }    from './Modules/Category/Category.component';
-import { MoneyEntryComponent }  from './Modules/MoneyEntry/MoneyEntry.component';
-import { ReconciliationComponent }  from './Modules/Reconciliation/Reconciliation.component';
-import { QueryComponent } from "./Modules/Query/Query.component"
-import { ChartingComponent  } from "./Modules/Charting/Charting.component";
+import { CategoryComponent }    from './Modules/Category/category.component';
+import { MoneyEntryComponent }  from './Modules/MoneyEntry/moneyEntry.component';
+import { ReconciliationComponent }  from './Modules/Reconciliation/reconciliation2.component';
+import { QueryComponent } from "./Modules/Query/query.component"
+import { ChartingComponent  } from "./Modules/Charting/charting.component";
 import { FormControl }          from '@angular/forms';
 
 

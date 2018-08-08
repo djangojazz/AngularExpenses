@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-Query',
-  templateUrl: './Query.component.html',
-  styleUrls: ['./Query.component.scss']
+  templateUrl: './query.component.html',
+  styleUrls: ['./query.component.scss']
 })
 export class QueryComponent implements OnInit {
 

@@ -5,8 +5,8 @@ import { FlightPlan } from '../../Models/FlightPlan';
 
 @Component({
   selector: 'app-Charting',
-  templateUrl: './Charting.component.html',
-  styleUrls: ['./Charting.component.scss']
+  templateUrl: './charting.component.html',
+  styleUrls: ['./charting.component.scss']
 })
 export class ChartingComponent implements OnInit {
   public flights: Flight[] = [];

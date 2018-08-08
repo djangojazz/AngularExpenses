@@ -16,8 +16,8 @@ import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-Category',
-  templateUrl: './Category.component.html',
-  styleUrls: ['./Category.component.scss']
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit  {
   displayedColumns = ['categoryId', 'description'];

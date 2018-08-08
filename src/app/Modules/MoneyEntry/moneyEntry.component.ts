@@ -12,8 +12,8 @@ import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group
 
 @Component({
   selector: 'app-MoneyEntry',
-  templateUrl: './MoneyEntry.component.html',
-  styleUrls: ['./MoneyEntry.component.scss']
+  templateUrl: './moneyEntry.component.html',
+  styleUrls: ['./moneyEntry.component.scss']
 })
 export class MoneyEntryComponent  {
   transactions: Transaction[] = [];

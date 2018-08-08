@@ -7,8 +7,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule  } from "./app-routing.module";
 
 import { CategoryModule  } from "./Modules/Category/Category.module";
-import { MoneyEntryModule } from "./Modules/MoneyEntry/MoneyEntry.module"
-import { ReconciliationModule  } from "./Modules/Reconciliation/Reconciliation.module";
+import { MoneyEntryModule } from "./Modules/MoneyEntry/moneyEntry.module"
+import { ReconciliationModule  } from "./Modules/Reconciliation/reconciliation.module";
 import { QueryModule } from "./Modules/Query/Query.module";
 import { ChartingModule  } from "./Modules/Charting/Charting.module";
 import { ServicesModule } from "./Services/services.module";

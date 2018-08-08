@@ -17,13 +17,13 @@ export class CategoriesService {
     }
 
     public loadCategories(): Observable<Category[]> {
-        return this.http.get<Category[]>(this.endpoint)
+        return this.http.get<Category[]>(`${this.endpoint}/getCategories`)
             .pipe(tap(results => this.alphabetize(results)))
     }
 
     public addCategory(newCategory: string): Observable<Category[]> {
         return this.http.post<Category[]>(
-            this.endpoint, 
+            `${this.endpoint}/postCategory`, 
             JSON.stringify(newCategory),
             { headers: this.headers})
         .pipe(tap(results => this.alphabetize(results)));

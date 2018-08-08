@@ -6,7 +6,7 @@ import { HttpClientModule } from "@angular/common/http"
 import { AppComponent } from './app.component';
 import { AppRoutingModule  } from "./app-routing.module";
 
-import { CategoryModule  } from "./Modules/Category/Category.module";
+import { CategoryModule  } from "./Modules/Category/category.module";
 import { MoneyEntryModule } from "./Modules/MoneyEntry/moneyEntry.module"
 import { ReconciliationModule  } from "./Modules/Reconciliation/reconciliation.module";
 import { QueryModule } from "./Modules/Query/query.module";

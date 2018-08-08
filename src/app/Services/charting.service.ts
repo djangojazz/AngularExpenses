@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { Observable, of } from "rxjs"
-import { Flight  } from "../Models/Flight";
-import { FlightPlan  } from "../Models/FlightPlan";
+import { Flight  } from "../Models/flight";
+import { FlightPlan  } from "../Models/flightPlan";
 
 @Injectable()
 export class ChartingService {

@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http"
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule  } from "./app-routing.module";
+import { AppRoutingModule  } from "./Shared/app-routing.module";
 
 import { CategoryModule  } from "./Modules/Category/category.module";
 import { MoneyEntryModule } from "./Modules/MoneyEntry/moneyEntry.module"
@@ -14,9 +14,11 @@ import { ChartingModule  } from "./Modules/Charting/charting.module";
 import { ServicesModule } from "./Services/services.module";
 import { MaterialModule } from "./Modules/material.module"
 
+import { PageNotFoundComponent  } from "./Shared/page-not-found.component";
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

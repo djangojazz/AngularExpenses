@@ -4,13 +4,15 @@ import { MoneyEntryComponent } from './moneyEntry.component';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forChild([ { path: 'MoneyEntry', component: MoneyEntryComponent }])
   ],
   providers: [SharedValidatorFunctions],
   declarations: [MoneyEntryComponent]

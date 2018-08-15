@@ -1,0 +1,32 @@
+<form novalidate (ngsubmit)="submit()"
+ [formGroup]="loginForm">
+    <mat-card>
+        <h2>Login</h2>
+
+        <mat-form-field>
+            <input matInput placeholder="Enter your Name" 
+            [formControl]="loginForm.get('nameFormControl')"
+            [errorStateMatcher]="matcher">
+            <mat-error *ngIf="loginForm.get('nameFormControl').hasError('required')">
+            Name Required
+            </mat-error>
+        </mat-form-field>
+        
+        <br/>
+
+        <mat-form-field>
+            <input matInput type="password" placeholder="Enter Password"
+            [formControl]="loginForm.get('passwordFormControl')"
+            [errorStateMatcher]="matcher">
+            <mat-error *ngIf="loginForm.get('passwordFormControl').hasError('required')">
+            Password Required
+            </mat-error>
+        </mat-form-field>
+
+        <br />
+
+        <button mat-button (click)="submit()" [disabled]="!loginForm.valid">
+            Login
+        </button> 
+    </mat-card>
+</form>

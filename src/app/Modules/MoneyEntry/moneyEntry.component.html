@@ -1,7 +1,7 @@
 <form novalidate (ngsubmit)="submit()"
  [formGroup]="moneyForm">
 
- <mat-grid-list cols="3" rowHeight="200px" margin="10px">
+ <mat-grid-list cols="3" rowHeight="150px" margin="10px">
 
     <mat-grid-tile>
         <mat-form-field>
@@ -28,7 +28,6 @@
             </mat-error>
           </mat-form-field>
         </mat-grid-tile>
-
 
     <mat-grid-tile item-width="500">
         <mat-card class="result">
@@ -58,7 +57,6 @@
           </mat-form-field>
     </mat-grid-tile>
   
-  
     <mat-grid-tile>
       <div class="form-group">
         <mat-form-field>
@@ -74,6 +72,7 @@
         </mat-form-field>
       </div>
     </mat-grid-tile>
+
     <mat-grid-tile>
         <div class="form-group">
             <mat-form-field>
@@ -86,6 +85,7 @@
             </mat-form-field>
           </div>
     </mat-grid-tile>
+    
   </mat-grid-list>
   <button mat-button (click)="submit()" [disabled]="!moneyForm.valid">
     Submit

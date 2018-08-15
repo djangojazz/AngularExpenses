@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 })
 export class AppComponent {
   events = [];
+  currentUser: string;
   title = 'MoneyEntry';
   showFiller = false;
 

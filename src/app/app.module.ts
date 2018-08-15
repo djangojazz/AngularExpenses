@@ -13,12 +13,15 @@ import { QueryModule } from "./Modules/Query/query.module";
 import { ChartingModule  } from "./Modules/Charting/charting.module";
 import { ServicesModule } from "./Services/services.module";
 import { MaterialModule } from "./Modules/material.module"
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PageNotFoundComponent  } from "./Shared/page-not-found.component";
+import { LoginComponent } from './Shared/login.component';
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,9 @@ import { PageNotFoundComponent  } from "./Shared/page-not-found.component";
     ChartingModule,
     AppRoutingModule,
     MaterialModule,
-    ServicesModule
+    ServicesModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

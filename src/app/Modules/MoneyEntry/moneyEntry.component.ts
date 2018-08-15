@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionsService  } from "../../Services/transactions.service";
 import { Transaction } from '../../Models/transaction';
-import { FormControl, FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { SharedErrorStateMatcher } from '../../Shared/sharedErrorStateMacher';
 import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
 import { CategoriesService } from '../../Services/categories.service';
 import { Category } from '../../Models/category';
 import { Observable } from 'rxjs';
 import { map, startWith} from 'rxjs/operators';
-import { modelGroupProvider } from '@angular/forms/src/directives/ng_model_group';
 
 @Component({
   selector: 'app-MoneyEntry',
   templateUrl: './moneyEntry.component.html',
   styleUrls: ['./moneyEntry.component.scss']
 })
-export class MoneyEntryComponent  {
+export class MoneyEntryComponent implements OnInit {
   transactions: Transaction[] = [];
   categories: Category[] = [];
   startDate: Date = new Date();

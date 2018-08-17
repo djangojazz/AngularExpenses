@@ -29,8 +29,8 @@ export class LoginComponent {
       .subscribe((str: string) => {
         var first = str.substr(4, 18).substr(0, 9).split('').reverse().join('');
         var second = str.substr(4, 18).substr(9, 9).split('').reverse().join('');
-        var text = `${first}${password}${second}`;
-        var u = new UserModel(user, hash(<any>text).toString());
+        var hashArray = hash(<any>`${first}${password}${second}`);
+        var u = new UserModel(user, btoa(String.fromCharCode.apply(null, hashArray)));
         this.authService.createAuthToken(u);
       });
   }

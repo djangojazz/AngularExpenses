@@ -5,12 +5,14 @@ import { Observable, of } from "rxjs"
 import { environment  } from "../../environments/environment";
 import { tap } from "rxjs/operators";
 import { UserModel } from "../Models/userModel";
+import { JWT } from "../Models/jwt";
+import { Token } from "../../../node_modules/@angular/compiler";
 
 @Injectable()
 export class AuthService {
     private endpoint = `${environment.baseApi}/auth`;
     private headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-    public jwt: string = "";
+    public jwtToken: JWT;
 
     constructor(private http: HttpClient) {
     }
@@ -20,17 +22,7 @@ export class AuthService {
     }
 
     public createAuthToken(user: UserModel) {
-        this.http.post<string>(`${this.endpoint}/createUserToken`, user, { headers: this.headers})
-            .subscribe(data => this.jwt = data);
-        console.log(this.jwt);
+        this.http.post<JWT>(`${this.endpoint}/createUserToken`, user, { headers: this.headers})
+            .subscribe((jwt: JWT) => this.jwtToken = jwt);
     }
-    
-    // public createANewTransaction(transaction: Transaction): Observable<Transaction> {
-    //     return this.http.post<Transaction>(`${this.endpoint}/postTransaction`, transaction, { headers: this.headers});
-    //     }
-
-    // public loadCategories(): Observable<Category[]> {
-    //     return this.http.get<Category[]>(`${this.endpoint}/getCategories`)
-    //         .pipe(tap(results => this.alphabetize(results)))
-    // }
 }

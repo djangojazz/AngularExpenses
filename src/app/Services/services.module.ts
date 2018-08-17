@@ -1,10 +1,11 @@
 import { NgModule, SkipSelf, Optional, ErrorHandler } from '@angular/core';
-import { FormsModule  } from "@angular/forms";
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { CategoriesService } from './categories.service'
 import { TransactionsService  } from "./transactions.service";
+import { ChartingService  } from "./charting.service";
+import { AuthService  } from "./auth.service";
 import { ErrorHandlerService } from "./errorHandler.service";
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
@@ -17,6 +18,8 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
   providers: [
     CategoriesService,
     TransactionsService,
+    ChartingService,
+    AuthService,
     { provide: ErrorHandler, useClass: ErrorHandlerService }
   ]
 })

@@ -14,15 +14,21 @@ export class AuthService {
     private headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
     public jwtToken: JWT;
 
-    constructor(private http: HttpClient) {
-    }
+    constructor(private http: HttpClient) { }
 
     public getSalt(userName: string): Observable<string> {
         return this.http.get<string>(`${this.endpoint}/getSalt/${userName}`)
     }
 
+    public generateSalt(user: UserModel) {
+        this.http.post<JWT>(`${this.endpoint}/generateSalt`, user, { headers: this.headers})
+            .subscribe((jwt: JWT) => this.jwtToken = jwt,
+            (err: HttpErrorResponse) => console.log(err.error));
+    }
+
     public createAuthToken(user: UserModel) {
         this.http.post<JWT>(`${this.endpoint}/createUserToken`, user, { headers: this.headers})
-            .subscribe((jwt: JWT) => this.jwtToken = jwt);
+            .subscribe((jwt: JWT) => this.jwtToken = jwt,
+            (err: HttpErrorResponse) => console.log(err.error));
     }
 }

@@ -26,32 +26,29 @@ export class LoginComponent {
     var user = this.loginForm.get('nameFormControl').value;
     var password = this.loginForm.get('passwordFormControl').value;
     
-    //TODO: Work on making salt here
-    var u = new UserModel(user, null, this.makeRandomSalt());
-    console.log(this.makeRandomSalt);
+    // var u = new UserModel(user, null, this.makeRandomSalt());
+    // this.authService.generateSalt(u);
 
-    // this.authService.getSalt(user)
-    //   .subscribe((str: string) => {
-    //     var first = str.substr(4, 18).substr(0, 9).split('').reverse().join('');
-    //     var second = str.substr(4, 18).substr(9, 9).split('').reverse().join('');
-    //     var hashArray = hash(<any>`${first}${password}${second}`);
-    //     var u = new UserModel(user, btoa(String.fromCharCode.apply(null, hashArray)));
-    //     this.authService.createAuthToken(u);
-    //   }, (error: HttpErrorResponse) => console.log(error.error));
+    this.authService.getSalt(user)
+      .subscribe((str: string) => {
+        var first = str.substr(4, 18).substr(0, 9).split('').reverse().join('');
+        var second = str.substr(4, 18).substr(9, 9).split('').reverse().join('');
+        var hashArray = hash(<any>`${first}${password}${second}`);
+        var u = new UserModel(user, btoa(String.fromCharCode.apply(null, hashArray)));
+        this.authService.createAuthToken(u);
+      }, (error: HttpErrorResponse) => console.log(error.error));
   }
 
-  makeRandomSalt(length: number = null, chars: String[] = null): string {
+  makeRandomSalt(length: number = null): any {
     if(length == null) {
-      length = 32;
+      length = 16;
     }
 
-    if(chars == null) {
-      chars = Array.from("abcdefghijklmnopqrstuvwxyz0123456789");
-    }
-
-    var result = '';
+    let chars = Array.from("abcdefghijklmnopqrstuvwxyz0123456789");
+    
+    var result: string = '';
     for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
-    return btoa(String.fromCharCode.apply(null, <any>result));
+    return btoa(String.fromCharCode.apply(null, hash(<any>` ${result} `)));
   }
 
 }

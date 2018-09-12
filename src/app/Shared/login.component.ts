@@ -4,6 +4,7 @@ import { hash } from "fast-sha256/sha256";
 import { AuthService } from '../Services/auth.service';
 import { UserModel } from '../Models/userModel';
 import { HttpErrorResponse } from '@angular/common/http';
+import { JWT } from '../Models/jwt';
 
 @Component({
   selector: 'login',
@@ -35,7 +36,12 @@ export class LoginComponent {
         var second = str.substr(4, 18).substr(9, 9).split('').reverse().join('');
         var hashArray = hash(<any>`${first}${password}${second}`);
         var u = new UserModel(user, btoa(String.fromCharCode.apply(null, hashArray)));
-        this.authService.createAuthToken(u);
+        this.authService.createAuthToken(u)
+          .subscribe((jwt: JWT) => 
+          {
+            this.authService.jwtToken = jwt;
+            
+          })
       }, (error: HttpErrorResponse) => console.log(error.error));
   }
 

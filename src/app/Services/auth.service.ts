@@ -26,9 +26,7 @@ export class AuthService {
             (err: HttpErrorResponse) => console.log(err.error));
     }
 
-    public createAuthToken(user: UserModel) {
-        this.http.post<JWT>(`${this.endpoint}/createUserToken`, user, { headers: this.headers})
-            .subscribe((jwt: JWT) => this.jwtToken = jwt,
-            (err: HttpErrorResponse) => console.log(err.error));
+    public createAuthToken(user: UserModel): Observable<JWT> {
+        return this.http.post<JWT>(`${this.endpoint}/createUserToken`, user, { headers: this.headers});
     }
 }

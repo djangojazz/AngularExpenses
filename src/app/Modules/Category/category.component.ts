@@ -13,6 +13,7 @@ import { DialogComponent } from '../../Shared/dialog.component';
 
 import {Observable, merge, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import { GlobalService } from '../../Services/globals.service';
 
 @Component({
   selector: 'app-Category',
@@ -31,7 +32,8 @@ export class CategoryComponent implements OnInit  {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private service: CategoriesService, 
+  constructor(private globals: GlobalService,
+    private service: CategoriesService, 
     private dialog: MatDialog,
     private snackBar: MatSnackBar)   { 
  }
@@ -47,6 +49,8 @@ export class CategoryComponent implements OnInit  {
         this.dataSource.data = data
         this.isLoadingResults = false
       });
+
+    this.globals.subTitle = "Category";
   }
 
   openDialog() {
@@ -69,12 +73,6 @@ export class CategoryComponent implements OnInit  {
               cats => this.dataSource.data = cats,
               error => console.log(error)
             )
-
-      //   getProduct(id: number) {
-      //     this.productService.getProduct(id).subscribe(
-      //         product => this.product = product,
-      //         error => this.errorMessage = <any>error);
-      // }
 
         this.snackBar.open('Created Category:', result, { duration: 2000, verticalPosition: 'top' });
       }

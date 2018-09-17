@@ -3,10 +3,10 @@
                 <button mat-button (click)="drawer.toggle()">
                         <i class="material-icons">menu</i> Menu
                     </button>
-                  <h1 id="headerTitle">{{title}}</h1>
+                  <h1 id="headerTitle">{{title}} {{globalService.subTitle}}</h1>
               </mat-toolbar>
   <mat-drawer #drawer class="sidenav-drawer" mode="over">
-      <button mat-button routerLink="Category" routerLinkActive="active" (click)="navChanged('Category')">
+      <button mat-button routerLink="Category" routerLinkActive="active">
           <i class="material-icons">vpn_key</i> Category
       </button>
       <br />

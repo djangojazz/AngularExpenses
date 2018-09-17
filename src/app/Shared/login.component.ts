@@ -5,6 +5,7 @@ import { AuthService } from '../Services/auth.service';
 import { UserModel } from '../Models/userModel';
 import { HttpErrorResponse } from '@angular/common/http';
 import { JWT } from '../Models/jwt';
+import { GlobalService } from '../Services/globals.service';
 
 @Component({
   selector: 'login',
@@ -12,15 +13,18 @@ import { JWT } from '../Models/jwt';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  example: string = 'TEST';
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(private globals: GlobalService,
+    private fb: FormBuilder, 
+    private authService: AuthService) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
       nameFormControl: ['', Validators.required],
       passwordFormControl: ['', Validators.required]
     })
+
+    this.globals.subTitle = "Login";
   }
 
   submit() {

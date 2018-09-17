@@ -6,6 +6,7 @@ import { MaterialModule } from '../material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { DialogComponent } from '../../Shared/dialog.component';
 import { RouterModule  } from "@angular/router";
+import { LoginGuard } from '../../Guards/login-guard.service.ts.service';
 
 @NgModule({
   imports: [
@@ -16,9 +17,8 @@ import { RouterModule  } from "@angular/router";
     RouterModule.forChild([
       {
         path: 'Category',
+        canActivate: [LoginGuard],
         component: CategoryComponent
-        //TODO: Work on getting child routes set up for viewing categories and adding a new catgory versus dialog popup later
-        //children: []
       }
     ])
   ],

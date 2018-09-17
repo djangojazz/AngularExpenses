@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormControl }          from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { LoginComponent } from './login.component';
+import { LoginGuard } from '../Guards/login-guard.service.ts.service';
+import { GlobalService } from '../Services/globals.service';
 
 @NgModule({
   imports: [
@@ -13,7 +15,7 @@ import { LoginComponent } from './login.component';
     ])
   ],
   exports: [ RouterModule ],
-  providers: []
+  providers: [LoginGuard, GlobalService]
 })
 export class AppRoutingModule { 
   mode = new FormControl('over');

@@ -12,7 +12,7 @@ import { Token } from "../../../node_modules/@angular/compiler";
 export class AuthService {
     private endpoint = `${environment.baseApi}/auth`;
     private headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-    public jwtToken: JWT;
+    public jwt: JWT;
 
     constructor(private http: HttpClient) { }
 
@@ -21,12 +21,10 @@ export class AuthService {
     }
 
     public generateSalt(user: UserModel) {
-        this.http.post<JWT>(`${this.endpoint}/generateSalt`, user, { headers: this.headers})
-            .subscribe((jwt: JWT) => this.jwtToken = jwt,
-            (err: HttpErrorResponse) => console.log(err.error));
+        this.http.post<JWT>(`${this.endpoint}/generateSalt`, user, { headers: this.headers});
     }
 
     public createAuthToken(user: UserModel): Observable<JWT> {
-        return this.http.post<JWT>(`${this.endpoint}/createUserToken`, user, { headers: this.headers});
+        return this.http.post<JWT>(`${this.endpoint}/createUserToken`, user, { headers: this.headers})
     }
 }

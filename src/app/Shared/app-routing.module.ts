@@ -5,6 +5,7 @@ import { PageNotFoundComponent } from './page-not-found.component';
 import { LoginComponent } from './login.component';
 import { LoginGuard } from '../Guards/login-guard.service.ts.service';
 import { GlobalService } from '../Services/globals.service';
+import { AuthService } from '../Services/auth.service';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { GlobalService } from '../Services/globals.service';
     ])
   ],
   exports: [ RouterModule ],
-  providers: [LoginGuard, GlobalService]
+  providers: [LoginGuard, GlobalService, AuthService]
 })
 export class AppRoutingModule { 
   mode = new FormControl('over');

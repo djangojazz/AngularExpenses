@@ -6,6 +6,7 @@ import { UserModel } from '../Models/userModel';
 import { HttpErrorResponse } from '@angular/common/http';
 import { JWT } from '../Models/jwt';
 import { GlobalService } from '../Services/globals.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -15,6 +16,7 @@ export class LoginComponent {
   loginForm: FormGroup;
 
   constructor(private globals: GlobalService,
+    private router: Router,
     private fb: FormBuilder, 
     private authService: AuthService) {}
 
@@ -41,12 +43,12 @@ export class LoginComponent {
         var hashArray = hash(<any>`${first}${password}${second}`);
         var u = new UserModel(user, btoa(String.fromCharCode.apply(null, hashArray)));
         this.authService.createAuthToken(u)
-          .subscribe((jwt: JWT) => 
+          .subscribe((jwt: JWT) =>  
           {
-            this.authService.jwtToken = jwt;
-            
+            this.authService.jwt = jwt;
+            this.router.navigate(['/Category']);
           })
-      }, (error: HttpErrorResponse) => console.log(error.error));
+      }, (error: HttpErrorResponse) => console.log(error));
   }
 
   makeRandomSalt(length: number = null): any {

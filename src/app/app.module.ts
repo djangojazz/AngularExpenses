@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http"
+import { StorageServiceModule } from "angular-webstorage-service";
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule  } from "./Shared/app-routing.module";
@@ -36,7 +37,8 @@ import { LoginComponent } from './Shared/login.component';
     MaterialModule,
     ServicesModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StorageServiceModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -17,7 +17,7 @@ export class LoginGuard implements CanActivate, CanLoad {
   }
 
   checkLoggedIn(url: string): boolean {
-      console.log(`jwt is: ${this.authService.jwt}`);
+      console.log(`jwt is : ${this.authService.jwt}`);
       if(this.authService.jwt != null) {
           return true;
       }

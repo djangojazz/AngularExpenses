@@ -1,23 +1,26 @@
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import { Observable, of } from "rxjs"
-
+import { Observable, of } from "rxjs";
 
 import { Category } from "../Models/category";
 import { environment  } from "../../environments/environment";
 import { tap } from "rxjs/operators";
+import { AuthService } from "./auth.service";
 
 @Injectable()
 export class CategoriesService {
     public Categories: Category[] = [];
     private endpoint = `${environment.baseApi}/categories`;
-    private headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    private headers: HttpHeaders = new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .set('Authorization', `Bearer ${this.authService.jwt.token}`);
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, 
+        private authService: AuthService) {
     }
 
     public loadCategories(): Observable<Category[]> {
-        return this.http.get<Category[]>(`${this.endpoint}/getCategories`)
+        return this.http.get<Category[]>(`${this.endpoint}/getCategories`, { headers: this.headers })
             .pipe(tap(results => this.alphabetize(results)))
     }
 

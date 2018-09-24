@@ -3,7 +3,7 @@ export class JWT {
     expires: string;
     userName: string;
 
-    constructor(token: string) {
+    constructor(token: string = "") {
         this.token = token;
     }
 }

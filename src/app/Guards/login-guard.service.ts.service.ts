@@ -19,7 +19,6 @@ export class LoginGuard implements CanActivate, CanLoad {
   }
 
   checkLoggedIn(url: string): boolean {
-      
       if(this.authService.jwt != null) {
           var token = this.authService.jwt.token;
           console.log(token);
@@ -34,6 +33,4 @@ export class LoginGuard implements CanActivate, CanLoad {
       this.router.navigate(['/login']);
       return false;
   }
-
-  
 }

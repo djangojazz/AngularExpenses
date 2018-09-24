@@ -3,7 +3,7 @@
                 <button mat-button (click)="drawer.toggle()">
                         <i class="material-icons">menu</i> Menu
                     </button>
-                  <h1 id="headerTitle">{{title}} {{globalService.subTitle}}</h1>
+                  <h1 id="headerTitle">{{title}} {{authService.subTitle}}</h1>
               </mat-toolbar>
   <mat-drawer #drawer class="sidenav-drawer" mode="over">
       <button mat-button routerLink="Category" routerLinkActive="active">

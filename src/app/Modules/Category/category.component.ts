@@ -13,7 +13,7 @@ import { DialogComponent } from '../../Shared/dialog.component';
 
 import {Observable, merge, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
-import { GlobalService } from '../../Services/globals.service';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-Category',
@@ -32,7 +32,7 @@ export class CategoryComponent implements OnInit  {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private globals: GlobalService,
+  constructor(private authService: AuthService,
     private service: CategoriesService, 
     private dialog: MatDialog,
     private snackBar: MatSnackBar)   { 
@@ -50,7 +50,7 @@ export class CategoryComponent implements OnInit  {
         this.isLoadingResults = false
       });
 
-    this.globals.subTitle = "Category";
+    this.authService.subTitle = "Category";
   }
 
   openDialog() {

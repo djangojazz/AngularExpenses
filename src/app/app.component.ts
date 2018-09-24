@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { GlobalService } from './Services/globals.service';
+import { AuthService } from './Services/auth.service';
+import { JWT } from './Models/jwt';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +14,11 @@ export class AppComponent {
   title = 'MoneyEntry';
   showFiller = false;
 
-  constructor(private globalService: GlobalService) {
-    this.globalService.subTitle = "";
+  constructor(private authService: AuthService) {
+    this.authService.jwt = new JWT();
   }
 
   public navChanged(nav: string) {
-    this.title = `MoneyEntry - ${nav} ${this.globalService.subTitle}`;
+    this.title = `MoneyEntry - ${nav} ${this.authService.subTitle}`;
   }
 }

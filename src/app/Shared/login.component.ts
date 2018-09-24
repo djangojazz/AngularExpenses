@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { hash } from "fast-sha256/sha256";
-import { AuthService } from '../Services/auth.service';
 import { UserModel } from '../Models/userModel';
 import { HttpErrorResponse } from '@angular/common/http';
 import { JWT } from '../Models/jwt';
-import { GlobalService } from '../Services/globals.service';
+import { AuthService } from '../Services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,8 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private globals: GlobalService,
-    private router: Router,
+  constructor(private router: Router,
     private fb: FormBuilder, 
     private authService: AuthService) {}
 
@@ -26,7 +24,7 @@ export class LoginComponent {
       passwordFormControl: ['', Validators.required]
     })
 
-    this.globals.subTitle = "Login";
+    //this.authService.subTitle = "Login";
   }
 
   submit() {

@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PageNotFoundComponent  } from "./Shared/page-not-found.component";
 import { LoginComponent } from './Shared/login.component';
+import { AuthService } from './Services/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,6 @@ import { LoginComponent } from './Shared/login.component';
     ReactiveFormsModule,
     StorageServiceModule
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

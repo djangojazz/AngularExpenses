@@ -12,7 +12,8 @@ import { Token } from "../../../node_modules/@angular/compiler";
 export class AuthService {
     private endpoint = `${environment.baseApi}/auth`;
     private headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-    public jwt: JWT;
+    public jwt: JWT = new JWT();
+    public subTitle: string = "";
 
     constructor(private http: HttpClient) { }
 

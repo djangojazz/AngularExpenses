@@ -36,6 +36,9 @@ export class LoginComponent {
 
     this.authService.getSalt(user)
       .subscribe((str: string) => {
+        //TODO: Now that you have this check to see if this can be reused.
+        this.authService.checkExistingToken();
+
         var first = str.substr(4, 18).substr(0, 9).split('').reverse().join('');
         var second = str.substr(4, 18).substr(9, 9).split('').reverse().join('');
         var hashArray = hash(<any>`${first}${password}${second}`);
@@ -60,5 +63,4 @@ export class LoginComponent {
     for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
     return btoa(String.fromCharCode.apply(null, hash(<any>` ${result} `)));
   }
-
 }

@@ -29,6 +29,19 @@ export class AuthService {
         return this.http.post<JWT>(`${this.endpoint}/createUserToken`, user, { headers: this.headers})
     }
 
+    public checkExistingToken() {
+        if(this.jwt != null) {
+            var token = localStorage.getItem("jwt");
+            console.log(token);
+            var data = this.decodeToken(token);
+            console.log(data);
+            var dt = new Date(0);//.setSeconds(data.exp);
+            dt.setUTCSeconds(data.exp);
+            console.log(dt);
+        }
+        return false;
+    }
+
     public decodeToken(token: string = '') {
         if (token === null || token === '') { return { 'upn': '' }; }
         const parts = token.split('.');

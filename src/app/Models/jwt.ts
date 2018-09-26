@@ -1,6 +1,6 @@
 export class JWT {
     token: string;
-    expires: string;
+    expires: Date;
     userName: string;
 
     constructor(token: string = "") {

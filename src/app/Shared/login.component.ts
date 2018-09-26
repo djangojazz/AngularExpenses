@@ -31,26 +31,34 @@ export class LoginComponent {
     var user = this.loginForm.get('nameFormControl').value;
     var password = this.loginForm.get('passwordFormControl').value;
     
-    // var u = new UserModel(user, null, this.makeRandomSalt());
-    // this.authService.generateSalt(u);
-
     this.authService.getSalt(user)
       .subscribe((str: string) => {
-        //TODO: Now that you have this check to see if this can be reused.
-        this.authService.checkExistingToken();
-
         var first = str.substr(4, 18).substr(0, 9).split('').reverse().join('');
         var second = str.substr(4, 18).substr(9, 9).split('').reverse().join('');
         var hashArray = hash(<any>`${first}${password}${second}`);
         var u = new UserModel(user, btoa(String.fromCharCode.apply(null, hashArray)));
-        this.authService.createAuthToken(u)
-          .subscribe((jwt: JWT) =>  
-          {
-            this.authService.jwt = jwt;
-            this.router.navigate(['/Category']);
-          })
+
+        //first time login
+        if(!this.authService.checkExistingToken(u)) {
+          //Service will ensure if the userName and password is correct else it will show a failure
+          this.authService.createAuthToken(u)
+            .subscribe((jwt: JWT) => {
+              this.authService.jwt = jwt;
+              localStorage.setItem("jwt", jwt.token);
+              localStorage.setItem("userName", u.userName);
+              localStorage.setItem("password", u.password);
+              this.router.navigate(['/Category']);
+
+            }, (error: HttpErrorResponse) => console.log(error))
+        } //They have logged in before and their userName and password is correct
+        else {
+          this.router.navigate(['/Category']);
+        }
+
+        
       }, (error: HttpErrorResponse) => console.log(error));
   }
+
 
   makeRandomSalt(length: number = null): any {
     if(length == null) {

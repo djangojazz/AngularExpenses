@@ -29,53 +29,38 @@ export class AuthService {
         return this.http.post<JWT>(`${this.endpoint}/createUserToken`, user, { headers: this.headers});
     }
 
-    // checkJWT(jwt: JWT) {
-        
-    //     this.jwt = jwt;
-    //     localStorage.setItem("jwt", this.authService.jwt.token);
-    //   }
-
     public checkExistingToken(user: UserModel): Boolean {
         var existingJWT = localStorage.getItem("jwt");
             if(existingJWT != null) {
-                var userName = localStorage.getItem("userName");
-                var password = localStorage.getItem("password");
+                var storageUserName = localStorage.getItem("userName");
+                var storagePassword = localStorage.getItem("password");
 
-                if(user.userName != userName && user.password != password) {
+                if(user.userName != storageUserName || user.password != storagePassword) {
                     console.log("Username or Password are wrong");
                     return false;
                 }
 
                 var data = this.decodeToken(existingJWT);
+                    console.log("Got into decode Token");    
                     this.jwt.token = existingJWT;
                     var dt = new Date(0);
                     dt.setUTCSeconds(data.exp);
                     this.jwt.expires = dt;
                     this.jwt.userName = user.userName;
-                    var j = this.jwt;
-                    var current = new Date(1051325889998);
+                    var current = new Date();
                     var dateDifference = this.jwt.expires.valueOf() - current.valueOf();
-                    console.log(`Hey there ${j.expires} ${current} ${dateDifference}`);
+                    
                     if(dateDifference <= 0) {
                         console.log("Token is expired, get a new one")
                         return false;
                     }
 
+                    console.log("Have token and got through successfully")
                     return true;
-
             }
 
+        console.log("You do not have an existing token");
         return false;
-
-        // if(this.jwt != null) {
-        //     var token = localStorage.getItem("jwt");
-        //     console.log(token);
-            
-        //     console.log(data);
-        //     var dt = new Date(0);//.setSeconds(data.exp);
-        //     dt.setUTCSeconds(data.exp);
-        //     console.log(dt);
-        // }
     }
 
     public decodeToken(token: string = '') {

@@ -28,19 +28,20 @@ export class LoginComponent {
   }
 
   submit() {
-    var user = this.loginForm.get('nameFormControl').value;
+    var userName = this.loginForm.get('nameFormControl').value;
     var password = this.loginForm.get('passwordFormControl').value;
-    
-    this.authService.getSalt(user)
-      .subscribe((str: string) => {
-        var first = str.substr(4, 18).substr(0, 9).split('').reverse().join('');
-        var second = str.substr(4, 18).substr(9, 9).split('').reverse().join('');
-        var hashArray = hash(<any>`${first}${password}${second}`);
-        var u = new UserModel(user, btoa(String.fromCharCode.apply(null, hashArray)));
+    var storageSalt = localStorage.getItem("salt");
 
-        //first time login
-        if(!this.authService.checkExistingToken(u)) {
-          //Service will ensure if the userName and password is correct else it will show a failure
+    var u = this.createUserObject(userName, storageSalt || "", password);
+
+    //See if the user already exists and has previously logged in and do not need to go through service again
+    if(!this.authService.checkExistingToken(u)) {
+
+      this.authService.getSalt(userName)
+        .subscribe((salt: string) => { 
+          localStorage.setItem("salt", salt)
+
+            //first time login
           this.authService.createAuthToken(u)
             .subscribe((jwt: JWT) => {
               this.authService.jwt = jwt;
@@ -49,16 +50,24 @@ export class LoginComponent {
               localStorage.setItem("password", u.password);
               this.router.navigate(['/Category']);
 
+            //CreateToken: errors could be from mismatched naming or password is wrong
             }, (error: HttpErrorResponse) => console.log(error))
-        } //They have logged in before and their userName and password is correct
-        else {
-          this.router.navigate(['/Category']);
-        }
-
         
-      }, (error: HttpErrorResponse) => console.log(error));
+        //Salt: If error will most likely be with missing user
+        } , (error: HttpErrorResponse) => console.log(error));
+    } else {
+      this.router.navigate(['/Category']);
+    }
   }
 
+
+  private createUserObject(userName: string, salt: string, password: string) {
+    var first = salt.substr(4, 18).substr(0, 9).split('').reverse().join('');
+    var second = salt.substr(4, 18).substr(9, 9).split('').reverse().join('');
+    var hashArray = hash(<any>`${first}${password}${second}`);
+    var u = new UserModel(userName, btoa(String.fromCharCode.apply(null, hashArray)));
+    return u;
+  }
 
   makeRandomSalt(length: number = null): any {
     if(length == null) {

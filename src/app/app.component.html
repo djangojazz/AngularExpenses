@@ -6,15 +6,15 @@
                   <h1 id="headerTitle">{{title}} {{authService.subTitle}}</h1>
               </mat-toolbar>
   <mat-drawer #drawer class="sidenav-drawer" mode="over">
-      <button mat-button routerLink="Category" routerLinkActive="active">
+      <button mat-button routerLink="Category" routerLinkActive="active" (click)="navChanged('Category')">
           <i class="material-icons">vpn_key</i> Category
       </button>
       <br />
-      <button mat-button routerLink="MoneyEntry" routerLinkActive="active"  (click)="navChanged('Entry')">
+      <button mat-button routerLink="MoneyEntry" routerLinkActive="active" (click)="navChanged('Entry')">
           <i class="material-icons">create</i> Entry
       </button>
       <br />
-      <button mat-button routerLink="Charting" routerLinkActive="active"  (click)="navChanged('Charting')">
+      <button mat-button routerLink="Charting" routerLinkActive="active" (click)="navChanged('Charting')">
           <i class="material-icons">insert_chart</i> Charting
       </button>
   </mat-drawer>

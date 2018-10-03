@@ -49,8 +49,6 @@ export class CategoryComponent implements OnInit  {
         this.dataSource.data = data
         this.isLoadingResults = false
       });
-
-    this.authService.subTitle = "Category";
   }
 
   openDialog() {

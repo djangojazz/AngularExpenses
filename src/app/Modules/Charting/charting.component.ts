@@ -13,6 +13,7 @@ export class ChartingComponent implements OnInit {
 
   constructor(private service: ChartingService) { 
     this.charts = this.service.charts;
+
   }
 
   ngOnInit() {

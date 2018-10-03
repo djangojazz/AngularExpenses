@@ -9,8 +9,8 @@ import { AuthService } from '../Services/auth.service';
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: 'login', component: LoginComponent },
-      { path: '',   redirectTo: '/login', pathMatch: 'full' },
+      { path: 'Login', component: LoginComponent },
+      { path: '',   redirectTo: '/Login', pathMatch: 'full' },
       { path: '**',  component: PageNotFoundComponent }
     ])
   ],

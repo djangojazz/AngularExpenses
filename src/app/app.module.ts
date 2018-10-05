@@ -14,14 +14,16 @@ import { ServicesModule } from "./Services/services.module";
 import { MaterialModule } from "./Modules/material.module"
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { SharedValidatorFunctions } from './Shared/sharedValidatorFunctions';
+
 import { PageNotFoundComponent  } from "./Shared/page-not-found.component";
 import { LoginComponent } from './Shared/login.component';
-import { AuthService } from './Services/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    SharedValidatorFunctions
   ],
   imports: [
     BrowserModule,

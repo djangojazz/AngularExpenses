@@ -8,6 +8,7 @@ import { CategoriesService } from '../../Services/categories.service';
 import { Category } from '../../Models/category';
 import { Observable } from 'rxjs';
 import { map, startWith} from 'rxjs/operators';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-MoneyEntry',
@@ -26,7 +27,9 @@ export class MoneyEntryComponent implements OnInit {
   constructor(private transactionService: TransactionsService, 
               private categoriesService: CategoriesService,
               private sharedValidator: SharedValidatorFunctions,
+              private authService: AuthService,
               private fb: FormBuilder) { 
+      this.authService.subTitle = "Entry";
     }
 
   ngOnInit() {

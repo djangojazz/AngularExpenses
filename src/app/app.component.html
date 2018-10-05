@@ -3,19 +3,23 @@
                 <button mat-button (click)="drawer.toggle()">
                         <i class="material-icons">menu</i> Menu
                     </button>
-                  <h1 id="headerTitle">{{title}} {{authService.subTitle}}</h1>
+                  <h1 id="headerTitle">{{title}} - {{authService.subTitle}}</h1>
               </mat-toolbar>
   <mat-drawer #drawer class="sidenav-drawer" mode="over">
-      <button mat-button routerLink="Category" routerLinkActive="active" (click)="navChanged('Category')">
+      <button mat-button routerLink="Category" routerLinkActive="active">
           <i class="material-icons">vpn_key</i> Category
       </button>
       <br />
-      <button mat-button routerLink="MoneyEntry" routerLinkActive="active" (click)="navChanged('Entry')">
+      <button mat-button routerLink="MoneyEntry" routerLinkActive="active">
           <i class="material-icons">create</i> Entry
       </button>
       <br />
-      <button mat-button routerLink="Charting" routerLinkActive="active" (click)="navChanged('Charting')">
+      <button mat-button routerLink="Charting" routerLinkActive="active">
           <i class="material-icons">insert_chart</i> Charting
+      </button>
+      <br />
+      <button mat-button routerLink="Login" routerLinkActive="active">
+          <i class="material-icons">exit_to_app</i> Login
       </button>
   </mat-drawer>
 

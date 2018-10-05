@@ -24,7 +24,7 @@ export class LoginComponent {
       passwordFormControl: ['', Validators.required]
     })
 
-    //this.authService.subTitle = "Login";
+    this.authService.subTitle = "Login";
   }
 
   submit() {

@@ -18,7 +18,4 @@ export class AppComponent {
     this.authService.jwt = new JWT();
   }
 
-  public navChanged(nav: string) {
-    this.title = `MoneyEntry - ${nav} ${this.authService.subTitle}`;
-  }
 }

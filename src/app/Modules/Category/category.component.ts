@@ -36,6 +36,7 @@ export class CategoryComponent implements OnInit  {
     private service: CategoriesService, 
     private dialog: MatDialog,
     private snackBar: MatSnackBar)   { 
+    this.authService.subTitle = "Category";
  }
 
  ngAfterViewInit() {

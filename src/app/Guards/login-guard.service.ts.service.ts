@@ -18,8 +18,9 @@ export class LoginGuard implements CanActivate, CanLoad {
       return this.checkLoggedIn(route.path);
   }
 
+  //TODO: Look at this section more
   checkLoggedIn(url: string): boolean {
-      if(this.authService.jwt != null) {
+      if(localStorage.getItem("jwt") != null) {
           return true;
       }
       console.log("Must be logged in first");

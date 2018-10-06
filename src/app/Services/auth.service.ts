@@ -12,7 +12,7 @@ import { Token } from "../../../node_modules/@angular/compiler";
 export class AuthService {
     private endpoint = `${environment.baseApi}/auth`;
     private headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-    public jwt: JWT = new JWT();
+    private jwt: JWT = new JWT();
     public subTitle: string = "";
 
     constructor(private http: HttpClient) { }
@@ -32,8 +32,11 @@ export class AuthService {
     public checkExistingToken(user: UserModel): Boolean {
         var existingJWT = localStorage.getItem("jwt");
             if(existingJWT != null) {
+                console.log(`jwt exists as ${existingJWT}`)
                 var storageUserName = localStorage.getItem("userName");
                 var storagePassword = localStorage.getItem("password");
+
+                console.log(`${storageUserName} ${storagePassword}`)
 
                 if(user.userName != storageUserName || user.password != storagePassword) {
                     console.log("Username or Password are wrong");

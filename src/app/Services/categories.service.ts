@@ -13,7 +13,7 @@ export class CategoriesService {
     private endpoint = `${environment.baseApi}/categories`;
     private headers: HttpHeaders = new HttpHeaders()
         .set('Content-Type', 'application/json')
-        .set('Authorization', `Bearer ${this.authService.jwt.token}`);
+        .set('Authorization', `Bearer ${localStorage.getItem("jwt")}`);
 
     constructor(private http: HttpClient, 
         private authService: AuthService) {

@@ -36,7 +36,6 @@ export class CategoryComponent implements OnInit  {
     private service: CategoriesService, 
     private dialog: MatDialog,
     private snackBar: MatSnackBar)   { 
-    this.authService.subTitle = "Category";
  }
 
  ngAfterViewInit() {
@@ -50,6 +49,8 @@ export class CategoryComponent implements OnInit  {
         this.dataSource.data = data
         this.isLoadingResults = false
       });
+
+      this.authService.subTitle = "Category";
   }
 
   openDialog() {

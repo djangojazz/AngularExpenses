@@ -30,22 +30,27 @@ export class LoginComponent {
   submit() {
     var userName = this.loginForm.get('nameFormControl').value;
     var password = this.loginForm.get('passwordFormControl').value;
+    
+    //TODO: Salt is getting incorrectly used to make password when user 
+    // changes, fix
     var storageSalt = localStorage.getItem("salt");
 
     var u = this.createUserObject(userName, storageSalt || "", password);
 
     //See if the user already exists and has previously logged in and do not need to go through service again
     if(!this.authService.checkExistingToken(u)) {
-
+      console.log('got into new')
       this.authService.getSalt(userName)
         .subscribe((salt: string) => { 
-          localStorage.setItem("salt", salt)
+          console.log('got salt')
+          u = this.createUserObject(userName, salt, password);
 
             //first time login
           this.authService.createAuthToken(u)
             .subscribe((jwt: JWT) => {
-              this.authService.jwt = jwt;
+              console.log('passed auth, setting local storage')
               localStorage.setItem("jwt", jwt.token);
+              localStorage.setItem("salt", salt)
               localStorage.setItem("userName", u.userName);
               localStorage.setItem("password", u.password);
               this.router.navigate(['/Category']);

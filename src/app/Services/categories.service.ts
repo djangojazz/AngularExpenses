@@ -15,8 +15,7 @@ export class CategoriesService {
         .set('Content-Type', 'application/json')
         .set('Authorization', `Bearer ${localStorage.getItem("jwt")}`);
 
-    constructor(private http: HttpClient, 
-        private authService: AuthService) {
+    constructor(private http: HttpClient) {
     }
 
     public loadCategories(): Observable<Category[]> {

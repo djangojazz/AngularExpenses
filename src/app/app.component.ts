@@ -15,7 +15,6 @@ export class AppComponent {
   showFiller = false;
 
   constructor(private authService: AuthService) {
-    this.authService.jwt = new JWT();
   }
 
 }

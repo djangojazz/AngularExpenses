@@ -13,6 +13,7 @@ export class AuthService {
     private endpoint = `${environment.baseApi}/auth`;
     private headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
     private jwt: JWT = new JWT();
+    private currentUser: UserModel = new UserModel();
     public subTitle: string = "";
 
     constructor(private http: HttpClient) { }
@@ -95,5 +96,15 @@ export class AuthService {
                 throw 'Illegal base64url string!';
         }
         return decodeURIComponent((<any>window).escape(window.atob(output)));
+    }
+
+    public setUser(userName: string, password: string)
+    {
+        this.currentUser = new UserModel(userName, password);
+    }
+
+    public getUser(): UserModel
+    {
+        return this.currentUser;
     }
 }

@@ -18,7 +18,7 @@ import { LoginGuard } from '../../Guards/login-guard.service.ts.service';
       {
         path: 'Category',
         canActivate: [LoginGuard],
-        component: CategoryComponent
+        component: CategoryComponent,
       }
     ])
   ],

@@ -10,7 +10,6 @@ import { JWT } from './Models/jwt';
 })
 export class AppComponent {
   events = [];
-  currentUser: string;
   title = 'MoneyEntry';
   showFiller = false;
 

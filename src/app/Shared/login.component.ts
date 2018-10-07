@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { JWT } from '../Models/jwt';
 import { AuthService } from '../Services/auth.service';
 import { Router } from '@angular/router';
+import { LoginGuard } from '../Guards/login-guard.service.ts.service';
 
 @Component({
   selector: 'login',
@@ -31,10 +32,7 @@ export class LoginComponent {
     var userName = this.loginForm.get('nameFormControl').value;
     var password = this.loginForm.get('passwordFormControl').value;
     
-    //TODO: Salt is getting incorrectly used to make password when user 
-    // changes, fix
     var storageSalt = localStorage.getItem("salt");
-
     var u = this.createUserObject(userName, storageSalt || "", password);
 
     //See if the user already exists and has previously logged in and do not need to go through service again
@@ -53,6 +51,7 @@ export class LoginComponent {
               localStorage.setItem("salt", salt)
               localStorage.setItem("userName", u.userName);
               localStorage.setItem("password", u.password);
+              this.authService.setUser(u.userName, u.password);
               this.router.navigate(['/Category']);
 
             //CreateToken: errors could be from mismatched naming or password is wrong

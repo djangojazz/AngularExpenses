@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AuthService } from './Services/auth.service';
 import { JWT } from './Models/jwt';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,13 @@ export class AppComponent {
   title = 'MoneyEntry';
   showFiller = false;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+    private router: Router) {
   }
 
+  logOut(): void {
+    this.authService.setUser("", "");
+    localStorage.clear();
+    this.router.navigateByUrl('/Login');
+  }
 }

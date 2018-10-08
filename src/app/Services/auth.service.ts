@@ -107,4 +107,8 @@ export class AuthService {
     {
         return this.currentUser;
     }
+
+    public userAssigned(): boolean {
+        return (this.currentUser.userName != "" && this.currentUser.password != "");
+    }
 }

@@ -6,21 +6,38 @@
                   <h1 id="headerTitle">{{title}} - {{authService.subTitle}}</h1>
               </mat-toolbar>
   <mat-drawer #drawer class="sidenav-drawer" mode="over">
-      <button mat-button routerLink="Category" routerLinkActive="active">
-          <i class="material-icons">vpn_key</i> Category
-      </button>
-      <br />
-      <button mat-button routerLink="MoneyEntry" routerLinkActive="active">
-          <i class="material-icons">create</i> Entry
-      </button>
-      <br />
-      <button mat-button routerLink="Charting" routerLinkActive="active">
-          <i class="material-icons">insert_chart</i> Charting
-      </button>
-      <br />
-      <button mat-button routerLink="Login" routerLinkActive="active">
-          <i class="material-icons">exit_to_app</i> Login
-      </button>
+    <ng-container *ngIf="authService.userAssigned()">  
+        <button mat-button routerLink="Category" routerLinkActive="active">
+            <i class="material-icons">vpn_key</i> Category
+        </button>
+    </ng-container>
+
+    <ng-container *ngIf="authService.userAssigned()">
+        <button mat-button routerLink="MoneyEntry" routerLinkActive="active">
+            <i class="material-icons">create</i> Entry
+        </button>
+    </ng-container>
+
+    <ng-container *ngIf="authService.userAssigned()">
+        <button mat-button routerLink="Charting" routerLinkActive="active">
+            <i class="material-icons">insert_chart</i> Charting
+        </button>
+    </ng-container>
+      
+    <ng-container *ngIf="!authService.userAssigned(); then logIn; else logOut">
+    </ng-container>
+    
+    <ng-template #logIn>
+        <button mat-button routerLink="Login" routerLinkActive="active">
+            <i class="material-icons">open_in_browser</i> Login
+        </button>
+    </ng-template>
+
+    <ng-template #logOut>
+        <button mat-button (click)="logOut()">
+            <i class="material-icons">exit_to_app</i> Logout
+        </button>
+    </ng-template>
   </mat-drawer>
 
   

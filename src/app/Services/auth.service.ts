@@ -108,6 +108,10 @@ export class AuthService {
         return this.currentUser;
     }
 
+    public getLoggedInDetail() {
+        return this.currentUser.userName != "" ? `Logged in as: ${this.currentUser.userName}` : "logged out";
+    }
+
     public userAssigned(): boolean {
         return (this.currentUser.userName != "" && this.currentUser.password != "");
     }

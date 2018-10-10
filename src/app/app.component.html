@@ -4,6 +4,8 @@
                         <i class="material-icons">menu</i> Menu
                     </button>
                   <h1 id="headerTitle">{{title}} - {{authService.subTitle}}</h1>
+                  <hr/>
+                  <h2>{{authService.getLoggedInDetail()}}</h2>
               </mat-toolbar>
   <mat-drawer #drawer class="sidenav-drawer" mode="over">
     <ng-container *ngIf="authService.userAssigned()">  
@@ -35,7 +37,7 @@
                 <i class="material-icons">exit_to_app</i> Logout
             </button>
     </ng-container>
-    
+
   </mat-drawer>
   
   <div class="sidenav-content">

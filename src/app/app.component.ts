@@ -18,9 +18,8 @@ export class AppComponent {
     private router: Router) {
   }
 
-  logOut(): void {
+  public logOut() {
     this.authService.setUser("", "");
-    localStorage.clear();
     this.router.navigateByUrl('/Login');
   }
 }

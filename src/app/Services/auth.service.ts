@@ -33,16 +33,16 @@ export class AuthService {
     public checkExistingToken(user: UserModel): Boolean {
         var existingJWT = localStorage.getItem("jwt");
             if(existingJWT != null) {
-                console.log(`jwt exists as ${existingJWT}`)
                 var storageUserName = localStorage.getItem("userName");
                 var storagePassword = localStorage.getItem("password");
-
-                console.log(`${storageUserName} ${storagePassword}`)
 
                 if(user.userName != storageUserName || user.password != storagePassword) {
                     console.log("Username or Password are wrong");
                     return false;
                 }
+
+                console.log("Setting up auth's persisted memory user object");
+                this.currentUser = user;
 
                 var data = this.decodeToken(existingJWT);
                     console.log("Got into decode Token");    

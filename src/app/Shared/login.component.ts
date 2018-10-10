@@ -43,7 +43,7 @@ export class LoginComponent {
           console.log('got salt')
           u = this.createUserObject(userName, salt, password);
 
-            //first time login
+          //first time login
           this.authService.createAuthToken(u)
             .subscribe((jwt: JWT) => {
               console.log('passed auth, setting local storage')
@@ -65,7 +65,7 @@ export class LoginComponent {
   }
 
 
-  private createUserObject(userName: string, salt: string, password: string) {
+  private createUserObject(userName: string, salt: string, password: string): UserModel {
     var first = salt.substr(4, 18).substr(0, 9).split('').reverse().join('');
     var second = salt.substr(4, 18).substr(9, 9).split('').reverse().join('');
     var hashArray = hash(<any>`${first}${password}${second}`);

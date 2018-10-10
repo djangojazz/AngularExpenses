@@ -23,23 +23,20 @@
             <i class="material-icons">insert_chart</i> Charting
         </button>
     </ng-container>
-      
-    <ng-container *ngIf="!authService.userAssigned(); then logIn; else logOut">
+
+    <ng-container *ngIf="!authService.userAssigned()">
+            <button mat-button routerLink="Login" routerLinkActive="active">
+                <i class="material-icons">open_in_browser</i> Login
+            </button>
+    </ng-container>
+
+    <ng-container *ngIf="authService.userAssigned()">
+            <button mat-button (click)="logOut()">
+                <i class="material-icons">exit_to_app</i> Logout
+            </button>
     </ng-container>
     
-    <ng-template #logIn>
-        <button mat-button routerLink="Login" routerLinkActive="active">
-            <i class="material-icons">open_in_browser</i> Login
-        </button>
-    </ng-template>
-
-    <ng-template #logOut>
-        <button mat-button (click)="logOut()">
-            <i class="material-icons">exit_to_app</i> Logout
-        </button>
-    </ng-template>
   </mat-drawer>
-
   
   <div class="sidenav-content">
     <router-outlet></router-outlet>

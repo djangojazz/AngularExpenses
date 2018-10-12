@@ -9,16 +9,18 @@ import { environment  } from "../../environments/environment";
 export class TransactionsService {
     public Transaction: Transaction[] = [];
     private endpoint = `${environment.baseApi}/transactions`;
-    private headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    private headers: HttpHeaders = new HttpHeaders()
+            .set('Content-Type', 'application/json')
+            .set('Authorization', `Bearer ${localStorage.getItem("jwt")}`);
 
 constructor(private http: HttpClient) { }
 
 public getLastDate(personId: number): Observable<Date> {
-    return this.http.get<Date>(`${this.endpoint}/getLastDate/${personId}`)
+    return this.http.get<Date>(`${this.endpoint}/getLastDate/${personId}`, { headers: this.headers })
 }
 
 public loadTransactions(personId?: number, start?: Date, end?: Date): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`${this.endpoint}/getTransactions/${personId}/${start}/${end}`);
+    return this.http.get<Transaction[]>(`${this.endpoint}/getTransactions/${personId}/${start}/${end}`, { headers: this.headers });
     }
 
 public createANewTransaction(transaction: Transaction): Observable<Transaction> {

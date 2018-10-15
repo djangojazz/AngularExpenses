@@ -14,7 +14,6 @@ export class CategoriesService {
     private headers: HttpHeaders = new HttpHeaders()
         .set('Content-Type', 'application/json')
         .set('Authorization', `Bearer ${localStorage.getItem("jwt")}`);
-
     constructor(private http: HttpClient) {
     }
 

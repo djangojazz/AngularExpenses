@@ -45,7 +45,7 @@ export class MoneyEntryComponent implements OnInit {
     this.categoriesService.loadCategories()
       .subscribe(x => this.categories = x);
 
-    this.transactionService.getLastDate(1)
+    this.transactionService.getLastDate()
       .subscribe(x => {
         this.startDate = x
         this.moneyForm.setValue({ 

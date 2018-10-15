@@ -15,8 +15,8 @@ export class TransactionsService {
 
 constructor(private http: HttpClient) { }
 
-public getLastDate(personId: number): Observable<Date> {
-    return this.http.get<Date>(`${this.endpoint}/getLastDate/${personId}`, { headers: this.headers })
+public getLastDate(): Observable<Date> {
+    return this.http.get<Date>(`${this.endpoint}/getLastDate`, { headers: this.headers })
 }
 
 public loadTransactions(personId?: number, start?: Date, end?: Date): Observable<Transaction[]> {

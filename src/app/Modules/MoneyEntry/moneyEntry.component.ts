@@ -57,7 +57,7 @@ export class MoneyEntryComponent implements OnInit {
           endDateFormControl: this.moneyForm.get('endDateFormControl').value,
         })
         
-      this.transactionService.loadTransactions(1, this.startDate, this.endDate)
+      this.transactionService.loadTransactions(this.startDate, this.endDate)
         .subscribe(x => this.transactions = x);
       });
 
@@ -91,7 +91,7 @@ export class MoneyEntryComponent implements OnInit {
   submit() {
     //console.log(`${<Date>this.moneyForm.get('startDateFormControl').value}-${<Date>this.moneyForm.get('endDateFormControl').value}`)
      this.transactionService.createANewTransaction( 
-      new Transaction(0, 1, <number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
+      new Transaction(<number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
           <number>(<Category>(this.moneyForm.get('categoryFormControl').value)).categoryId, <Date>this.moneyForm.get('startDateFormControl').value,
           this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value)
         ).subscribe(

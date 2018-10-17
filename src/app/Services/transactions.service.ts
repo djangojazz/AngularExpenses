@@ -19,8 +19,8 @@ public getLastDate(): Observable<Date> {
     return this.http.get<Date>(`${this.endpoint}/getLastDate`, { headers: this.headers })
 }
 
-public loadTransactions(personId?: number, start?: Date, end?: Date): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`${this.endpoint}/getTransactions/${personId}/${start}/${end}`, { headers: this.headers });
+public loadTransactions(start?: Date, end?: Date): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(`${this.endpoint}/getTransactions/${start}/${end}`, { headers: this.headers });
     }
 
 public createANewTransaction(transaction: Transaction): Observable<Transaction> {

@@ -18,8 +18,8 @@ import { AuthService } from '../../Services/auth.service';
 export class MoneyEntryComponent implements OnInit {
   transactions: Transaction[] = [];
   categories: Category[] = [];
-  startDate: Date = new Date();
-  endDate: Date = new Date();
+  startDate: Date;
+  endDate: Date;
   
   filteredCategories: Observable<Category[]>;
   moneyForm: FormGroup;
@@ -46,15 +46,18 @@ export class MoneyEntryComponent implements OnInit {
       .subscribe(x => this.categories = x);
 
     this.transactionService.getLastDate()
-      .subscribe(x => {
-        this.startDate = x
+      .subscribe((x: Date) => {
+        this.endDate = new Date(x);
+        this.startDate = new Date(x);
+        this.startDate.setDate(this.startDate.getDate() - 21);
+        console.log(`start ${this.startDate} end ${this.endDate}`)
         this.moneyForm.setValue({ 
           debitCreditFormControl: this.moneyForm.get('debitCreditFormControl').value,
           categoryFormControl: this.moneyForm.get('categoryFormControl').value,
           amountFormControl: this.moneyForm.get('amountFormControl').value,
           descFormControl: this.moneyForm.get('descFormControl').value,
-          startDateFormControl: x,
-          endDateFormControl: this.moneyForm.get('endDateFormControl').value,
+          startDateFormControl: this.startDate,
+          endDateFormControl: this.endDate
         })
         
       this.transactionService.loadTransactions(this.startDate, this.endDate)

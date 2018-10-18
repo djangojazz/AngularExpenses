@@ -80,6 +80,12 @@ html,body,#wrapper {
   position:absolute;
 }
 
+#moneyEntryArea {
+  position:fixed;
+  top: 80px;
+  min-width: 450px;
+}
+
 #content {
   top:0px;
   bottom:40px;

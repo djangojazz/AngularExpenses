@@ -1,4 +1,4 @@
-<form novalidate (ngsubmit)="submit()"
+<!-- <form novalidate (ngsubmit)="submit()"
  [formGroup]="moneyForm">
 
  <mat-grid-list cols="3" rowHeight="150px" margin="10px">
@@ -90,7 +90,39 @@
   <button mat-button (click)="submit()" [disabled]="!moneyForm.valid">
     Submit
   </button> 
-</form>
-<div *ngFor="let tran of transactions">
-  <div>ID: {{tran.transactionID}} Amount: {{tran.amount}} Desc:{{tran.transactionDesc}} Running Total:{{tran.runningTotal}}</div>
+</form> -->
+<div id="moneyEntryArea">
+  <table width="100%">
+    <tr>
+      <td width="50%">
+        <mat-form-field>
+            <input matInput [matDatepicker]="start" 
+            placeholder="Start Date" 
+            [formControl]="moneyForm.get('startDateFormControl')">
+            <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+            <mat-datepicker #start></mat-datepicker>
+            <mat-error *ngIf="moneyForm.get('startDateFormControl').hasError('required')">
+              Date Required
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td width="50%">
+          <mat-form-field>
+            <input matInput [matDatepicker]="end" 
+            placeholder="End Date" 
+            [formControl]="moneyForm.get('endDateFormControl')">
+            <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+            <mat-datepicker #end></mat-datepicker>
+            <mat-error *ngIf="moneyForm.get('endDateFormControl').hasError('required')">
+              Date Required
+            </mat-error>
+          </mat-form-field>
+        </td>
+    </tr>
+  </table>
+  
+
+  <div *ngFor="let tran of transactions">
+    <div>ID: {{tran.transactionID}} Amount: {{tran.amount}} Desc:{{tran.transactionDesc}} Running Total:{{tran.runningTotal}}</div>
+  </div>
 </div>

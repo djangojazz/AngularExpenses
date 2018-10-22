@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
 import { RouterModule } from '@angular/router';
 import { MoneyEntryComponent } from './MoneyEntry.component';
+import { LoginGuard } from '../../Guards/login-guard.service.ts.service';
 
 @NgModule({
   imports: [
@@ -15,8 +16,9 @@ import { MoneyEntryComponent } from './MoneyEntry.component';
     ReactiveFormsModule,
     RouterModule.forChild(
       [
-        { path: 'Money', component: MoneyListingsComponent },
-        { path: 'Money:id', component: MoneyEntryComponent }
+        { path: '', component: MoneyListingsComponent, canActivate: [LoginGuard] },
+        //{ path: 'Money', component: MoneyListingsComponent },
+        //{ path: 'Money:id', component: MoneyEntryComponent }
       ])
   ],
   providers: [SharedValidatorFunctions],

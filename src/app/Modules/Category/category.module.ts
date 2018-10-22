@@ -15,7 +15,11 @@ import { LoginGuard } from '../../Guards/login-guard.service.ts.service';
     FormsModule,
     MaterialModule,
     RouterModule.forChild([
-      { path: 'Category', component: CategoryComponent }
+      {
+        path: 'Category',
+        canActivate: [LoginGuard],
+        component: CategoryComponent,
+      }
     ])
   ],
   entryComponents: [DialogComponent

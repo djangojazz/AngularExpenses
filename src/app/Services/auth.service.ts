@@ -13,7 +13,7 @@ export class AuthService {
     private endpoint = `${environment.baseApi}/auth`;
     private headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
     private jwt: JWT = new JWT();
-    private currentUser: UserModel = new UserModel();
+    private currentUser: UserModel = new UserModel("", "");
     public subTitle: string = "";
 
     constructor(private http: HttpClient) { }

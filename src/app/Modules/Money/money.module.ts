@@ -16,9 +16,9 @@ import { LoginGuard } from '../../Guards/login-guard.service.ts.service';
     ReactiveFormsModule,
     RouterModule.forChild(
       [
-        { path: '', component: MoneyListingsComponent, canActivate: [LoginGuard] },
-        //{ path: 'Money', component: MoneyListingsComponent },
-        //{ path: 'Money:id', component: MoneyEntryComponent }
+        // { path: '', component: MoneyListingsComponent, canActivate: [LoginGuard] },
+        { path: 'Money', component: MoneyListingsComponent },
+        { path: 'Money:id', component: MoneyEntryComponent }
       ])
   ],
   providers: [SharedValidatorFunctions],

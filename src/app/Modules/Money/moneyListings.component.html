@@ -92,7 +92,7 @@
   </button> 
 </form> -->
 <div id="moneyEntryArea">
-  <table width="100%">
+  <!-- <table width="100%">
     <tr>
       <td>
         <mat-form-field>
@@ -119,7 +119,9 @@
         </mat-form-field>
       </td>
     </tr>
-  </table>
+  </table> -->
+
+  <router-outlet></router-outlet>
 
   <div *ngFor="let tran of transactions">
     <div>ID: 

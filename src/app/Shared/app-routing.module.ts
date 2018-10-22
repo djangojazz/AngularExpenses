@@ -11,11 +11,12 @@ import { AuthService } from '../Services/auth.service';
     RouterModule.forRoot([
       { path: 'Login', component: LoginComponent },
       { path: '',   redirectTo: '/Login', pathMatch: 'full' },
+      { path: 'Category', canActivate: [LoginGuard], loadChildren: 'app/Modules/Category/category.module#CategoryModule'},
       { path: '**',  component: PageNotFoundComponent }
     ])
   ],
   exports: [ RouterModule ],
-  providers: [LoginGuard, AuthService, AuthService]
+  providers: [LoginGuard, AuthService]
 })
 export class AppRoutingModule { 
   mode = new FormControl('over');

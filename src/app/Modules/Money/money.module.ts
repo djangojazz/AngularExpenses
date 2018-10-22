@@ -5,6 +5,7 @@ import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
 import { RouterModule } from '@angular/router';
+import { MoneyEntryComponent } from './MoneyEntry.component';
 
 @NgModule({
   imports: [
@@ -12,9 +13,17 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     MaterialModule,
     ReactiveFormsModule,
-    RouterModule.forChild([ { path: 'Money', component: MoneyListingsComponent }])
+    RouterModule.forChild(
+      [
+        { path: 'Money', component: MoneyListingsComponent },
+        { path: 'Money:id', component: MoneyEntryComponent }
+      ])
   ],
   providers: [SharedValidatorFunctions],
-  declarations: [MoneyListingsComponent]
+  declarations: 
+  [
+    MoneyListingsComponent,
+    MoneyEntryComponent 
+  ]
 })
 export class MoneyModule { }

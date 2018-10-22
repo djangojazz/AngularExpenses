@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MoneyEntryComponent } from './moneyEntry.component';
+import { MoneyListingsComponent } from './moneyListings.component';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
@@ -12,9 +12,9 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     MaterialModule,
     ReactiveFormsModule,
-    RouterModule.forChild([ { path: 'MoneyEntry', component: MoneyEntryComponent }])
+    RouterModule.forChild([ { path: 'Money', component: MoneyListingsComponent }])
   ],
   providers: [SharedValidatorFunctions],
-  declarations: [MoneyEntryComponent]
+  declarations: [MoneyListingsComponent]
 })
-export class MoneyEntryModule { }
+export class MoneyModule { }

@@ -12,10 +12,10 @@ import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-MoneyEntry',
-  templateUrl: './moneyEntry.component.html',
-  styleUrls: ['./moneyEntry.component.scss']
+  templateUrl: './moneyListings.component.html',
+  styleUrls: ['./money.component.scss']
 })
-export class MoneyEntryComponent implements OnInit {
+export class MoneyListingsComponent implements OnInit {
   transactions: Transaction[] = [];
   categories: Category[] = [];
   startDate: Date;

@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule  } from "./Shared/app-routing.module";
 
 import { CategoryModule  } from "./Modules/Category/category.module";
-import { MoneyEntryModule } from "./Modules/MoneyEntry/moneyEntry.module";
+import { MoneyModule } from "./Modules/Money/money.module";
 import { ChartingModule  } from "./Modules/Charting/charting.module";
 import { ServicesModule } from "./Services/services.module";
 import { MaterialModule } from "./Modules/material.module"
@@ -30,7 +30,7 @@ import { LoginComponent } from './Shared/login.component';
     BrowserAnimationsModule,
     HttpClientModule,
     CategoryModule,
-    MoneyEntryModule,
+    MoneyModule,
     ChartingModule,
     AppRoutingModule,
     MaterialModule,

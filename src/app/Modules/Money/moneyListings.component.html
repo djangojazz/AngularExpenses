@@ -94,30 +94,30 @@
 <div id="moneyEntryArea">
   <table width="100%">
     <tr>
-      <td width="50%">
+      <td>
         <mat-form-field>
-            <input matInput [matDatepicker]="start" 
-            placeholder="Start Date" 
-            [formControl]="moneyForm.get('startDateFormControl')">
-            <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
-            <mat-datepicker #start></mat-datepicker>
-            <mat-error *ngIf="moneyForm.get('startDateFormControl').hasError('required')">
-              Date Required
-            </mat-error>
-          </mat-form-field>
-        </td>
-        <td width="50%">
-          <mat-form-field>
-            <input matInput [matDatepicker]="end" 
-            placeholder="End Date" 
-            [formControl]="moneyForm.get('endDateFormControl')">
-            <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
-            <mat-datepicker #end></mat-datepicker>
-            <mat-error *ngIf="moneyForm.get('endDateFormControl').hasError('required')">
-              Date Required
-            </mat-error>
-          </mat-form-field>
-        </td>
+          <input matInput [matDatepicker]="start" 
+          placeholder="Start Date" 
+          [formControl]="moneyForm.get('startDateFormControl')">
+          <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
+          <mat-datepicker #start></mat-datepicker>
+          <mat-error *ngIf="moneyForm.get('startDateFormControl').hasError('required')">
+            Date Required
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <input matInput [matDatepicker]="end" 
+          placeholder="End Date" 
+          [formControl]="moneyForm.get('endDateFormControl')">
+          <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
+          <mat-datepicker #end></mat-datepicker>
+          <mat-error *ngIf="moneyForm.get('endDateFormControl').hasError('required')">
+            Date Required
+          </mat-error>
+        </mat-form-field>
+      </td>
     </tr>
   </table>
   

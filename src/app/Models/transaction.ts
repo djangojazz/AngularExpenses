@@ -14,10 +14,10 @@ export class Transaction {
 
     constructor(typeId: number, categoryId: number, createdDate: Date, amount: number, description: string, transactionId: number = 0) {
         this.transactionID = transactionId;
-        this.typeID = typeId,
-        this.categoryID = categoryId,
-        this.createdDate = createdDate,
-        this.amount = amount,
-        this.Description = description
+        this.typeID = typeId;
+        this.categoryID = categoryId;
+        this.createdDate = createdDate;
+        this.amount = amount;
+        this.Description = description;
     }
 }

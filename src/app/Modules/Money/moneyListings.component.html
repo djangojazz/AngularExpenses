@@ -121,13 +121,11 @@
     </tr>
   </table> -->
 
-  <router-outlet></router-outlet>
-
   <div *ngFor="let tran of transactions">
-    <div>ID: 
-      <a [routerLink]="['/Money', tran.transactionID]">{{tran.transactionID}}</a>
+    ID: 
+      <a [routerLink]="['Money', tran.transactionID]">{{tran.transactionID}}</a>
         Amount: {{tran.amount}} 
         Desc:{{tran.transactionDesc}} 
         Running Total:{{tran.runningTotal}}</div>
-  </div>
+  
 </div>

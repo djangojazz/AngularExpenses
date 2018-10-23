@@ -17,8 +17,12 @@ import { LoginGuard } from '../../Guards/login-guard.service.ts.service';
     RouterModule.forChild(
       [
         // { path: '', component: MoneyListingsComponent, canActivate: [LoginGuard] },
-        { path: 'Money', component: MoneyListingsComponent },
-        { path: 'Money:id', component: MoneyEntryComponent }
+        { path: 'Money:id', component: MoneyEntryComponent },
+        { path: 'Money', component: MoneyListingsComponent }
+        
+
+        
+        
       ])
   ],
   providers: [SharedValidatorFunctions],

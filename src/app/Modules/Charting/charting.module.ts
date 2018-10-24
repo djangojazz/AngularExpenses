@@ -13,10 +13,8 @@ import { MaterialModule } from "../material.module";
 @NgModule({
   imports: [
     CommonModule,
-    BrowserModule,
-    FormsModule,
     MaterialModule,
-    RouterModule.forChild([ { path: 'Charting', component: ChartingComponent }])
+    RouterModule.forChild([ { path: '', component: ChartingComponent }])
   ],
   declarations: [ChartingComponent],
   providers: [ChartingService]

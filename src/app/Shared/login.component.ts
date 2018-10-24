@@ -52,7 +52,7 @@ export class LoginComponent {
               localStorage.setItem("userName", u.userName);
               localStorage.setItem("password", u.password);
               this.authService.setUser(u.userName, u.password);
-              this.router.navigate(['/Category']);
+              this.router.navigate(['/Money']);
 
             //CreateToken: errors could be from mismatched naming or password is wrong
             }, (error: HttpErrorResponse) => console.log(error))
@@ -60,7 +60,7 @@ export class LoginComponent {
         //Salt: If error will most likely be with missing user
         } , (error: HttpErrorResponse) => console.log(error));
     } else {
-      this.router.navigate(['/Category']);
+      this.router.navigate(['/Money']);
     }
   }
 

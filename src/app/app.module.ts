@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http"
 import { StorageServiceModule } from "angular-webstorage-service";
 
@@ -18,6 +18,7 @@ import { SharedValidatorFunctions } from './Shared/sharedValidatorFunctions';
 
 import { PageNotFoundComponent  } from "./Shared/page-not-found.component";
 import { LoginComponent } from './Shared/login.component';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,12 +27,9 @@ import { LoginComponent } from './Shared/login.component';
     SharedValidatorFunctions
   ],
   imports: [
-    BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     HttpClientModule,
-    CategoryModule,
-    MoneyModule,
-    ChartingModule,
     AppRoutingModule,
     MaterialModule,
     ServicesModule,

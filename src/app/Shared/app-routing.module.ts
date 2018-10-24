@@ -9,12 +9,20 @@ import { AuthService } from '../Services/auth.service';
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: 'Login', component: LoginComponent },
       { path: '',   redirectTo: '/Login', pathMatch: 'full' },
+      { path: 'Login', component: LoginComponent },
+      {
+        path: 'Category',
+        loadChildren: '../Modules/Category/category.module#CategoryModule'
+      },
       {
         path: 'Money',
         loadChildren: '../Modules/Money/money.module#MoneyModule',
         //canLoad: [LoginGuard]
+      },
+      {
+        path: 'Charting',
+        loadChildren: '../Modules/Charting/charting.module#ChartingModule'
       },
       { path: '**',  component: PageNotFoundComponent },
     ]

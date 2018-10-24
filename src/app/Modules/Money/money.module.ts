@@ -11,18 +11,14 @@ import { LoginGuard } from '../../Guards/login-guard.service.ts.service';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     MaterialModule,
     ReactiveFormsModule,
     RouterModule.forChild(
       [
+        { path: '', component: MoneyListingsComponent },
+        { path: ':id', component: MoneyEntryComponent }
+        
         // { path: '', component: MoneyListingsComponent, canActivate: [LoginGuard] },
-        { path: 'Money:id', component: MoneyEntryComponent },
-        { path: 'Money', component: MoneyListingsComponent }
-        
-
-        
-        
       ])
   ],
   providers: [SharedValidatorFunctions],

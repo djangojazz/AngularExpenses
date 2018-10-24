@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { TransactionsService } from '../../Services/transactions.service';
 
@@ -11,11 +11,12 @@ import { TransactionsService } from '../../Services/transactions.service';
 export class MoneyEntryComponent implements OnInit {
   id: number;
 
-  constructor(private route: ActivatedRouteSnapshot, private tranService: TransactionsService) { 
+  constructor(private route: ActivatedRoute) { 
   }
 
   ngOnInit() {
-    this.id = this.route.params['id'];
+    var snapshot = this.route.snapshot;
+    this.id = snapshot.params['id'];
   }
 
 }

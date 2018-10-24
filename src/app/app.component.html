@@ -9,25 +9,25 @@
               </mat-toolbar>
   <mat-drawer #drawer class="sidenav-drawer" mode="over">
     <ng-container *ngIf="authService.userAssigned()">  
-        <button mat-button routerLink="Category" routerLinkActive="active">
+        <button mat-button [routerLink]="['/Category']" routerLinkActive="active">
             <i class="material-icons">vpn_key</i> Category
         </button>
     </ng-container>
 
     <ng-container *ngIf="authService.userAssigned()">
-        <button mat-button routerLink="Money" routerLinkActive="active">
+        <button mat-button [routerLink]="['/Money']" routerLinkActive="active">
             <i class="material-icons">create</i> Entry
         </button>
     </ng-container>
 
     <ng-container *ngIf="authService.userAssigned()">
-        <button mat-button routerLink="Charting" routerLinkActive="active">
+        <button mat-button [routerLink]="['/Charting']" routerLinkActive="active">
             <i class="material-icons">insert_chart</i> Charting
         </button>
     </ng-container>
 
     <ng-container *ngIf="!authService.userAssigned()">
-            <button mat-button routerLink="Login" routerLinkActive="active">
+            <button mat-button [routerLink]="['/Login']" routerLinkActive="active">
                 <i class="material-icons">open_in_browser</i> Login
             </button>
     </ng-container>

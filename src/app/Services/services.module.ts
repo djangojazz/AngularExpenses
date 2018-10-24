@@ -8,8 +8,6 @@ import { ChartingService  } from "./charting.service";
 import { AuthService  } from "./auth.service";
 import { ErrorHandlerService } from "./errorHandler.service";
 
-import { throwIfAlreadyLoaded } from './module-import-guard';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -25,6 +23,5 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 })
 export class ServicesModule { 
   constructor(@Optional() @SkipSelf() parentModule: ServicesModule) {
-    throwIfAlreadyLoaded(parentModule, 'CoreModule');
   }
 }

@@ -1,4 +1,71 @@
 <p>
   {{id}}
-  MoneyEntry works!
 </p>
+
+  <form novalidate (ngsubmit)="submit()"
+ [formGroup]="moneyForm">
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="dt" 
+      placeholder="Date" 
+      [formControl]="moneyForm.get('dateFormControl')">
+      <mat-datepicker-toggle matSuffix [for]="dt"></mat-datepicker-toggle>
+      <mat-datepicker #dt></mat-datepicker>
+      <mat-error *ngIf="moneyForm.get('dateFormControl').hasError('required')">
+        Date Required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-card class="result">
+        <mat-card-content>
+            <mat-slide-toggle
+                class="example-margin"
+                [formControl]="moneyForm.get('debitCreditFormControl')"
+                >
+                <h2>Debit/Credit</h2>
+            </mat-slide-toggle>
+        </mat-card-content>
+      </mat-card>
+  
+      <mat-form-field>
+        <input type="text" placeholder="categorySelect" aria-label="categorySelect" matInput 
+          [formControl]="moneyForm.get('categoryFormControl')" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredCategories | async" [value]="option">
+            {{option.description}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="moneyForm.get('categoryFormControl').hasError('required')">
+          Category Required
+        </mat-error>
+      </mat-form-field>
+  
+      <div class="form-group">
+        <mat-form-field>
+            <input matInput placeholder="amount" 
+            [formControl]="moneyForm.get('amountFormControl')"
+            [errorStateMatcher]="matcher">
+        <mat-error *ngIf="moneyForm.get('amountFormControl').hasError('required')">
+        Amount Required
+        </mat-error>
+        <mat-error *ngIf="moneyForm.get('amountFormControl').hasError('isNumeric')">
+          Amount must be numeric
+        </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field>
+            <input matInput placeholder="description" 
+            [formControl]="moneyForm.get('descFormControl')"
+            [errorStateMatcher]="matcher">
+        <mat-error *ngIf="moneyForm.get('descFormControl').hasError('required')">
+        Description Required
+        </mat-error>
+        </mat-form-field>
+      </div>
+    
+  <button mat-button (click)="submit()" [disabled]="!moneyForm.valid">
+    Submit
+  </button> 
+</form>

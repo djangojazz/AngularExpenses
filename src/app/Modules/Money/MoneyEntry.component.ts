@@ -33,7 +33,12 @@ export class MoneyEntryComponent implements OnInit {
   ngOnInit() {
     var snapshot = this.route.snapshot;
     this.id = snapshot.params['id'];
+    if (this.id > 0) {
+      this.currentTran = this.transactionService.Transactions.find(x => x.transactionID == this.id);
+    }
 
+    console.log(this.currentTran);
+    //this.currentTran = this.transactionService.Transaction;
     
     this.categoriesService.loadCategories()
       .subscribe(x => this.categories = x);

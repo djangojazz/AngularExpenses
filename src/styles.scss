@@ -164,5 +164,23 @@ text-align:left;
 }
 
 .mat-card {
-  margin-top: 20px;
+  margin-top: 5px;
+  background: $slight;
+}
+
+.mat-card-content {
+  font-size: 14pt;
+  color: $sdark;
+}
+
+.outer-card {
+  background: $sdark;
+}
+
+.placeholder {
+  color: $secondary;
+}
+
+.mat-focused .placeholder {
+  color: whitesmoke;
 }

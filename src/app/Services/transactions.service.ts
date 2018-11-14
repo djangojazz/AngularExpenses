@@ -7,7 +7,7 @@ import { environment  } from "../../environments/environment";
 
 @Injectable()
 export class TransactionsService {
-    public Transaction: Transaction[] = [];
+    public Transactions: Transaction[] = [];
     private endpoint = `${environment.baseApi}/transactions`;
     private headers: HttpHeaders = new HttpHeaders()
             .set('Content-Type', 'application/json')
@@ -22,6 +22,10 @@ public getLastDate(): Observable<Date> {
 public loadTransactions(start?: Date, end?: Date): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(`${this.endpoint}/getTransactions/${start}/${end}`, { headers: this.headers });
     }
+
+public setupTransactionsCache(start?: Date, end?: Date) {
+    this.loadTransactions(start, end).subscribe((trans: Transaction[]) => this.Transactions = trans)
+}
 
 public createANewTransaction(transaction: Transaction): Observable<Transaction> {
     return this.http.post<Transaction>(`${this.endpoint}/postTransaction`, transaction, { headers: this.headers});

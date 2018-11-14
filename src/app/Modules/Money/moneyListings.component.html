@@ -28,7 +28,7 @@
     </tr>
   </table> -->
 
-  <div *ngFor="let tran of transactions">
+  <div *ngFor="let tran of transactionService.Transactions">
     ID: 
       <a [routerLink]="['/Money', tran.transactionID]">{{tran.transactionID}}</a>
         Amount: {{tran.amount}} 

@@ -36,12 +36,11 @@ export class MoneyListingsComponent implements OnInit {
         this.startDate.setDate(this.startDate.getDate() - 21);
         console.log(`start ${this.startDate} end ${this.endDate}`)
         
-      this.transactionService.loadTransactions(this.startDate, this.endDate)
-        .subscribe(x => this.transactions = x);
+        this.transactionService.setupTransactionsCache();
+        // this.transactionService.loadTransactions(this.startDate, this.endDate)
+      //   .subscribe(x => this.transactions = x);
       });
-
-
-
+      
     this.moneyForm.get('startDateFormControl').valueChanges.pipe(
       map(x => x = this.startDate)
     )

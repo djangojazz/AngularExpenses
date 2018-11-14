@@ -21,6 +21,7 @@ export class MoneyEntryComponent implements OnInit {
   date: Date;
   categories: Category[] = [];
   filteredCategories: Observable<Category[]>;
+  currentTran: Transaction;
 
   constructor(private route: ActivatedRoute,
     private sharedValidator: SharedValidatorFunctions,

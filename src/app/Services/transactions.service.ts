@@ -27,6 +27,10 @@ public setupTransactionsCache(start?: Date, end?: Date) {
     this.loadTransactions(start, end).subscribe((trans: Transaction[]) => this.Transactions = trans)
 }
 
+public getTransaction(transactionId: number): Transaction {
+    return this.Transactions.find(x => x.transactionID == transactionId)
+}
+
 public createANewTransaction(transaction: Transaction): Observable<Transaction> {
     return this.http.post<Transaction>(`${this.endpoint}/postTransaction`, transaction, { headers: this.headers});
     }

@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
     RouterModule.forChild([
       {
         path: '',
-        canActivate: [LoginGuard],
+        //canActivate: [LoginGuard],
         component: CategoryComponent,
       }
     ])

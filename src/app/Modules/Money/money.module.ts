@@ -17,8 +17,6 @@ import { LoginGuard } from '../../Guards/login-guard.service.ts.service';
       [
         { path: '', component: MoneyListingsComponent },
         { path: ':id', component: MoneyEntryComponent }
-        
-        // { path: '', component: MoneyListingsComponent, canActivate: [LoginGuard] },
       ])
   ],
   providers: [SharedValidatorFunctions],

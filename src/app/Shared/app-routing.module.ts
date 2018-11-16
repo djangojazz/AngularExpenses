@@ -13,12 +13,13 @@ import { AuthService } from '../Services/auth.service';
       { path: 'Login', component: LoginComponent },
       {
         path: 'Category',
-        loadChildren: '../Modules/Category/category.module#CategoryModule'
+        loadChildren: '../Modules/Category/category.module#CategoryModule',
+        canActivate: [LoginGuard]
       },
       {
         path: 'Money',
         loadChildren: '../Modules/Money/money.module#MoneyModule',
-        //canLoad: [LoginGuard]
+        canActivate: [LoginGuard]
       },
       {
         path: 'Charting',

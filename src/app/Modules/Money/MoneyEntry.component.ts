@@ -80,13 +80,13 @@ export class MoneyEntryComponent implements OnInit {
   
   submit() {
     //console.log(`${<Date>this.moneyForm.get('startDateFormControl').value}-${<Date>this.moneyForm.get('endDateFormControl').value}`)
-     this.transactionService.createANewTransaction( 
-      new Transaction(<number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
-          <number>(<Category>(this.moneyForm.get('categoryFormControl').value)).categoryId, <Date>this.moneyForm.get('startDateFormControl').value,
-          this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value)
-        ).subscribe(
-          (result: Transaction) => console.log(`saved entry to database ${result}`),
-          (err: any) => console.log(err)
-        );
+    //  this.transactionService.createANewTransaction( 
+    //   new Transaction(<number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
+    //       <number>(<Category>(this.moneyForm.get('categoryFormControl').value)).categoryId, <Date>this.moneyForm.get('startDateFormControl').value,
+    //       this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value)
+    //     ).subscribe(
+    //       (result: Transaction) => console.log(`saved entry to database ${result}`),
+    //       (err: any) => console.log(err)
+    //     );
   }
 }

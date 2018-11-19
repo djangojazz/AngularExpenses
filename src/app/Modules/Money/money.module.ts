@@ -7,6 +7,7 @@ import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions'
 import { RouterModule } from '@angular/router';
 import { MoneyEntryComponent } from './MoneyEntry.component';
 import { LoginGuard } from '../../Guards/login-guard.service.ts.service';
+import { MoneyResolverService } from './money-resolver.service';
 
 @NgModule({
   imports: [
@@ -16,10 +17,17 @@ import { LoginGuard } from '../../Guards/login-guard.service.ts.service';
     RouterModule.forChild(
       [
         { path: '', component: MoneyListingsComponent },
-        { path: ':id', component: MoneyEntryComponent }
+        { 
+          path: ':id', 
+          component: MoneyEntryComponent,
+          resolve: { tran: MoneyResolverService }
+        }
       ])
   ],
-  providers: [SharedValidatorFunctions],
+  providers: [
+    SharedValidatorFunctions,
+    MoneyResolverService
+  ],
   declarations: 
   [
     MoneyListingsComponent,

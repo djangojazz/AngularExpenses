@@ -7,9 +7,6 @@ import { StorageServiceModule } from "angular-webstorage-service";
 import { AppComponent } from './app.component';
 import { AppRoutingModule  } from "./Shared/app-routing.module";
 
-import { CategoryModule  } from "./Modules/Category/category.module";
-import { MoneyModule } from "./Modules/Money/money.module";
-import { ChartingModule  } from "./Modules/Charting/charting.module";
 import { ServicesModule } from "./Services/services.module";
 import { MaterialModule } from "./Modules/material.module"
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

@@ -16,9 +16,8 @@ import { Transaction } from '../../Models/transaction';
   styleUrls: ['./money.component.scss']
 })
 export class MoneyEntryComponent implements OnInit {
-  id: number;
+  idLabel: string;
   moneyForm: FormGroup;
-  date: Date;
   categories: Category[] = [];
   filteredCategories: Observable<Category[]>;
   currentTran: Transaction;
@@ -31,24 +30,20 @@ export class MoneyEntryComponent implements OnInit {
   }
 
   ngOnInit() {
-    var snapshot = this.route.snapshot;
-    this.id = snapshot.params['id'];
-    if (this.id > 0) {
-      this.currentTran = this.transactionService.Transactions.find(x => x.transactionID == this.id);
-    }
-
-    console.log(this.currentTran);
-    //this.currentTran = this.transactionService.Transaction;
+    this.currentTran = this.route.snapshot.data['tran'];
+    this.idLabel = (this.currentTran.transactionID > 0) ? this.currentTran.transactionID.toString() : "New";
     
     this.categoriesService.loadCategories()
       .subscribe(x => this.categories = x);
 
     this.moneyForm = this.fb.group({
-      debitCreditFormControl: [false],
-      categoryFormControl: [new Category('Food', 28), [Validators.required]],
-      amountFormControl: [10, [Validators.required, this.sharedValidator.numberValidator]],
-      descFormControl: ['groceries', [Validators.required]],
-      dateFormControl: [this.date, [Validators.required]]
+      debitCreditFormControl: [(this.currentTran.transactionID > 0) ? 
+        (this.currentTran.type == "1") ? true : false : 
+        false],
+      categoryFormControl: [(this.currentTran.transactionID > 0) ? new Category(this.currentTran.category, this.currentTran.categoryID) : new Category('Food', 28), [Validators.required]],
+      amountFormControl: [(this.currentTran.transactionID > 0) ? this.currentTran.amount : 10, [Validators.required, this.sharedValidator.numberValidator]],
+      descFormControl: [(this.currentTran.transactionID > 0) ? this.currentTran.transactionDesc : 'groceries', [Validators.required]],
+      dateFormControl: [this.currentTran.createdDate || Date.now, [Validators.required]]
     })
 
     
@@ -58,12 +53,13 @@ export class MoneyEntryComponent implements OnInit {
         map(x => typeof x === 'string' ? x: x.description),
         map(name => name ? this.filter(name) : this.categories.slice())
       );
+      
     // this.moneyForm.setValue({ 
     //   debitCreditFormControl: this.moneyForm.get('debitCreditFormControl').value,
     //   categoryFormControl: this.moneyForm.get('categoryFormControl').value,
     //   amountFormControl: this.moneyForm.get('amountFormControl').value,
     //   descFormControl: this.moneyForm.get('descFormControl').value,
-    //   startDateFormControl: this.startDate
+    //   dateFormControl: this.currentTran.createdDate || Date.now
     // })
   }
 

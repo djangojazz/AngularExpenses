@@ -40,9 +40,15 @@ export class MoneyEntryComponent implements OnInit {
       debitCreditFormControl: [(this.currentTran.transactionID > 0) ? 
         (this.currentTran.type == "1") ? true : false : 
         false],
-      categoryFormControl: [(this.currentTran.transactionID > 0) ? new Category(this.currentTran.category, this.currentTran.categoryID) : new Category('Food', 28), [Validators.required]],
-      amountFormControl: [(this.currentTran.transactionID > 0) ? this.currentTran.amount : 10, [Validators.required, this.sharedValidator.numberValidator]],
-      descFormControl: [(this.currentTran.transactionID > 0) ? this.currentTran.transactionDesc : 'groceries', [Validators.required]],
+      categoryFormControl: [(this.currentTran.transactionID > 0) 
+        ? new Category(this.currentTran.category, this.currentTran.categoryID) 
+        : new Category('Food', 28), [Validators.required]],
+      amountFormControl: [(this.currentTran.transactionID > 0) 
+        ? this.currentTran.amount 
+        : 10, [Validators.required, this.sharedValidator.numberValidator]],
+      descFormControl: [(this.currentTran.transactionID > 0) 
+        ? this.currentTran.transactionDesc 
+        : 'groceries', [Validators.required]],
       dateFormControl: [this.currentTran.createdDate || Date.now, [Validators.required]]
     })
 
@@ -53,18 +59,11 @@ export class MoneyEntryComponent implements OnInit {
         map(x => typeof x === 'string' ? x: x.description),
         map(name => name ? this.filter(name) : this.categories.slice())
       );
-      
-    // this.moneyForm.setValue({ 
-    //   debitCreditFormControl: this.moneyForm.get('debitCreditFormControl').value,
-    //   categoryFormControl: this.moneyForm.get('categoryFormControl').value,
-    //   amountFormControl: this.moneyForm.get('amountFormControl').value,
-    //   descFormControl: this.moneyForm.get('descFormControl').value,
-    //   dateFormControl: this.currentTran.createdDate || Date.now
-    // })
   }
 
   
   filter(desc: string): Category[] {
+    console.log(desc);
     return this.categories.filter(x =>
       x.description.toLowerCase().indexOf(desc.toLowerCase()) === 0);
   }

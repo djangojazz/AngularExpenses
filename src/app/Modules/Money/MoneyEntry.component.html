@@ -37,8 +37,8 @@
           [formControl]="moneyForm.get('categoryFormControl')" [matAutocomplete]="auto">
         <mat-placeholder class="placeholder">Category</mat-placeholder>
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let option of filteredCategories | async" [value]="option">
-            {{option.description}}
+          <mat-option *ngFor="let cat of filteredCategories | async" [value]="cat">
+            {{cat.description}}
           </mat-option>
         </mat-autocomplete>
         <mat-error *ngIf="moneyForm.get('categoryFormControl').hasError('required')">

@@ -12,18 +12,9 @@ function isNumeric(): ValidatorFn {
         };
     }
 
-    // export const isCategory = (cats: string[]) => {
-    //     return (c:AbstractControl) => {
-    //       if (c.value !== undefined && cats.find(c.value) ) {
-    //                     return { 'isCategory': true };
-    //                 };
-    //       return null;
-    //     };
-    //   };
-
 function isCategory(cats: string[]): ValidatorFn {
     return  (c: AbstractControl): {[key: string]: boolean} | null => {
-        if (c.value !== undefined && cats.find(c.value) ) {
+        if (c.value !== undefined && cats.find(x => x == c.value) ) {
             return { 'isCategory': true };
         };
         return null;
@@ -38,6 +29,5 @@ function isCategory(cats: string[]): ValidatorFn {
 export class SharedValidatorFunctions {
     constructor(private catService: CategoriesService) {}
     numberValidator: Function = isNumeric();
-    categoryValidator: Function = isCategory(this.catService.Categories.map((cat: Category) => cat.description) || String[""]);
-   
+    categoryValidator: Function = isCategory(this.catService.Categories.map<string>(x => x.description));
     }

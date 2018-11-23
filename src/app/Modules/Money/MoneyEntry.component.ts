@@ -42,7 +42,7 @@ export class MoneyEntryComponent implements OnInit {
         false],
       categoryFormControl: [(this.currentTran.transactionID > 0) 
         ? new Category(this.currentTran.category, this.currentTran.categoryID) 
-        : new Category('Food', 28), [Validators.required]],
+        : new Category('Food', 28), [Validators.required, this.sharedValidator.categoryValidator]],
       amountFormControl: [(this.currentTran.transactionID > 0) 
         ? this.currentTran.amount 
         : 10, [Validators.required, this.sharedValidator.numberValidator]],
@@ -74,6 +74,9 @@ export class MoneyEntryComponent implements OnInit {
 
   
   submit() {
+    var cat: Category = this.moneyForm.get('categoryFormControl').value
+    
+    console.log(this.categoriesService.hasCategory(cat.description));
     //console.log(`${<Date>this.moneyForm.get('startDateFormControl').value}-${<Date>this.moneyForm.get('endDateFormControl').value}`)
     //  this.transactionService.createANewTransaction( 
     //   new Transaction(<number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),

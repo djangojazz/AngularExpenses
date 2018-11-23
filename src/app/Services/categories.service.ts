@@ -22,6 +22,14 @@ export class CategoriesService {
             .pipe(tap(results => this.alphabetize(results)))
     }
 
+    public setupCategoriesCache() {
+        this.loadCategories().subscribe((cats: Category[]) => this.Categories = cats)
+    }
+
+    public hasCategory(desc: string): boolean {
+        return this.Categories.find(x => x.description == desc) != null;
+    }
+    
     public addCategory(newCategory: string): Observable<Category[]> {
         return this.http.post<Category[]>(
             `${this.endpoint}/postCategory`, 

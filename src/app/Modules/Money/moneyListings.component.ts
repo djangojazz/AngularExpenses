@@ -23,6 +23,7 @@ export class MoneyListingsComponent implements OnInit {
   moneyForm: FormGroup;
 
   constructor(private transactionService: TransactionsService, 
+              private categoriesService: CategoriesService,
               private authService: AuthService) { 
       this.authService.subTitle = "Entry";
     }
@@ -36,9 +37,8 @@ export class MoneyListingsComponent implements OnInit {
         this.startDate.setDate(this.startDate.getDate() - 21);
         console.log(`start ${this.startDate} end ${this.endDate}`)
         
-        this.transactionService.setupTransactionsCache();
-        // this.transactionService.loadTransactions(this.startDate, this.endDate)
-      //   .subscribe(x => this.transactions = x);
+        this.categoriesService.setupCategoriesCache();
+        this.transactionService.setupTransactionsCache(this.startDate, this.endDate);
       });
       
     this.moneyForm.get('startDateFormControl').valueChanges.pipe(

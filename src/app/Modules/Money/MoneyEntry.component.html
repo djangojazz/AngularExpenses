@@ -36,6 +36,11 @@
         <input type="text" aria-label="categorySelect" matInput 
           [formControl]="moneyForm.get('categoryFormControl')" [matAutocomplete]="auto">
         <mat-placeholder class="placeholder">Category</mat-placeholder>
+        <!-- <mat-select>
+          <mat-option *ngFor="let cat of this.categoriesService.Categories" [value]="cat">
+              {{cat.description}}
+          </mat-option>
+        </mat-select> -->
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
           <mat-option *ngFor="let cat of filteredCategories | async" [value]="cat">
             {{cat.description}}

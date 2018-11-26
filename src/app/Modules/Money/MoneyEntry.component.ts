@@ -56,14 +56,22 @@ export class MoneyEntryComponent implements OnInit {
     this.filteredCategories = this.moneyForm.get('categoryFormControl').valueChanges
       .pipe(
         startWith<string | Category>(''),
-        map(x => typeof x === 'string' ? x: x.description),
+        map(x => typeof x === 'string' ? x : x.description),
         map(name => name ? this.filter(name) : this.categories.slice())
       );
   }
 
   
   filter(desc: string): Category[] {
-    console.log(desc);
+    let exists = this.categoriesService.hasCategory(desc)
+    //This causes infinite loop and stack overflow, same thing will happen
+    //if I add it to subscribing to categoryFormControl value changes or
+    // subscribing to the filtered categories changes
+    if (!exists) {
+      console.log(desc)
+      this.moneyForm.controls['categoryFormControl'].updateValueAndValidity();
+    }
+    
     return this.categories.filter(x =>
       x.description.toLowerCase().indexOf(desc.toLowerCase()) === 0);
   }

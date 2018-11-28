@@ -18,6 +18,7 @@ import { Transaction } from '../../Models/transaction';
 export class MoneyEntryComponent implements OnInit {
   idLabel: string;
   moneyForm: FormGroup;
+  currentCategory: Category;
   categories: Category[] = [];
   filteredCategories: Observable<Category[]>;
   currentTran: Transaction;
@@ -36,13 +37,15 @@ export class MoneyEntryComponent implements OnInit {
     this.categoriesService.loadCategories()
       .subscribe(x => this.categories = x);
 
+    this.currentCategory = (this.currentTran.transactionID > 0) 
+      ? new Category(this.currentTran.category, this.currentTran.categoryID) 
+      : new Category('Food', 28);
+
     this.moneyForm = this.fb.group({
       debitCreditFormControl: [(this.currentTran.transactionID > 0) ? 
         (this.currentTran.type == "1") ? true : false : 
         false],
-      categoryFormControl: [(this.currentTran.transactionID > 0) 
-        ? new Category(this.currentTran.category, this.currentTran.categoryID) 
-        : new Category('Food', 28), [Validators.required, this.sharedValidator.categoryValidator]],
+      categoryFormControl: [this.currentCategory, [Validators.required, this.sharedValidator.categoryValidator]],
       amountFormControl: [(this.currentTran.transactionID > 0) 
         ? this.currentTran.amount 
         : 10, [Validators.required, this.sharedValidator.numberValidator]],
@@ -61,14 +64,15 @@ export class MoneyEntryComponent implements OnInit {
       );
   }
 
+  categoryLeft() {
+    console.log(this.currentTran.category);
+    var catControl = this.moneyForm.controls['categoryFormControl'];
+     this.currentTran.category = catControl.value;
+    console.log(catControl.value);
+    this.sharedValidator.categoryValidator.call;
+  }
   
   filter(desc: string): Category[] {
-    let exists = this.categoriesService.hasCategory(desc)
-    if (!exists) {
-      console.log(desc)
-      this.moneyForm.controls['categoryFormControl'].updateValueAndValidity();
-    }
-    
     return this.categories.filter(x =>
       x.description.toLowerCase().indexOf(desc.toLowerCase()) === 0);
   }

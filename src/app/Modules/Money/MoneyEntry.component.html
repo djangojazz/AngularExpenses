@@ -32,7 +32,7 @@
   </mat-card>
   <mat-card>
       <mat-card-content>  
-      <mat-form-field>
+      <mat-form-field (focusout)="categoryLeft()">
         <input type="text" aria-label="categorySelect" matInput 
           [formControl]="moneyForm.get('categoryFormControl')" [matAutocomplete]="auto">
         <mat-placeholder class="placeholder">Category</mat-placeholder>

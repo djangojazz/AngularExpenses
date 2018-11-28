@@ -12,9 +12,10 @@ function isNumeric(): ValidatorFn {
         };
     }
 
-function isCategory(cats: string[]): ValidatorFn {
+function isCategory(cats: number[]): ValidatorFn {
     return  (c: AbstractControl): {[key: string]: boolean} | null => {
-        if (c.value !== undefined && cats.find(x => x == c.value) ) {
+        if (c.value != undefined && cats.find(x => x == c.value) ) {
+            console.log(c.value);
             return { 'isCategory': true };
         };
         return null;
@@ -29,5 +30,5 @@ function isCategory(cats: string[]): ValidatorFn {
 export class SharedValidatorFunctions {
     constructor(private catService: CategoriesService) {}
     numberValidator: Function = isNumeric();
-    categoryValidator: Function = isCategory(this.catService.Categories.map<string>(x => x.description));
+    categoryValidator: Function = isCategory(this.catService.Categories.map<number>(x => x.categoryId));
     }

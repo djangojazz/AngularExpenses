@@ -43,8 +43,6 @@ export class MoneyEntryComponent implements OnInit {
     this.currentTran = this.route.snapshot.data['tran'];
     this.idLabel = (this.currentTran.transactionID > 0) ? this.currentTran.transactionID.toString() : "New";
 
-    var cats = this.categoriesService.Categories.map<string>(x => x.description);
-
     this.currentCategory = (this.currentTran.transactionID > 0) 
       ? new Category(this.currentTran.category, this.currentTran.categoryID) 
       : new Category('Food', 28);
@@ -53,9 +51,7 @@ export class MoneyEntryComponent implements OnInit {
       debitCreditFormControl: [(this.currentTran.transactionID > 0) ? 
         (this.currentTran.type == "1") ? true : false : 
         false],
-      categoryFormControl: [this.currentCategory, [Validators.required, 
-        categoryRange(cats)
-      ]],
+      categoryFormControl: [this.currentCategory, [Validators.required ]],
       amountFormControl: [(this.currentTran.transactionID > 0) 
         ? this.currentTran.amount 
         : 10, [Validators.required, this.sharedValidator.numberValidator]],
@@ -75,7 +71,8 @@ export class MoneyEntryComponent implements OnInit {
   }
 
   categoryLeft() {
-    // console.log(this.currentTran.category);
+    categoryRange(this.categoriesService.Categories.map<string>(x => x.description));
+    
     // var catControl = this.moneyForm.controls['categoryFormControl'];
     //  this.currentTran.category = catControl.value;
     // console.log(catControl.value);

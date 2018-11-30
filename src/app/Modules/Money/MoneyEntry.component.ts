@@ -2,13 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { TransactionsService } from '../../Services/transactions.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Category } from '../../Models/category';
 import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { CategoriesService } from '../../Services/categories.service';
 import { Transaction } from '../../Models/transaction';
+
+function categoryRange(cats: string[]): ValidatorFn {
+  return  (c: AbstractControl): {[key: string]: boolean} | null => {
+    if (cats.find(x => x == c.value) === undefined) {
+        return { 'isCategory': true };
+    }
+      return null;
+  };
+}
 
 @Component({
   selector: 'app-MoneyEntry',
@@ -33,9 +42,8 @@ export class MoneyEntryComponent implements OnInit {
   ngOnInit() {
     this.currentTran = this.route.snapshot.data['tran'];
     this.idLabel = (this.currentTran.transactionID > 0) ? this.currentTran.transactionID.toString() : "New";
-    
-    this.categoriesService.loadCategories()
-      .subscribe(x => this.categories = x);
+
+    var cats = this.categoriesService.Categories.map<string>(x => x.description);
 
     this.currentCategory = (this.currentTran.transactionID > 0) 
       ? new Category(this.currentTran.category, this.currentTran.categoryID) 
@@ -45,7 +53,9 @@ export class MoneyEntryComponent implements OnInit {
       debitCreditFormControl: [(this.currentTran.transactionID > 0) ? 
         (this.currentTran.type == "1") ? true : false : 
         false],
-      categoryFormControl: [this.currentCategory, [Validators.required, this.sharedValidator.categoryValidator]],
+      categoryFormControl: [this.currentCategory, [Validators.required, 
+        categoryRange(cats)
+      ]],
       amountFormControl: [(this.currentTran.transactionID > 0) 
         ? this.currentTran.amount 
         : 10, [Validators.required, this.sharedValidator.numberValidator]],
@@ -65,11 +75,11 @@ export class MoneyEntryComponent implements OnInit {
   }
 
   categoryLeft() {
-    console.log(this.currentTran.category);
-    var catControl = this.moneyForm.controls['categoryFormControl'];
-     this.currentTran.category = catControl.value;
-    console.log(catControl.value);
-    this.sharedValidator.categoryValidator.call;
+    // console.log(this.currentTran.category);
+    // var catControl = this.moneyForm.controls['categoryFormControl'];
+    //  this.currentTran.category = catControl.value;
+    // console.log(catControl.value);
+    // this.sharedValidator.categoryValidator.call;
   }
   
   filter(desc: string): Category[] {

@@ -32,28 +32,18 @@
   </mat-card>
   <mat-card>
       <mat-card-content>  
-      <mat-form-field (focusout)="categoryLeft()">
-        <input type="text" aria-label="categorySelect" matInput 
-          [formControl]="moneyForm.get('categoryFormControl')" [matAutocomplete]="auto">
-        <mat-placeholder class="placeholder">Category</mat-placeholder>
-        <!-- <mat-select>
-          <mat-option *ngFor="let cat of this.categoriesService.Categories" [value]="cat">
-              {{cat.description}}
-          </mat-option>
-        </mat-select> -->
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let cat of filteredCategories | async" [value]="cat">
-            {{cat.description}}
-          </mat-option>
-        </mat-autocomplete>
-        <mat-error *ngIf="moneyForm.get('categoryFormControl').hasError('required')">
-          Category Required
-        </mat-error>
-        <mat-error *ngIf="moneyForm.get('categoryFormControl').hasError('isCategory')">
-          Category is wrong
-        </mat-error>
-      </mat-form-field>
-    </mat-card-content>
+        <mat-form-field>
+          <mat-placeholder class="placeholder">Category</mat-placeholder>
+          <mat-select [formControl]="moneyForm.get('categoryFormControl')">
+            <mat-option *ngFor="let cat of categoriesService.Categories" [value]="cat.categoryId">
+                {{cat.description}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="moneyForm.get('categoryFormControl').hasError('required')">
+            Category Required
+          </mat-error>
+        </mat-form-field>
+      </mat-card-content>
   </mat-card>  
   <mat-card>
     <mat-card-content>

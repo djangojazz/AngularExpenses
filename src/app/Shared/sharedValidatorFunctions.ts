@@ -12,17 +12,6 @@ function isNumeric(): ValidatorFn {
         };
     }
 
-function isCategory(cats: number[]): ValidatorFn {
-    return  (c: AbstractControl): {[key: string]: boolean} | null => {
-        if (c.value != undefined && cats.find(x => x == c.value) ) {
-            console.log(c.value);
-            return { 'isCategory': true };
-        };
-        return null;
-        };
-    }
-
-
 @Directive({
     selector: '[ngModel]'
 })
@@ -30,5 +19,4 @@ function isCategory(cats: number[]): ValidatorFn {
 export class SharedValidatorFunctions {
     constructor(private catService: CategoriesService) {}
     numberValidator: Function = isNumeric();
-    categoryValidator: Function = isCategory(this.catService.Categories.map<number>(x => x.categoryId));
     }

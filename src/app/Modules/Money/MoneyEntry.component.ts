@@ -43,15 +43,11 @@ export class MoneyEntryComponent implements OnInit {
     this.currentTran = this.route.snapshot.data['tran'];
     this.idLabel = (this.currentTran.transactionID > 0) ? this.currentTran.transactionID.toString() : "New";
 
-    this.currentCategory = (this.currentTran.transactionID > 0) 
-      ? new Category(this.currentTran.category, this.currentTran.categoryID) 
-      : new Category('Food', 28);
-
     this.moneyForm = this.fb.group({
       debitCreditFormControl: [(this.currentTran.transactionID > 0) ? 
         (this.currentTran.type == "1") ? true : false : 
         false],
-      categoryFormControl: [this.currentCategory, [Validators.required ]],
+      categoryFormControl: [this.currentTran.categoryID, [Validators.required ]],
       amountFormControl: [(this.currentTran.transactionID > 0) 
         ? this.currentTran.amount 
         : 10, [Validators.required, this.sharedValidator.numberValidator]],
@@ -60,43 +56,16 @@ export class MoneyEntryComponent implements OnInit {
         : 'groceries', [Validators.required]],
       dateFormControl: [this.currentTran.createdDate || Date.now, [Validators.required]]
     })
-
-    
-    this.filteredCategories = this.moneyForm.get('categoryFormControl').valueChanges
-      .pipe(
-        startWith<string | Category>(''),
-        map(x => typeof x === 'string' ? x : x.description),
-        map(name => name ? this.filter(name) : this.categories.slice())
-      );
   }
 
-  categoryLeft() {
-    categoryRange(this.categoriesService.Categories.map<string>(x => x.description));
-    
-    // var catControl = this.moneyForm.controls['categoryFormControl'];
-    //  this.currentTran.category = catControl.value;
-    // console.log(catControl.value);
-    // this.sharedValidator.categoryValidator.call;
-  }
-  
-  filter(desc: string): Category[] {
-    return this.categories.filter(x =>
-      x.description.toLowerCase().indexOf(desc.toLowerCase()) === 0);
-  }
-
-  displayFn(cat?: Category): string | undefined {
-    return cat ?  cat.description : undefined;
-  }
-
-  
   submit() {
     var cat: Category = this.moneyForm.get('categoryFormControl').value
+    console.log(cat);
     
-    console.log(this.categoriesService.hasCategory(cat.description));
     //console.log(`${<Date>this.moneyForm.get('startDateFormControl').value}-${<Date>this.moneyForm.get('endDateFormControl').value}`)
     //  this.transactionService.createANewTransaction( 
     //   new Transaction(<number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
-    //       <number>(<Category>(this.moneyForm.get('categoryFormControl').value)).categoryId, <Date>this.moneyForm.get('startDateFormControl').value,
+    //       <number>this.moneyForm.get('categoryFormControl').value, <Date>this.moneyForm.get('startDateFormControl').value,
     //       this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value)
     //     ).subscribe(
     //       (result: Transaction) => console.log(`saved entry to database ${result}`),

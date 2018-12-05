@@ -37,16 +37,13 @@ export class LoginComponent {
 
     //See if the user already exists and has previously logged in and do not need to go through service again
     if(!this.authService.checkExistingToken(u)) {
-      console.log('got into new')
       this.authService.getSalt(userName)
         .subscribe((salt: string) => { 
-          console.log('got salt')
           u = this.createUserObject(userName, salt, password);
 
           //first time login
           this.authService.createAuthToken(u)
             .subscribe((jwt: JWT) => {
-              console.log('passed auth, setting local storage')
               localStorage.setItem("jwt", jwt.token);
               localStorage.setItem("salt", salt)
               localStorage.setItem("userName", u.userName);

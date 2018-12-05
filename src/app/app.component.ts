@@ -3,6 +3,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AuthService } from './Services/auth.service';
 import { JWT } from './Models/jwt';
 import { Router } from '@angular/router';
+import { TransactionsService } from './Services/transactions.service';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +16,14 @@ export class AppComponent {
   showFiller = false;
 
   constructor(private authService: AuthService,
+    private transactionsService: TransactionsService,
     private router: Router) {
   }
 
   public logOut() {
     this.authService.setUser("", "");
+    localStorage.clear();
+    this.transactionsService.Transactions = [];
     this.router.navigateByUrl('/Login');
   }
 }

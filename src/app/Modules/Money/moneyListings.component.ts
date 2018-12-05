@@ -35,7 +35,6 @@ export class MoneyListingsComponent implements OnInit {
         this.endDate = new Date(x);
         this.startDate = new Date(x);
         this.startDate.setDate(this.startDate.getDate() - 21);
-        console.log(`start ${this.startDate} end ${this.endDate}`)
         
         this.categoriesService.setupCategoriesCache();
         this.transactionService.setupTransactionsCache(this.startDate, this.endDate);

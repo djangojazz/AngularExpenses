@@ -25,21 +25,16 @@ export class LoginGuard implements CanActivate, CanLoad {
       var storageJWT = localStorage.getItem("jwt");
 
       if(storageJWT == null) {
-        console.log("Must be logged in first");
         this.router.navigate(['/Login']);
         return false;
       }
 
       if(storageUserName != user.userName) {
-        console.log(`Storage ${storageUserName} passed in: ${user.userName}`);
-        console.log("Username is wrong, login with correct Username");
         this.router.navigate(['/Login']);
         return false;
       }
 
       if(storagePassword != user.password) {
-        console.log(`Storage ${storagePassword} passed in: ${user.password}`);
-        console.log("Password is wrong, login with correct Password");
         this.router.navigate(['/Login']);
         return false;
       }

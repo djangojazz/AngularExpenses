@@ -37,15 +37,12 @@ export class AuthService {
                 var storagePassword = localStorage.getItem("password");
 
                 if(user.userName != storageUserName || user.password != storagePassword) {
-                    console.log("Username or Password are wrong");
                     return false;
                 }
 
-                console.log("Setting up auth's persisted memory user object");
                 this.currentUser = user;
 
                 var data = this.decodeToken(existingJWT);
-                    console.log("Got into decode Token");    
                     this.jwt.token = existingJWT;
                     var dt = new Date(0);
                     dt.setUTCSeconds(data.exp);
@@ -55,15 +52,12 @@ export class AuthService {
                     var dateDifference = this.jwt.expires.valueOf() - current.valueOf();
                     
                     if(dateDifference <= 0) {
-                        console.log("Token is expired, get a new one")
                         return false;
                     }
 
-                    console.log("Have token and got through successfully")
                     return true;
             }
 
-        console.log("You do not have an existing token");
         return false;
     }
 

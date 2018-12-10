@@ -17,19 +17,19 @@ import { AuthService } from '../../Services/auth.service';
 })
 export class MoneyListingsComponent implements OnInit {
   transactions: Transaction[] = [];
-  startDate: Date;
-  endDate: Date;
+  startDate: Date = new Date;
+  endDate: Date = new Date;
   
   moneyForm: FormGroup;
 
   constructor(private transactionService: TransactionsService, 
               private categoriesService: CategoriesService,
-              private authService: AuthService) { 
+              private authService: AuthService,
+              private fb: FormBuilder) { 
       this.authService.subTitle = "Entry";
     }
 
   ngOnInit() {
-    
     this.transactionService.getLastDate()
       .subscribe((x: Date) => {
         this.endDate = new Date(x);
@@ -39,10 +39,17 @@ export class MoneyListingsComponent implements OnInit {
         this.categoriesService.setupCategoriesCache();
         this.transactionService.setupTransactionsCache(this.startDate, this.endDate);
       });
-      
+
+    this.moneyForm = this.fb.group({
+      startDateFormControl: [this.startDate, [Validators.required]],
+      endDateFormControl: [this.endDate, [Validators.required]]
+    })
+
     this.moneyForm.get('startDateFormControl').valueChanges.pipe(
       map(x => x = this.startDate)
-    )
+    ).subscribe(x => {
+      console.log(`Value changed to ${x}`);
+    });
     
     this.moneyForm.get('endDateFormControl').valueChanges.pipe(
       map(x => x = this.endDate)

@@ -9,7 +9,7 @@ import { AuthService } from '../Services/auth.service';
 @NgModule({
   imports: [
     RouterModule.forRoot([
-      { path: '',   redirectTo: '/Login', pathMatch: 'full' },
+      { path: '',   redirectTo: '/Money', pathMatch: 'full' },
       { path: 'Login', component: LoginComponent },
       {
         path: 'Category',
@@ -19,7 +19,7 @@ import { AuthService } from '../Services/auth.service';
       {
         path: 'Money',
         loadChildren: '../Modules/Money/money.module#MoneyModule',
-        canActivate: [LoginGuard]
+        //canActivate: [LoginGuard]
       },
       {
         path: 'Charting',

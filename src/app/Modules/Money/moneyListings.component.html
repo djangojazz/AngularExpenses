@@ -1,39 +1,50 @@
-<div id="moneyListingsArea">
-  <table width="100%">
-    <tr>
-      <td>
-        <mat-form-field>
-          <input matInput [matDatepicker]="start" 
-          placeholder="Start Date" 
-          [formControl]="moneyForm.get('startDateFormControl')">
-          <mat-datepicker-toggle matSuffix [for]="start"></mat-datepicker-toggle>
-          <mat-datepicker #start></mat-datepicker>
-          <mat-error *ngIf="moneyForm.get('startDateFormControl').hasError('required')">
-            Date Required
-          </mat-error>
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field>
-          <input matInput [matDatepicker]="end" 
-          placeholder="End Date" 
-          [formControl]="moneyForm.get('endDateFormControl')">
-          <mat-datepicker-toggle matSuffix [for]="end"></mat-datepicker-toggle>
-          <mat-datepicker #end></mat-datepicker>
-          <mat-error *ngIf="moneyForm.get('endDateFormControl').hasError('required')">
-            Date Required
-          </mat-error>
-        </mat-form-field>
-      </td>
-    </tr>
-  </table>
+<form novalidate (ngsubmit)="submit()" [formGroup]="moneyListingsForm">
+  <mat-card class="outer-card">
+    <label class="label">Dates to select from</label>
+    <mat-card>
+      <mat-card-content>
+        <table width="100%">
+          <tr>
+            <td>
+              <mat-form-field>
+                <input matInput [matDatepicker]="startDt" 
+                placeholder="Start Date" 
+                [formControl]="moneyListingsForm.get('startDateFormControl')">
+                <mat-datepicker-toggle matSuffix [for]="startDt"></mat-datepicker-toggle>
+                <mat-datepicker #startDt></mat-datepicker>
+                <mat-error *ngIf="moneyListingsForm.get('startDateFormControl').hasError('required')">
+                  Date Required
+                </mat-error>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
+                <input matInput [matDatepicker]="endDt" 
+                placeholder="End Date" 
+                [formControl]="moneyListingsForm.get('endDateFormControl')">
+                <mat-datepicker-toggle matSuffix [for]="endDt"></mat-datepicker-toggle>
+                <mat-datepicker #endDt></mat-datepicker>
+                <mat-error *ngIf="moneyListingsForm.get('endDateFormControl').hasError('required')">
+                  Date Required
+                </mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
 
-  <div *ngFor="let tran of transactionService.Transactions">
-    ID: 
-      <a [routerLink]="['/Money', tran.transactionID]">{{tran.transactionID}}</a>
-        Amount: {{tran.amount}} 
-        Date: {{tran.createdDate}}
-        Desc:{{tran.transactionDesc}} 
-        Running Total:{{tran.runningTotal}}
-  </div>
-</div>
+    <label class="label">Transactions</label>
+    <mat-card>
+      <mat-card-content>
+          <div *ngFor="let tran of transactionService.Transactions">
+              <a [routerLink]="['/Money', tran.transactionID]">{{tran.transactionID}}</a>
+                Amount: {{tran.amount}} 
+                Date: {{tran.createdDate}}
+                Desc:{{tran.transactionDesc}} 
+                Running Total:{{tran.runningTotal}}
+          </div>
+      </mat-card-content>
+    </mat-card> 
+  </mat-card>
+</form>

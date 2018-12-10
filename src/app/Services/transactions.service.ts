@@ -20,7 +20,7 @@ public getLastDate(): Observable<Date> {
 }
 
 public loadTransactions(start?: Date, end?: Date): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`${this.endpoint}/getTransactions/${start}/${end}`, { headers: this.headers });
+    return this.http.get<Transaction[]>(`${this.endpoint}/getTransactions/${start.toDateString()}/${end.toDateString()}`, { headers: this.headers });
     }
 
 public setupTransactionsCache(start?: Date, end?: Date) {

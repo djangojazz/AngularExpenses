@@ -19,8 +19,9 @@ export class MoneyListingsComponent implements OnInit {
   transactions: Transaction[] = [];
   startDate: Date = new Date;
   endDate: Date = new Date;
+  initialLoadDone: Boolean = false;
   
-  moneyForm: FormGroup;
+  moneyListingsForm: FormGroup;
 
   constructor(private transactionService: TransactionsService, 
               private categoriesService: CategoriesService,
@@ -30,6 +31,11 @@ export class MoneyListingsComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.moneyListingsForm = this.fb.group({
+      startDateFormControl: [this.startDate, [Validators.required]],
+      endDateFormControl: [this.endDate, [Validators.required]]
+    })
+
     this.transactionService.getLastDate()
       .subscribe((x: Date) => {
         this.endDate = new Date(x);
@@ -37,27 +43,34 @@ export class MoneyListingsComponent implements OnInit {
         this.startDate.setDate(this.startDate.getDate() - 21);
         
         this.categoriesService.setupCategoriesCache();
-        this.transactionService.setupTransactionsCache(this.startDate, this.endDate);
+        this.moneyListingsForm.get('startDateFormControl').setValue(this.startDate);
+        //Callback to value changed will do the load as the data changes for the end date and also handle initial load query.
+        
+        this.initialLoadDone = true;
+        this.moneyListingsForm.get('endDateFormControl').setValue(this.endDate);
       });
 
-    this.moneyForm = this.fb.group({
-      startDateFormControl: [this.startDate, [Validators.required]],
-      endDateFormControl: [this.endDate, [Validators.required]]
-    })
+      this.moneyListingsForm.get('startDateFormControl').valueChanges
+        .pipe(map(x => this.startDate = x))
+        .subscribe(x => {
+          if(this.initialLoadDone) {
+            this.transactionService.setupTransactionsCache(this.startDate, this.endDate);
+          }
+        });
 
-    this.moneyForm.get('startDateFormControl').valueChanges.pipe(
-      map(x => x = this.startDate)
-    ).subscribe(x => {
-      console.log(`Value changed to ${x}`);
-    });
-    
-    this.moneyForm.get('endDateFormControl').valueChanges.pipe(
-      map(x => x = this.endDate)
-    )
+      this.moneyListingsForm.get('endDateFormControl').valueChanges
+        .pipe(map(x => this.endDate = x))
+        .subscribe(x => {
+          if(this.initialLoadDone) {
+            this.transactionService.setupTransactionsCache(this.startDate, this.endDate);
+          }
+        });
   }
 
-
-
+  submit() {
+    // var starDate: Date = this.moneyListingsForm.get('startDateFormControl').value
+    // console.log(starDate);
+  }
 
   matcher = new SharedErrorStateMatcher();
 }

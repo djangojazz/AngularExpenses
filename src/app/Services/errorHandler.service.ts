@@ -6,9 +6,9 @@ export class ErrorHandlerService implements ErrorHandler{
 
   handleError(error: any): void {
     let customError: MoneyEntryError = new MoneyEntryError();
-    customError.errorNumber = 200;
+    customError.errorNumber = 500;
     customError.message = (<Error>error).message;
-    customError.friendlyMessage = 'An error occurred. Please try again.'
+    customError.friendlyMessage = 'An error occurred on Error Handler Service. Please try again.'
     console.log(customError);
   }
 

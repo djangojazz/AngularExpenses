@@ -4,10 +4,15 @@ import { Observable, of, observable } from 'rxjs';
 
 import { Transaction } from "../Models/transaction";
 import { environment  } from "../../environments/environment";
+import { min } from 'rxjs/operators';
+import { createWiresService } from 'selenium-webdriver/firefox';
 
 @Injectable()
 export class TransactionsService {
     public Transactions: Transaction[] = [];
+    public minDate: Date;
+    public maxDate: Date;
+    private Cache: Transaction[] = [];
     private endpoint = `${environment.baseApi}/transactions`;
     private headers: HttpHeaders = new HttpHeaders()
             .set('Content-Type', 'application/json')
@@ -24,7 +29,27 @@ public loadTransactions(start?: Date, end?: Date): Observable<Transaction[]> {
     }
 
 public setupTransactionsCache(start?: Date, end?: Date) {
-    this.loadTransactions(start, end).subscribe((trans: Transaction[]) => this.Transactions = trans)
+    if (this.Cache.length === 0) {
+        this.loadTransactions(start, end).subscribe((trans: Transaction[]) => {
+            this.Cache = trans;
+            this.Transactions = trans;
+            this.minDate = start;
+            this.maxDate = end;
+        })
+    } else {
+        if (start >= this.minDate && end <= this.maxDate) {
+            let t = this.Transactions.sort((a: Transaction, b: Transaction) => (new Date(a.createdDate)).getTime() - (new Date(b.createdDate)).getTime());
+
+            this.Transactions = this.Cache.filter(x => new Date(x.createdDate) >= start && new Date(x.createdDate) <= end);
+        } else {
+            this.loadTransactions(start, end).subscribe((trans: Transaction[]) => {
+                this.Cache = trans;
+                this.Transactions = trans;
+                this.minDate = start;
+                this.maxDate = end;
+            })
+        }
+    }
 }
 
 public getTransaction(transactionId: number): Transaction {

@@ -12,7 +12,7 @@ export class Transaction {
     runningTotal: number;
     reconciled: boolean;
 
-    constructor(typeId: number = 2, categoryId: number = 2, createdDate: Date = new Date(), amount: number = 40, transactiondesc: string = "groceries", transactionId: number = 0) {
+    constructor(typeId: number, categoryId: number, createdDate: Date, amount: number, transactiondesc: string, transactionId: number) {
         this.transactionID = transactionId;
         this.typeID = typeId;
         this.categoryID = categoryId;

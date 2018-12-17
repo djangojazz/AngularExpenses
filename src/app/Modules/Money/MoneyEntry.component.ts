@@ -53,12 +53,9 @@ export class MoneyEntryComponent implements OnInit {
   }
 
   submit() {
-    // var cat: Category = this.moneyForm.get('categoryFormControl').value
-    // console.log(cat);
-    
     console.log(new Transaction(<number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
     <number>this.moneyForm.get('categoryFormControl').value, <Date>this.moneyForm.get('dateFormControl').value,
-    this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value));
+    this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value, this.currentTran.transactionID));
 
 
     //  this.transactionService.createANewTransaction( 

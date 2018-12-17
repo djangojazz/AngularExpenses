@@ -48,7 +48,7 @@ export class MoneyEntryComponent implements OnInit {
       categoryFormControl: [this.currentTran.categoryID, [Validators.required]],
       amountFormControl: [this.currentTran.amount, [Validators.required, this.sharedValidator.numberValidator]],
       descFormControl: [this.currentTran.transactionDesc, [Validators.required]],
-      dateFormControl: [this.currentTran.createdDate || Date.now, [Validators.required]]
+      dateFormControl: [this.currentTran.createdDate, [Validators.required]]
     })
   }
 

@@ -45,7 +45,6 @@ export class MoneyListingsComponent implements OnInit {
         this.categoriesService.setupCategoriesCache();
         this.moneyListingsForm.get('startDateFormControl').setValue(this.startDate);
         //Callback to value changed will do the load as the data changes for the end date and also handle initial load query.
-        
         this.initialLoadDone = true;
         this.moneyListingsForm.get('endDateFormControl').setValue(this.endDate);
       });
@@ -65,11 +64,6 @@ export class MoneyListingsComponent implements OnInit {
             this.transactionService.setupTransactionsCache(this.startDate, this.endDate);
           }
         });
-  }
-
-  submit() {
-    // var starDate: Date = this.moneyListingsForm.get('startDateFormControl').value
-    // console.log(starDate);
   }
 
   matcher = new SharedErrorStateMatcher();

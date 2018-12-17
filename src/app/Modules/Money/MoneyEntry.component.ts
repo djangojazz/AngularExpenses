@@ -44,25 +44,23 @@ export class MoneyEntryComponent implements OnInit {
     this.idLabel = (this.currentTran.transactionID > 0) ? this.currentTran.transactionID.toString() : "New";
 
     this.moneyForm = this.fb.group({
-      debitCreditFormControl: [(this.currentTran.transactionID > 0) ? 
-        (this.currentTran.type == "1") ? true : false : 
-        false],
-      categoryFormControl: [this.currentTran.categoryID, [Validators.required ]],
-      amountFormControl: [(this.currentTran.transactionID > 0) 
-        ? this.currentTran.amount 
-        : 10, [Validators.required, this.sharedValidator.numberValidator]],
-      descFormControl: [(this.currentTran.transactionID > 0) 
-        ? this.currentTran.transactionDesc 
-        : 'groceries', [Validators.required]],
+      debitCreditFormControl: [this.currentTran.transactionID, [Validators.required]],
+      categoryFormControl: [this.currentTran.categoryID, [Validators.required]],
+      amountFormControl: [this.currentTran.amount, [Validators.required, this.sharedValidator.numberValidator]],
+      descFormControl: [this.currentTran.transactionDesc, [Validators.required]],
       dateFormControl: [this.currentTran.createdDate || Date.now, [Validators.required]]
     })
   }
 
   submit() {
-    var cat: Category = this.moneyForm.get('categoryFormControl').value
-    console.log(cat);
+    // var cat: Category = this.moneyForm.get('categoryFormControl').value
+    // console.log(cat);
     
-    //console.log(`${<Date>this.moneyForm.get('startDateFormControl').value}-${<Date>this.moneyForm.get('endDateFormControl').value}`)
+    console.log(new Transaction(<number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
+    <number>this.moneyForm.get('categoryFormControl').value, <Date>this.moneyForm.get('dateFormControl').value,
+    this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value));
+
+
     //  this.transactionService.createANewTransaction( 
     //   new Transaction(<number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
     //       <number>this.moneyForm.get('categoryFormControl').value, <Date>this.moneyForm.get('startDateFormControl').value,

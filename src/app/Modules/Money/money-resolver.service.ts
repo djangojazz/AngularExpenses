@@ -14,22 +14,27 @@ export class MoneyResolverService implements Resolve<Transaction> {
     private router: Router) {}
 
 resolve(route: ActivatedRouteSnapshot) : Observable<Transaction> {
+    let id = route.params['id'];
+    
+    if(isNaN(id)) {
+        console.log(`TransactionId id was not a number: ${id}`);
+        this.router.navigate(['/Money']);
+        return of(null);
+    }
+
+    if(id != 0 ) {
+      let transaction = this.transactionService.getTransaction(+id);
+
+      if(transaction) {
+          return of(transaction);
+      }
   
-  let id = route.params['id'];
-  
-  if(isNaN(id)) {
-      console.log(`TransactionId id was not a number: ${id}`);
+      console.log(`Transaction was not found for id: ${id}`);
       this.router.navigate(['/Money']);
-      return of(null);
-  }
-
-  let transaction = this.transactionService.getTransaction(+id);
-          if(transaction) {
-              return of(transaction);
-          }
-
-          console.log(`Transaction was not found: ${id}`);
-          this.router.navigate(['/Money']);
-          return null;
+      return null;
+    } else {
+      return of(new Transaction())
+    }
+    
   }
 }

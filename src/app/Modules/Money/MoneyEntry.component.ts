@@ -44,7 +44,7 @@ export class MoneyEntryComponent implements OnInit {
     this.idLabel = (this.currentTran.transactionID > 0) ? this.currentTran.transactionID.toString() : "New";
 
     this.moneyForm = this.fb.group({
-      debitCreditFormControl: [this.currentTran.transactionID, [Validators.required]],
+      debitCreditFormControl: [(this.currentTran.type == "1") ? true : false],
       categoryFormControl: [this.currentTran.categoryID, [Validators.required]],
       amountFormControl: [this.currentTran.amount, [Validators.required, this.sharedValidator.numberValidator]],
       descFormControl: [this.currentTran.transactionDesc, [Validators.required]],

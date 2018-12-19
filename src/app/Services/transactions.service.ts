@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { Observable, of, observable } from 'rxjs';
 
-import { Transaction } from "../Models/transaction";
+import { Transaction } from "../Models/transactionModel";
 import { environment  } from "../../environments/environment";
-import { min } from 'rxjs/operators';
-import { createWiresService } from 'selenium-webdriver/firefox';
 
 @Injectable()
 export class TransactionsService {

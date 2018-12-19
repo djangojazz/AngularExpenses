@@ -8,7 +8,7 @@ import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions'
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { CategoriesService } from '../../Services/categories.service';
-import { Transaction } from '../../Models/transaction';
+import { Transaction } from '../../Models/transactionModel';
 
 function categoryRange(cats: string[]): ValidatorFn {
   return  (c: AbstractControl): {[key: string]: boolean} | null => {
@@ -42,12 +42,13 @@ export class MoneyEntryComponent implements OnInit {
   ngOnInit() {
     this.currentTran = this.route.snapshot.data['tran'];
     this.idLabel = (this.currentTran.transactionID > 0) ? this.currentTran.transactionID.toString() : "New";
+    console.log(this.currentTran);
 
     this.moneyForm = this.fb.group({
-      debitCreditFormControl: [(this.currentTran.type == "1") ? true : false],
+      debitCreditFormControl: [(this.currentTran.typeID == 1) ? true : false],
       categoryFormControl: [this.currentTran.categoryID, [Validators.required]],
       amountFormControl: [this.currentTran.amount, [Validators.required, this.sharedValidator.numberValidator]],
-      descFormControl: [this.currentTran.transactionDesc, [Validators.required]],
+      descFormControl: [this.currentTran.description, [Validators.required]],
       dateFormControl: [this.currentTran.createdDate, [Validators.required]]
     })
   }
@@ -57,11 +58,10 @@ export class MoneyEntryComponent implements OnInit {
     <number>this.moneyForm.get('categoryFormControl').value, <Date>this.moneyForm.get('dateFormControl').value,
     this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value, this.currentTran.transactionID));
 
-
     //  this.transactionService.createANewTransaction( 
     //   new Transaction(<number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
-    //       <number>this.moneyForm.get('categoryFormControl').value, <Date>this.moneyForm.get('startDateFormControl').value,
-    //       this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value)
+    //    <number>this.moneyForm.get('categoryFormControl').value, <Date>this.moneyForm.get('dateFormControl').value,
+    //    this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value, this.currentTran.transactionID)
     //     ).subscribe(
     //       (result: Transaction) => console.log(`saved entry to database ${result}`),
     //       (err: any) => console.log(err)

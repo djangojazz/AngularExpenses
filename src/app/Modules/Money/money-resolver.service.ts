@@ -1,7 +1,7 @@
 import { Injectable }  from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router  } from "@angular/router";
 
-import { Transaction } from '../../Models/transaction';
+import { Transaction } from '../../Models/transactionModel';
 import { TransactionsService } from '../../Services/transactions.service';
 import { Observable, of } from 'rxjs';
 

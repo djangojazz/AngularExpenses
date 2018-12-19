@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionsService  } from "../../Services/transactions.service";
-import { Transaction } from '../../Models/transaction';
+import { Transaction } from '../../Models/transactionModel';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { SharedErrorStateMatcher } from '../../Shared/sharedErrorStateMacher';
 import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';

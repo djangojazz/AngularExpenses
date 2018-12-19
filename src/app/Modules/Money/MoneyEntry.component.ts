@@ -54,17 +54,17 @@ export class MoneyEntryComponent implements OnInit {
   }
 
   submit() {
-    console.log(new Transaction(<number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
-    <number>this.moneyForm.get('categoryFormControl').value, <Date>this.moneyForm.get('dateFormControl').value,
-    this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value, this.currentTran.transactionID));
+    // console.log(new Transaction(<number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
+    // <number>this.moneyForm.get('categoryFormControl').value, <Date>this.moneyForm.get('dateFormControl').value,
+    // this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value, this.currentTran.transactionID));
 
-    //  this.transactionService.createANewTransaction( 
-    //   new Transaction(<number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
-    //    <number>this.moneyForm.get('categoryFormControl').value, <Date>this.moneyForm.get('dateFormControl').value,
-    //    this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value, this.currentTran.transactionID)
-    //     ).subscribe(
-    //       (result: Transaction) => console.log(`saved entry to database ${result}`),
-    //       (err: any) => console.log(err)
-    //     );
+     this.transactionService.createANewTransaction( 
+      new Transaction(<number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
+       <number>this.moneyForm.get('categoryFormControl').value, <Date>this.moneyForm.get('dateFormControl').value,
+       this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value, this.currentTran.transactionID)
+        ).subscribe(
+          (result: Transaction) => console.log(`saved entry to database ${result}`),
+          (err: any) => console.log(err)
+        );
   }
 }

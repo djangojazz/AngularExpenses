@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TransactionsService  } from "../../Services/transactions.service";
 import { Transaction } from '../../Models/transactionModel';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
 import { CategoriesService } from '../../Services/categories.service';
-import { Category } from '../../Models/category';
-import { Observable } from 'rxjs';
-import { map, startWith} from 'rxjs/operators';
+import { map} from 'rxjs/operators';
 import { AuthService } from '../../Services/auth.service';
 
 @Component({

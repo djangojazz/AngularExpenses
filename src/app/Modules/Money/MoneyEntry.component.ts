@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../Services/auth.service';
 import { TransactionsService } from '../../Services/transactions.service';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Category } from '../../Models/category';
 import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
 import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
 import { CategoriesService } from '../../Services/categories.service';
 import { Transaction } from '../../Models/transactionModel';
+import { SharedErrorStateMatcher } from '../../Shared/sharedErrorStateMacher';
 
 function categoryRange(cats: string[]): ValidatorFn {
   return  (c: AbstractControl): {[key: string]: boolean} | null => {
@@ -67,4 +66,6 @@ export class MoneyEntryComponent implements OnInit {
           (err: any) => console.log(err)
         );
   }
+
+  matcher = new SharedErrorStateMatcher();
 }

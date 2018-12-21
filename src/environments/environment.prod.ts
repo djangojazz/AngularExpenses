@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
-  baseApi: 'http://expensesentryapi.azurewebsites.net/expensesApi'
+  production: true,
+  baseApi: 'http://moneyexpensesapi.azurewebsites.net/expensesApi'
 };

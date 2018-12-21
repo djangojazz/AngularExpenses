@@ -15,7 +15,7 @@ import { SharedValidatorFunctions } from './Shared/sharedValidatorFunctions';
 
 import { PageNotFoundComponent  } from "./Shared/page-not-found.component";
 import { LoginComponent } from './Shared/login.component';
-import { CommonModule } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,

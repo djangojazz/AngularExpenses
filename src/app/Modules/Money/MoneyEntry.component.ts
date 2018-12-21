@@ -34,7 +34,7 @@ export class MoneyEntryComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private sharedValidator: SharedValidatorFunctions,
-    private categoriesService: CategoriesService,
+    public categoriesService: CategoriesService,
     private transactionService: TransactionsService,
     private fb: FormBuilder) { 
   }

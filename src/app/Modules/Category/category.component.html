@@ -1,7 +1,7 @@
 <div>
 <div class="tableContainer mat-elevation-z24">
   <div class="loading-shade"
-       *ngIf="isLoadingResults || isRateLimitReached">
+       *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     <div class="problem" *ngIf="isErrorState">
       There was a problem

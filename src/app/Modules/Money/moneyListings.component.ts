@@ -22,7 +22,7 @@ export class MoneyListingsComponent implements OnInit {
   
   moneyListingsForm: FormGroup;
 
-  constructor(private transactionService: TransactionsService, 
+  constructor(public transactionService: TransactionsService, 
               private categoriesService: CategoriesService,
               private authService: AuthService,
               private fb: FormBuilder) { 

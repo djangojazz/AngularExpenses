@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{data.title}}</h2>
 <mat-dialog-content>
-  <form novalidate (ngSubmit)="save()">
+  <form novalidate>
   <mat-form-field>
     <textarea [(ngModel)]="data.result" name="description" #description="ngModel" matInput placeholder={{data.description}} >
     </textarea>

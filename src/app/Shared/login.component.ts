@@ -6,7 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { JWT } from '../Models/jwt';
 import { AuthService } from '../Services/auth.service';
 import { Router } from '@angular/router';
-import { LoginGuard } from '../Guards/login-guard.service.ts.service';
+import { SharedErrorStateMatcher } from '../Shared/sharedErrorStateMacher';
 
 @Component({
   selector: 'login',
@@ -81,4 +81,6 @@ export class LoginComponent {
     for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
     return btoa(String.fromCharCode.apply(null, hash(<any>` ${result} `)));
   }
+
+  matcher = new SharedErrorStateMatcher();
 }

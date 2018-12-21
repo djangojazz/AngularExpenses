@@ -15,7 +15,7 @@ export class AppComponent {
   title = 'MoneyEntry';
   showFiller = false;
 
-  constructor(private authService: AuthService,
+  constructor(public authService: AuthService,
     private transactionsService: TransactionsService,
     private router: Router) {
   }

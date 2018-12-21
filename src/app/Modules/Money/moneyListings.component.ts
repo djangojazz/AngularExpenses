@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TransactionsService  } from "../../Services/transactions.service";
 import { Transaction } from '../../Models/transactionModel';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { SharedErrorStateMatcher } from '../../Shared/sharedErrorStateMacher';
 import { SharedValidatorFunctions } from '../../Shared/sharedValidatorFunctions';
 import { CategoriesService } from '../../Services/categories.service';
 import { Category } from '../../Models/category';
@@ -65,6 +64,4 @@ export class MoneyListingsComponent implements OnInit {
           }
         });
   }
-
-  matcher = new SharedErrorStateMatcher();
 }

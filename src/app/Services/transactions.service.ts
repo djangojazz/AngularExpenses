@@ -13,8 +13,7 @@ export class TransactionsService {
     private Cache: Transaction[] = [];
     private endpoint = `${environment.baseApi}/transactions`;
     private headers: HttpHeaders = new HttpHeaders()
-            .set('Content-Type', 'application/json')
-            .set('Authorization', `Bearer ${localStorage.getItem("jwt")}`);
+            .set('Content-Type', 'application/json');
 
 constructor(private http: HttpClient) { }
 

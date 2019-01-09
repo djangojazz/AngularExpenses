@@ -33,7 +33,7 @@ resolve(route: ActivatedRouteSnapshot) : Observable<Transaction> {
       this.router.navigate(['/Money']);
       return null;
     } else {
-      return of(new Transaction(2, 2, new Date(), 10, "groceries", 0))
+      return of(new Transaction(2, 2, new Date(), 10, "groceries", 0, false))
     }
     
   }

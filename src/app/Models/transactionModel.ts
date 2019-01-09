@@ -8,12 +8,13 @@ export class Transaction {
     runningTotal: number;
     reconciled: boolean;
     
-    constructor(typeId: number, categoryId: number, createdDate: Date, amount: number, description: string, transactionId: number) {
+    constructor(typeId: number, categoryId: number, createdDate: Date, amount: number, description: string, transactionId: number, reconciled: boolean) {
         this.transactionID = transactionId;
         this.typeID = typeId;
         this.categoryID = categoryId;
         this.createdDate = createdDate;
         this.amount = amount;
         this.description = description;
+        this.reconciled = reconciled;
     }
 }

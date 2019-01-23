@@ -1,4 +1,4 @@
-<form novalidate [formGroup]="moneyListingsForm">
+<!-- <form novalidate [formGroup]="moneyListingsForm"> -->
   <mat-card class="outer-card">
     <label class="label">Dates to select from</label>
     <mat-card>
@@ -40,14 +40,85 @@
     </button>
     <mat-card>
       <mat-card-content>
-          <div *ngFor="let tran of transactionService.Transactions">
+          <!-- <div *ngFor="let tran of transactionService.Transactions">
               <a [routerLink]="['/Money', tran.transactionID]">{{tran.transactionID}}</a>
                 Amount: {{tran.amount}} 
                 Date: {{tran.createdDate}}
                 Desc:{{tran.description}} 
                 Running Total:{{tran.runningTotal}}
-          </div>
+          </div> -->
+          <div class="tableContainer mat-elevation-z24">
+              <div class="loading-shade"
+                   *ngIf="isLoadingResults">
+                <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+                <div class="problem" *ngIf="isErrorState">
+                  There was a problem
+                </div>
+              </div>
+              <mat-table #table [dataSource]="dataSource" 
+                matSort matSortActive="description" 
+                matSortDisableClear matSortDirection="asc">
+            
+                <ng-container matColumnDef="transactionID">
+                  <mat-header-cell *matHeaderCellDef>Transaction</mat-header-cell>
+                  <mat-cell *matCellDef="let t"> 
+                      <a [routerLink]="['/Money', t.transactionID]">{{t.transactionID}}</a>
+                       </mat-cell>
+                </ng-container>
+            
+                <ng-container matColumnDef="description">
+                  <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+                  <mat-cell *matCellDef="let t"> {{t.description}}
+                        </mat-cell>
+                </ng-container>
+          
+                <ng-container matColumnDef="amount">
+                  <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+                  <mat-cell *matCellDef="let t"> {{t.amount}}
+                        </mat-cell>
+                </ng-container>
+          
+                <ng-container matColumnDef="type">
+                  <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+                  <mat-cell *matCellDef="let t"> {{t.type}}
+                        </mat-cell>
+                </ng-container>
+          
+                <ng-container matColumnDef="category">
+                  <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+                  <mat-cell *matCellDef="let t"> {{t.category}}
+                        </mat-cell>
+                </ng-container>
+          
+                <ng-container matColumnDef="createdDate">
+                  <mat-header-cell *matHeaderCellDef>Created</mat-header-cell>
+                  <mat-cell *matCellDef="let t"> {{t.createdDate | date:'MM/dd/yyyy'}}
+                        </mat-cell>
+                </ng-container>
+          
+                <ng-container matColumnDef="runningTotal">
+                  <mat-header-cell *matHeaderCellDef>RunningTotal</mat-header-cell>
+                  <mat-cell *matCellDef="let t"> {{t.runningTotal}}
+                        </mat-cell>
+                </ng-container>
+          
+                <ng-container matColumnDef="reconciled">
+                  <mat-header-cell *matHeaderCellDef>Reconciled</mat-header-cell>
+                  <mat-cell *matCellDef="let t"> {{t.reconciled}}
+                        </mat-cell>
+                </ng-container>
+               
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                
+              </mat-table>
+              <mat-paginator [length]="resultsLength"
+                             [pageSize]="18"
+                             [showFirstLastButtons]="true">
+              </mat-paginator>
+            </div>
       </mat-card-content>
     </mat-card> 
   </mat-card>
-</form>
+  
+<!-- </form> -->

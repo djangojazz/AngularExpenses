@@ -4,6 +4,7 @@ import { AuthService } from './Services/auth.service';
 import { JWT } from './Models/jwt';
 import { Router } from '@angular/router';
 import { TransactionsService } from './Services/transactions.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-root',

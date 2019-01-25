@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TransactionsService  } from "../../Services/transactions.service";
 import { Transaction } from '../../Models/transactionModel';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
 import { CategoriesService } from '../../Services/categories.service';
 import { map} from 'rxjs/operators';
 import { AuthService } from '../../Services/auth.service';
@@ -17,6 +17,7 @@ export class MoneyListingsComponent implements OnInit {
   startDate: Date = new Date;
   endDate: Date = new Date;
   initialLoadDone: Boolean = false;
+  reconciled = new Map<number, boolean>();
 
   displayedColumns = ['transactionID','description','amount','type','category','createdDate','runningTotal','reconciled'];
   dataSource: MatTableDataSource<Transaction> = new MatTableDataSource();
@@ -60,8 +61,9 @@ export class MoneyListingsComponent implements OnInit {
         this.initialLoadDone = true;
         this.moneyListingsForm.get('endDateFormControl').setValue(this.endDate);
 
-        this.transactionService.loadTransactions(this.startDate, this.endDate)
-          .subscribe(data => this.setUpData());
+        this.transactionService.setupTransactionsCache(this.startDate, this.endDate)
+        this.setUpData();
+        
       });
 
 
@@ -71,6 +73,7 @@ export class MoneyListingsComponent implements OnInit {
           if(this.initialLoadDone) {
             this.transactionService.setupTransactionsCache(this.startDate, this.endDate);
             this.setUpData();
+            this.reconciled.clear();
           }
         });
 
@@ -80,6 +83,7 @@ export class MoneyListingsComponent implements OnInit {
           if(this.initialLoadDone) {
             this.transactionService.setupTransactionsCache(this.startDate, this.endDate);
             this.setUpData();
+            this.reconciled.clear();
           }
         });
   }
@@ -88,5 +92,15 @@ export class MoneyListingsComponent implements OnInit {
     this.isLoadingResults = true
     this.dataSource.data = this.transactionService.Transactions;
     this.isLoadingResults = false
+  }
+
+  reconcile() {
+    console.log(this.reconciled);
+  }
+
+  changed(tranId: number, checked: boolean) {
+    this.reconciled.set(tranId, checked);    
+
+    console.log(`${tranId} ${checked}`);
   }
 }

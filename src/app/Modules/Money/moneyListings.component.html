@@ -104,7 +104,7 @@
           
                 <ng-container matColumnDef="reconciled">
                   <mat-header-cell *matHeaderCellDef>Reconciled</mat-header-cell>
-                  <mat-cell *matCellDef="let t"> {{t.reconciled}}
+                  <mat-cell *matCellDef="let t"><mat-checkbox (change)='changed(t.transactionID, $event.checked)' [checked]='t.reconciled'>{{t.reconciled}}</mat-checkbox>
                         </mat-cell>
                 </ng-container>
                
@@ -117,6 +117,10 @@
                              [showFirstLastButtons]="true">
               </mat-paginator>
             </div>
+
+            <button mat-button (click)="reconcile()">
+              Update List
+            </button>
       </mat-card-content>
     </mat-card> 
   </mat-card>

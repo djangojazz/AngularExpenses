@@ -6,6 +6,7 @@ import { CategoriesService } from '../../Services/categories.service';
 import { map} from 'rxjs/operators';
 import { AuthService } from '../../Services/auth.service';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { KeyValue } from '@angular/common';
 
 @Component({
   selector: 'app-MoneyEntry',
@@ -63,7 +64,6 @@ export class MoneyListingsComponent implements OnInit {
 
         this.transactionService.setupTransactionsCache(this.startDate, this.endDate)
         this.setUpData();
-        
       });
 
 
@@ -95,12 +95,10 @@ export class MoneyListingsComponent implements OnInit {
   }
 
   reconcile() {
-    console.log(this.reconciled);
+   const mp: any[] = [];
+   this.reconciled.forEach((v, k) => mp.push({transactionId: k, reconciled: v}));
+   console.log(mp);
   }
 
-  changed(tranId: number, checked: boolean) {
-    this.reconciled.set(tranId, checked);    
-
-    console.log(`${tranId} ${checked}`);
-  }
+  changed = (tranId: number, checked: boolean) => this.reconciled.set(tranId, checked);
 }

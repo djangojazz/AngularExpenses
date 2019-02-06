@@ -61,9 +61,6 @@ export class MoneyListingsComponent implements OnInit {
         //Callback to value changed will do the load as the data changes for the end date and also handle initial load query.
         this.initialLoadDone = true;
         this.moneyListingsForm.get('endDateFormControl').setValue(this.endDate);
-
-        this.transactionService.setupTransactionsCache(this.startDate, this.endDate)
-        this.setUpData();
       });
 
 
@@ -71,9 +68,7 @@ export class MoneyListingsComponent implements OnInit {
         .pipe(map(x => this.startDate = x))
         .subscribe(x => {
           if(this.initialLoadDone) {
-            this.transactionService.setupTransactionsCache(this.startDate, this.endDate);
-            this.setUpData();
-            this.reconciled.clear();
+            this.setUpTransactionalData();
           }
         });
 
@@ -81,17 +76,18 @@ export class MoneyListingsComponent implements OnInit {
         .pipe(map(x => this.endDate = x))
         .subscribe(x => {
           if(this.initialLoadDone) {
-            this.transactionService.setupTransactionsCache(this.startDate, this.endDate);
-            this.setUpData();
-            this.reconciled.clear();
+            this.setUpTransactionalData();
           }
         });
   }
 
-  setUpData() {
+  setUpTransactionalData() {
     this.isLoadingResults = true
-    this.dataSource.data = this.transactionService.Transactions;
+    this.transactionService.setupTransactionsCache(this.startDate, this.endDate);
+    this.transactionService.loadTransactions(this.startDate, this.endDate)
+      .subscribe((trans: Transaction[]) => this.dataSource.data = trans);
     this.isLoadingResults = false
+    this.reconciled.clear();
   }
 
   reconcile() {

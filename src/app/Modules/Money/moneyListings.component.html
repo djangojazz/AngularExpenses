@@ -40,13 +40,6 @@
     </button>
     <mat-card>
       <mat-card-content>
-          <!-- <div *ngFor="let tran of transactionService.Transactions">
-              <a [routerLink]="['/Money', tran.transactionID]">{{tran.transactionID}}</a>
-                Amount: {{tran.amount}} 
-                Date: {{tran.createdDate}}
-                Desc:{{tran.description}} 
-                Running Total:{{tran.runningTotal}}
-          </div> -->
           <div class="tableContainer mat-elevation-z24">
               <div class="loading-shade"
                    *ngIf="isLoadingResults">
@@ -104,7 +97,7 @@
           
                 <ng-container matColumnDef="reconciled">
                   <mat-header-cell *matHeaderCellDef>Reconciled</mat-header-cell>
-                  <mat-cell *matCellDef="let t"><mat-checkbox (change)='changed(t.transactionID, $event.checked)' [checked]='t.reconciled'>{{t.reconciled}}</mat-checkbox>
+                  <mat-cell *matCellDef="let t"><mat-checkbox (change)='changed(t.transactionID, $event.checked)' [checked]='t.reconciled'></mat-checkbox>
                         </mat-cell>
                 </ng-container>
                

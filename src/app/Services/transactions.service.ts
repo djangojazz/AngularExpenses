@@ -10,7 +10,7 @@ export class TransactionsService {
     public Transactions: Transaction[] = [];
     public minDate: Date;
     public maxDate: Date;
-    private Cache: Transaction[] = [];
+    private cache: Transaction[] = [];
     private endpoint = `${environment.baseApi}/transactions`;
     private headers: HttpHeaders = new HttpHeaders()
             .set('Content-Type', 'application/json');
@@ -26,10 +26,12 @@ public loadTransactions(start?: Date, end?: Date): Observable<Transaction[]> {
     }
 
 public setupTransactionsCache(start?: Date, end?: Date) {
-    if (this.Cache.length === 0) {
+    if (this.cache.length === 0) {
         this.loadTransactions(start, end).subscribe((trans: Transaction[]) => {
-            this.Cache = trans;
+            this.cache = trans;
+            console.log(`cache is ${this.cache.length}`)
             this.Transactions = trans;
+            console.log(`transactions are ${this.Transactions.length}`)
             this.minDate = start;
             this.maxDate = end;
         })
@@ -37,10 +39,10 @@ public setupTransactionsCache(start?: Date, end?: Date) {
         if (start >= this.minDate && end <= this.maxDate) {
             let t = this.Transactions.sort((a: Transaction, b: Transaction) => (new Date(a.createdDate)).getTime() - (new Date(b.createdDate)).getTime());
 
-            this.Transactions = this.Cache.filter(x => new Date(x.createdDate) >= start && new Date(x.createdDate) <= end);
+            this.Transactions = this.cache.filter(x => new Date(x.createdDate) >= start && new Date(x.createdDate) <= end);
         } else {
             this.loadTransactions(start, end).subscribe((trans: Transaction[]) => {
-                this.Cache = trans;
+                this.cache = trans;
                 this.Transactions = trans;
                 this.minDate = start;
                 this.maxDate = end;

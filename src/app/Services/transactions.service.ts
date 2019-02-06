@@ -4,6 +4,7 @@ import { Observable, of, observable } from 'rxjs';
 
 import { Transaction } from "../Models/transactionModel";
 import { environment  } from "../../environments/environment";
+import { TransactionReconcile } from '../Models/transactionReconcileModel';
 
 @Injectable()
 export class TransactionsService {
@@ -16,46 +17,47 @@ export class TransactionsService {
             .set('Content-Type', 'application/json');
 
 constructor(private http: HttpClient) { }
-
-public getLastDate(): Observable<Date> {
-    return this.http.get<Date>(`${this.endpoint}/getLastDate`, { headers: this.headers })
-}
-
-public loadTransactions(start?: Date, end?: Date): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`${this.endpoint}/getTransactions/${start.toDateString()}/${end.toDateString()}`, { headers: this.headers });
+    public getLastDate(): Observable<Date> {
+        return this.http.get<Date>(`${this.endpoint}/getLastDate`, { headers: this.headers })
     }
 
-public setupTransactionsCache(start?: Date, end?: Date) {
-    if (this.cache.length === 0) {
-        this.loadTransactions(start, end).subscribe((trans: Transaction[]) => {
-            this.cache = trans;
-            console.log(`cache is ${this.cache.length}`)
-            this.Transactions = trans;
-            console.log(`transactions are ${this.Transactions.length}`)
-            this.minDate = start;
-            this.maxDate = end;
-        })
-    } else {
-        if (start >= this.minDate && end <= this.maxDate) {
-            let t = this.Transactions.sort((a: Transaction, b: Transaction) => (new Date(a.createdDate)).getTime() - (new Date(b.createdDate)).getTime());
+    public loadTransactions(start?: Date, end?: Date): Observable<Transaction[]> {
+        return this.http.get<Transaction[]>(`${this.endpoint}/getTransactions/${start.toDateString()}/${end.toDateString()}`, { headers: this.headers });
+        }
 
-            this.Transactions = this.cache.filter(x => new Date(x.createdDate) >= start && new Date(x.createdDate) <= end);
-        } else {
+    public setupTransactionsCache(start?: Date, end?: Date) {
+        if (this.cache.length === 0) {
             this.loadTransactions(start, end).subscribe((trans: Transaction[]) => {
                 this.cache = trans;
                 this.Transactions = trans;
                 this.minDate = start;
                 this.maxDate = end;
             })
+        } else {
+            if (start >= this.minDate && end <= this.maxDate) {
+                let t = this.Transactions.sort((a: Transaction, b: Transaction) => (new Date(a.createdDate)).getTime() - (new Date(b.createdDate)).getTime());
+
+                this.Transactions = this.cache.filter(x => new Date(x.createdDate) >= start && new Date(x.createdDate) <= end);
+            } else {
+                this.loadTransactions(start, end).subscribe((trans: Transaction[]) => {
+                    this.cache = trans;
+                    this.Transactions = trans;
+                    this.minDate = start;
+                    this.maxDate = end;
+                })
+            }
         }
     }
-}
 
-public getTransaction(transactionId: number): Transaction {
-    return this.Transactions.find(x => x.transactionID == transactionId)
-}
+    public getTransaction(transactionId: number): Transaction {
+        return this.Transactions.find(x => x.transactionID == transactionId)
+    }
 
-public createANewTransaction(transaction: Transaction): Observable<Transaction> {
-    return this.http.post<Transaction>(`${this.endpoint}/postTransaction`, transaction, { headers: this.headers});
+    public createANewTransaction(transaction: Transaction): Observable<Transaction> {
+        return this.http.post<Transaction>(`${this.endpoint}/postTransaction`, transaction, { headers: this.headers});
+    }
+
+    public reconcileTransactions(transactionsToReconcile: TransactionReconcile[]): Observable<TransactionReconcile[]> {
+        return this.http.post<TransactionReconcile[]>(`${this.endpoint}/reconcileTransactions`, transactionsToReconcile, { headers: this.headers});
     }
 }

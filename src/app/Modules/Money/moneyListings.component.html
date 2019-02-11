@@ -1,5 +1,5 @@
 <!-- <form novalidate [formGroup]="moneyListingsForm"> -->
-  <mat-card class="outer-card">
+  <mat-card class="outer-card mat-card-stretch">
     <label class="label">Dates to select from</label>
     <mat-card>
       <mat-card-content>
@@ -61,7 +61,7 @@
             
                 <ng-container matColumnDef="description">
                   <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
-                  <mat-cell *matCellDef="let t"> {{t.description}}
+                  <mat-cell *matCellDef="let t" > {{t.description}}
                         </mat-cell>
                 </ng-container>
           

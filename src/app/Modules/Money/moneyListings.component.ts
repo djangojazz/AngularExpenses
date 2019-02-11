@@ -51,10 +51,18 @@ export class MoneyListingsComponent implements OnInit {
       endDateFormControl: [this.endDate, [Validators.required]]
     })
 
-    this.transactionService.getLastDate()
+    //If you were already in the system and moving dates, show that instead.
+    if(this.transactionService.maxDate != null && this.transactionService.minDate != null) {
+        this.endDate = this.transactionService.maxDate;
+        this.startDate = this.transactionService.minDate;
+        this.moneyListingsForm.get('startDateFormControl').setValue(this.startDate);
+        this.moneyListingsForm.get('endDateFormControl').setValue(this.endDate);
+        this.setUpTransactionalData();
+    } else {
+      this.transactionService.getLastDate()
       .subscribe((x: Date) => {
-        this.endDate = new Date(x);
-        this.startDate = new Date(x);
+        this.endDate = this.transactionService.maxDate || new Date(x);
+        this.startDate = this.transactionService.minDate || new Date(x);
         this.startDate.setDate(this.startDate.getDate() - 21);
         
         this.categoriesService.setupCategoriesCache();
@@ -63,23 +71,23 @@ export class MoneyListingsComponent implements OnInit {
         this.initialLoadDone = true;
         this.moneyListingsForm.get('endDateFormControl').setValue(this.endDate);
       });
+    }
 
+    this.moneyListingsForm.get('startDateFormControl').valueChanges
+      .pipe(map(x => this.startDate = x))
+      .subscribe(x => {
+        if(this.initialLoadDone) {
+          this.setUpTransactionalData();
+        }
+      });
 
-      this.moneyListingsForm.get('startDateFormControl').valueChanges
-        .pipe(map(x => this.startDate = x))
-        .subscribe(x => {
-          if(this.initialLoadDone) {
-            this.setUpTransactionalData();
-          }
-        });
-
-      this.moneyListingsForm.get('endDateFormControl').valueChanges
-        .pipe(map(x => this.endDate = x))
-        .subscribe(x => {
-          if(this.initialLoadDone) {
-            this.setUpTransactionalData();
-          }
-        });
+    this.moneyListingsForm.get('endDateFormControl').valueChanges
+      .pipe(map(x => this.endDate = x))
+      .subscribe(x => {
+        if(this.initialLoadDone) {
+          this.setUpTransactionalData();
+        }
+      });
   }
 
   setUpTransactionalData() {

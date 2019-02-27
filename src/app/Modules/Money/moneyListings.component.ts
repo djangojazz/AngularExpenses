@@ -58,6 +58,7 @@ export class MoneyListingsComponent implements OnInit {
         this.moneyListingsForm.get('startDateFormControl').setValue(this.startDate);
         this.moneyListingsForm.get('endDateFormControl').setValue(this.endDate);
         this.setUpTransactionalData();
+        this.initialLoadDone = true;
     } else {
       this.transactionService.getLastDate()
       .subscribe((x: Date) => {

@@ -16,8 +16,8 @@ import { TransactionReconcile } from '../../Models/transactionReconcileModel';
 })
 export class MoneyListingsComponent implements OnInit {
   transactions: Transaction[] = [];
-  startDate: Date = new Date;
-  endDate: Date = new Date;
+  // startDate: Date = new Date;
+  // endDate: Date = new Date;
   initialLoadDone: Boolean = false;
   reconciled = new Map<number, boolean>();
 
@@ -46,36 +46,43 @@ export class MoneyListingsComponent implements OnInit {
     }
     
   ngOnInit() {
+    var currentDate = new Date();
     this.moneyListingsForm = this.fb.group({
-      startDateFormControl: [this.startDate, [Validators.required]],
-      endDateFormControl: [this.endDate, [Validators.required]]
+      startDateFormControl: [new Date, [Validators.required]],
+      endDateFormControl: [new Date, [Validators.required]]
     })
 
     //If you were already in the system and moving dates, show that instead.
     if(this.transactionService.maxDate != null && this.transactionService.minDate != null) {
-        this.endDate = this.transactionService.maxDate;
-        this.startDate = this.transactionService.minDate;
-        this.moneyListingsForm.get('startDateFormControl').setValue(this.startDate);
-        this.moneyListingsForm.get('endDateFormControl').setValue(this.endDate);
+        // this.endDate = this.transactionService.maxDate;
+        // this.startDate = this.transactionService.minDate;
+        console.log('already set');
+        this.moneyListingsForm.get('startDateFormControl').setValue(this.transactionService.minDate);
+        this.moneyListingsForm.get('endDateFormControl').setValue(this.transactionService.maxDate);
         this.setUpTransactionalData();
         this.initialLoadDone = true;
     } else {
       this.transactionService.getLastDate()
       .subscribe((x: Date) => {
-        this.endDate = this.transactionService.maxDate || new Date(x);
-        this.startDate = this.transactionService.minDate || new Date(x);
-        this.startDate.setDate(this.startDate.getDate() - 21);
+        var dt = new Date(x);
+        // this.endDate = this.transactionService.maxDate || new Date(x);
+        // this.startDate = this.transactionService.minDate || new Date(x);
+        // this.startDate.setDate(this.startDate.getDate() - 21);
+
+        this.transactionService.maxDate = dt || new Date();
+        this.transactionService.minDate = new Date();
+        this.transactionService.minDate.setDate(dt.getDate() - 14);
         
         this.categoriesService.setupCategoriesCache();
-        this.moneyListingsForm.get('startDateFormControl').setValue(this.startDate);
-        //Callback to value changed will do the load as the data changes for the end date and also handle initial load query.
+        this.moneyListingsForm.get('startDateFormControl').setValue(this.transactionService.minDate);
+        // //Callback to value changed will do the load as the data changes for the end date and also handle initial load query.
         this.initialLoadDone = true;
-        this.moneyListingsForm.get('endDateFormControl').setValue(this.endDate);
+        this.moneyListingsForm.get('endDateFormControl').setValue(this.transactionService.maxDate);
       });
     }
 
     this.moneyListingsForm.get('startDateFormControl').valueChanges
-      .pipe(map(x => this.startDate = x))
+      //.pipe(map(x => this.transactionService.minDate = x))
       .subscribe(x => {
         if(this.initialLoadDone) {
           this.setUpTransactionalData();
@@ -83,7 +90,7 @@ export class MoneyListingsComponent implements OnInit {
       });
 
     this.moneyListingsForm.get('endDateFormControl').valueChanges
-      .pipe(map(x => this.endDate = x))
+      //.pipe(map(x => this.endDate = x))
       .subscribe(x => {
         if(this.initialLoadDone) {
           this.setUpTransactionalData();
@@ -93,8 +100,12 @@ export class MoneyListingsComponent implements OnInit {
 
   setUpTransactionalData() {
     this.isLoadingResults = true
-    this.transactionService.setupTransactionsCache(this.startDate, this.endDate);
-    this.transactionService.loadTransactions(this.startDate, this.endDate)
+    this.transactionService.minDate = this.moneyListingsForm.get('startDateFormControl').value;
+    this.transactionService.maxDate = this.moneyListingsForm.get('endDateFormControl').value;
+    console.log(`${this.transactionService.minDate} ${this.transactionService.maxDate}`);
+    
+    //this.transactionService.setupTransactionsCache(this.transactionService.minDate, this.transactionService.maxDate);
+    this.transactionService.loadTransactions(this.transactionService.minDate, this.transactionService.maxDate)
       .subscribe((trans: Transaction[]) => this.dataSource.data = trans);
     this.isLoadingResults = false
     this.reconciled.clear();

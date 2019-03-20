@@ -54,9 +54,6 @@ export class MoneyListingsComponent implements OnInit {
 
     //If you were already in the system and moving dates, show that instead.
     if(this.transactionService.maxDate != null && this.transactionService.minDate != null) {
-        // this.endDate = this.transactionService.maxDate;
-        // this.startDate = this.transactionService.minDate;
-        console.log('already set');
         this.moneyListingsForm.get('startDateFormControl').setValue(this.transactionService.minDate);
         this.moneyListingsForm.get('endDateFormControl').setValue(this.transactionService.maxDate);
         this.setUpTransactionalData();
@@ -65,17 +62,13 @@ export class MoneyListingsComponent implements OnInit {
       this.transactionService.getLastDate()
       .subscribe((x: Date) => {
         var dt = new Date(x);
-        // this.endDate = this.transactionService.maxDate || new Date(x);
-        // this.startDate = this.transactionService.minDate || new Date(x);
-        // this.startDate.setDate(this.startDate.getDate() - 21);
-
         this.transactionService.maxDate = dt || new Date();
         this.transactionService.minDate = new Date();
         this.transactionService.minDate.setDate(dt.getDate() - 14);
         
         this.categoriesService.setupCategoriesCache();
         this.moneyListingsForm.get('startDateFormControl').setValue(this.transactionService.minDate);
-        // //Callback to value changed will do the load as the data changes for the end date and also handle initial load query.
+        //Callback to value changed will do the load as the data changes for the end date and also handle initial load query.
         this.initialLoadDone = true;
         this.moneyListingsForm.get('endDateFormControl').setValue(this.transactionService.maxDate);
       });
@@ -102,11 +95,12 @@ export class MoneyListingsComponent implements OnInit {
     this.isLoadingResults = true
     this.transactionService.minDate = this.moneyListingsForm.get('startDateFormControl').value;
     this.transactionService.maxDate = this.moneyListingsForm.get('endDateFormControl').value;
-    console.log(`${this.transactionService.minDate} ${this.transactionService.maxDate}`);
     
-    //this.transactionService.setupTransactionsCache(this.transactionService.minDate, this.transactionService.maxDate);
     this.transactionService.loadTransactions(this.transactionService.minDate, this.transactionService.maxDate)
-      .subscribe((trans: Transaction[]) => this.dataSource.data = trans);
+       .subscribe((trans: Transaction[]) => {
+         this.transactionService.Transactions = trans;
+         this.dataSource.data = this.transactionService.Transactions;
+       });
     this.isLoadingResults = false
     this.reconciled.clear();
   }

@@ -64,7 +64,7 @@ export class MoneyListingsComponent implements OnInit {
         var dt = new Date(x);
         this.transactionService.maxDate = dt || new Date();
         this.transactionService.minDate = new Date();
-        this.transactionService.minDate.setDate(dt.getDate() - 14);
+        this.transactionService.minDate.setDate(new Date().getDate() - 14);
         
         this.categoriesService.setupCategoriesCache();
         this.moneyListingsForm.get('startDateFormControl').setValue(this.transactionService.minDate);

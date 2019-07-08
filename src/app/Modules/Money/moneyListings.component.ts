@@ -62,9 +62,8 @@ export class MoneyListingsComponent implements OnInit {
       this.transactionService.getLastDate()
       .subscribe((x: Date) => {
         var dt = new Date(x);
-        this.transactionService.maxDate = dt || new Date();
-        this.transactionService.minDate = new Date();
-        this.transactionService.minDate.setDate(new Date().getDate() - 14);
+        this.transactionService.minDate = dt || new Date();
+        this.transactionService.maxDate = new Date();
         
         this.categoriesService.setupCategoriesCache();
         this.moneyListingsForm.get('startDateFormControl').setValue(this.transactionService.minDate);
@@ -75,7 +74,6 @@ export class MoneyListingsComponent implements OnInit {
     }
 
     this.moneyListingsForm.get('startDateFormControl').valueChanges
-      //.pipe(map(x => this.transactionService.minDate = x))
       .subscribe(x => {
         if(this.initialLoadDone) {
           this.setUpTransactionalData();
@@ -83,7 +81,6 @@ export class MoneyListingsComponent implements OnInit {
       });
 
     this.moneyListingsForm.get('endDateFormControl').valueChanges
-      //.pipe(map(x => this.endDate = x))
       .subscribe(x => {
         if(this.initialLoadDone) {
           this.setUpTransactionalData();

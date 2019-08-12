@@ -1,5 +1,13 @@
 <!-- <form novalidate [formGroup]="moneyListingsForm"> -->
   <mat-card class="outer-card mat-card-stretch">
+      <button mat-button style="width: 150px" [routerLink]="['/Money', '0']">
+        New Transaction
+      </button>
+      
+      <button mat-button (click)="reconcile()">
+        Update List
+      </button>
+      <br/>
     <label class="label">Dates to select from</label>
     <mat-card>
       <mat-card-content>
@@ -35,9 +43,7 @@
     </mat-card>
 
     <label class="label">Transactions</label>
-    <button mat-button style="width: 150px" [routerLink]="['/Money', '0']">
-      New Transaction
-    </button>
+    
     <mat-card>
       <mat-card-content>
           <div class="tableContainer mat-elevation-z24">
@@ -111,9 +117,6 @@
               </mat-paginator>
             </div>
 
-            <button mat-button (click)="reconcile()">
-              Update List
-            </button>
       </mat-card-content>
     </mat-card> 
   </mat-card>

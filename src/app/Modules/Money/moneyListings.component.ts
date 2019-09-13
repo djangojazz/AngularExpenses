@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { TransactionsService  } from "../../Services/transactions.service";
+import { TransactionsService  } from '../../Services/transactions.service';
 import { Transaction } from '../../Models/transactionModel';
-import { FormGroup, FormBuilder, FormArray, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { CategoriesService } from '../../Services/categories.service';
 import { map} from 'rxjs/operators';
 import { AuthService } from '../../Services/auth.service';
@@ -10,7 +10,6 @@ import { KeyValue } from '@angular/common';
 import { TransactionReconcile } from '../../Models/transactionReconcileModel';
 
 @Component({
-  selector: 'app-MoneyEntry',
   templateUrl: './moneyListings.component.html',
   styleUrls: ['./money.component.scss']
 })
@@ -21,7 +20,7 @@ export class MoneyListingsComponent implements OnInit {
   initialLoadDone: Boolean = false;
   reconciled = new Map<number, boolean>();
 
-  displayedColumns = ['transactionID','description','amount','type','category','createdDate','runningTotal','reconciled'];
+  displayedColumns = ['transactionID', 'description', 'amount', 'type', 'category', 'createdDate', 'runningTotal', 'reconciled'];
   dataSource: MatTableDataSource<Transaction> = new MatTableDataSource();
   newCategory: string;
 
@@ -31,29 +30,28 @@ export class MoneyListingsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
+
   moneyListingsForm: FormGroup;
 
-  constructor(public transactionService: TransactionsService, 
+  constructor(public transactionService: TransactionsService,
               private categoriesService: CategoriesService,
               private authService: AuthService,
-              private fb: FormBuilder) { 
-      this.authService.subTitle = "Entry";
+              private fb: FormBuilder) {
+      this.authService.subTitle = 'Entry';
     }
 
     ngAfterViewInit() {
       this.dataSource.paginator = this.paginator;
     }
-    
-  ngOnInit() {
-    var currentDate = new Date();
+
+    ngOnInit() {
     this.moneyListingsForm = this.fb.group({
       startDateFormControl: [new Date, [Validators.required]],
       endDateFormControl: [new Date, [Validators.required]]
-    })
+    });
 
-    //If you were already in the system and moving dates, show that instead.
-    if(this.transactionService.maxDate != null && this.transactionService.minDate != null) {
+    // If you were already in the system and moving dates, show that instead.
+    if (this.transactionService.maxDate != null && this.transactionService.minDate != null) {
         this.moneyListingsForm.get('startDateFormControl').setValue(this.transactionService.minDate);
         this.moneyListingsForm.get('endDateFormControl').setValue(this.transactionService.maxDate);
         this.setUpTransactionalData();
@@ -61,13 +59,13 @@ export class MoneyListingsComponent implements OnInit {
     } else {
       this.transactionService.getLastDate()
       .subscribe((x: Date) => {
-        var dt = new Date(x);
+        const dt = new Date(x);
         this.transactionService.minDate = dt || new Date();
         this.transactionService.maxDate = new Date();
-        
+
         this.categoriesService.setupCategoriesCache();
         this.moneyListingsForm.get('startDateFormControl').setValue(this.transactionService.minDate);
-        //Callback to value changed will do the load as the data changes for the end date and also handle initial load query.
+        // Callback to value changed will do the load as the data changes for the end date and also handle initial load query.
         this.initialLoadDone = true;
         this.moneyListingsForm.get('endDateFormControl').setValue(this.transactionService.maxDate);
       });
@@ -75,30 +73,31 @@ export class MoneyListingsComponent implements OnInit {
 
     this.moneyListingsForm.get('startDateFormControl').valueChanges
       .subscribe(x => {
-        if(this.initialLoadDone) {
+        if (this.initialLoadDone) {
           this.setUpTransactionalData();
         }
       });
 
     this.moneyListingsForm.get('endDateFormControl').valueChanges
       .subscribe(x => {
-        if(this.initialLoadDone) {
+        if (this.initialLoadDone) {
           this.setUpTransactionalData();
         }
       });
   }
 
   setUpTransactionalData() {
-    this.isLoadingResults = true
+    console.log('setting up data');
+    this.isLoadingResults = true;
     this.transactionService.minDate = this.moneyListingsForm.get('startDateFormControl').value;
     this.transactionService.maxDate = this.moneyListingsForm.get('endDateFormControl').value;
-    
+
     this.transactionService.loadTransactions(this.transactionService.minDate, this.transactionService.maxDate)
        .subscribe((trans: Transaction[]) => {
          this.transactionService.Transactions = trans;
          this.dataSource.data = this.transactionService.Transactions;
        });
-    this.isLoadingResults = false
+    this.isLoadingResults = false;
     this.reconciled.clear();
   }
 
@@ -110,7 +109,7 @@ export class MoneyListingsComponent implements OnInit {
     .subscribe(
       result => console.log(`reconciled: ${result}`),
       (err: any) => console.log(err)
-    )
+    );
   }
 
   changed = (tranId: number, checked: boolean) => this.reconciled.set(tranId, checked);

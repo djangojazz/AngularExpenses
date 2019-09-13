@@ -10,11 +10,18 @@ import { Transaction } from '../../Models/transactionModel';
 import { SharedErrorStateMatcher } from '../../Shared/sharedErrorStateMacher';
 
 @Component({
-  selector: 'app-MoneyEntry',
   templateUrl: './MoneyEntry.component.html',
   styleUrls: ['./money.component.scss']
 })
 export class MoneyEntryComponent implements OnInit {
+
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private sharedValidator: SharedValidatorFunctions,
+    public categoriesService: CategoriesService,
+    private transactionService: TransactionsService,
+    private fb: FormBuilder) {
+  }
   idLabel: string;
   moneyForm: FormGroup;
   currentCategory: Category;
@@ -22,55 +29,46 @@ export class MoneyEntryComponent implements OnInit {
   filteredCategories: Observable<Category[]>;
   currentTran: Transaction;
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private sharedValidator: SharedValidatorFunctions,
-    public categoriesService: CategoriesService,
-    private transactionService: TransactionsService,
-    private fb: FormBuilder) { 
-  }
+  matcher = new SharedErrorStateMatcher();
 
   ngOnInit() {
     this.currentTran = this.route.snapshot.data['tran'];
-    this.idLabel = (this.currentTran.transactionID > 0) ? this.currentTran.transactionID.toString() : "New";
+    this.idLabel = (this.currentTran.transactionID > 0) ? this.currentTran.transactionID.toString() : 'New';
     console.log(this.currentTran);
 
     this.moneyForm = this.fb.group({
       dateFormControl: [this.currentTran.createdDate, [Validators.required]],
-      debitCreditFormControl: [(this.currentTran.typeID == 1) ? true : false],
+      debitCreditFormControl: [(this.currentTran.typeID === 1) ? true : false],
       categoryFormControl: [this.currentTran.categoryID, [Validators.required]],
       amountFormControl: [this.currentTran.amount, [Validators.required, this.sharedValidator.numberValidator]],
       descFormControl: [this.currentTran.description, [Validators.required]],
       recFormControl: [this.currentTran.reconciled, [Validators.required]],
-    })
+    });
   }
 
   submit() {
-    // console.log(new Transaction(<number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
-    // <number>this.moneyForm.get('categoryFormControl').value, <Date>this.moneyForm.get('dateFormControl').value,
-    // this.moneyForm.get('amountFormControl').value, this.moneyForm.get('descFormControl').value, this.currentTran.transactionID));
-
-     this.transactionService.createANewTransaction( 
-        new Transaction(
-          <number>((this.moneyForm.get('debitCreditFormControl').value == true) ? 1 : 2),
-          <number>this.moneyForm.get('categoryFormControl').value, 
-          <Date>this.moneyForm.get('dateFormControl').value,
-          this.moneyForm.get('amountFormControl').value, 
-          this.moneyForm.get('descFormControl').value, 
-          <number>this.currentTran.transactionID, 
-          <boolean>this.moneyForm.get('recFormControl').value
-        )
-      ).subscribe(
-        (result: Transaction) => console.log(`saved entry to database ${result}`),
-        (err: any) => console.log(err)
+    const tran = new Transaction(
+      <number>((this.moneyForm.get('debitCreditFormControl').value === true) ? 1 : 2),
+      <number>this.moneyForm.get('categoryFormControl').value,
+      <Date>this.moneyForm.get('dateFormControl').value,
+      this.moneyForm.get('amountFormControl').value,
+      this.moneyForm.get('descFormControl').value,
+      <number>this.currentTran.transactionID,
+      <boolean>this.moneyForm.get('recFormControl').value
       );
-        
+
+    console.log(tran);
+
+    this.transactionService.createANewTransaction(tran)
+    .subscribe(
+      (result: Transaction) => console.log(`saved entry to database ${result}`),
+      (err: any) => console.log(err)
+    );
+
     this.router.navigate(['/Money']);
   }
 
   cancel() {
     this.router.navigate(['/Money']);
   }
-
-  matcher = new SharedErrorStateMatcher();
 }
